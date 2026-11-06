@@ -3,6 +3,10 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   /* config options here */
   poweredByHeader: false,
+  images: {
+    // Stock photography used by components/ui/perspective-tunnel-hero.tsx
+    remotePatterns: [new URL("https://images.unsplash.com/**")],
+  },
   cacheComponents: true,
   async headers() {
     return [

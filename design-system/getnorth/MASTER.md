@@ -123,18 +123,20 @@ Minimum rendered text size: **12px**. Base body: **16px**. Fonts load with `disp
 
 | Component | File | Notes |
 |---|---|---|
-| Button / ButtonLink | `src/components/ui.tsx` | Variants: `primary`, `dark`, `light`, `outline`, `outline-light`; min-height 48px |
-| Eyebrow, SectionHeading, TextLink, PlaceholderBadge | `src/components/ui.tsx` | |
+| Button / ButtonLink | `src/components/ui/index.tsx` | Variants: `primary`, `dark`, `light`, `outline`, `outline-light`; min-height 48px |
+| Eyebrow, SectionHeading, TextLink, PlaceholderBadge | `src/components/ui/index.tsx` | |
 | Logo, LogoMark, LogoStacked | `src/components/logo.tsx` | Official logo assets only (`src/assets/brand`) |
 | SiteHeader / mobile menu | `src/components/site-header.tsx` | Light variant over dark heroes |
 | PageHero, CtaBand, WhatsAppFloat, MobileActionBar | `src/components/sections.tsx` | |
 | LoopCardCarousel | `src/components/loop-card-carousel.tsx` | Endless ring carousel: swipe/drag, prev/next, indicators, ←/→, auto-advance with pause. Never captures page scroll |
-| **BentoGrid** | `src/components/ui21/bento-grid.tsx` | From 21st.dev — Kokonut UI (MIT), adapted to tokens and a11y |
-| **WordRotate** | `src/components/ui21/word-rotate.tsx` | From 21st.dev — Magic UI (MIT), CSS motion, pause control |
+| **BentoGrid** | `src/components/ui/bento-grid.tsx` | From 21st.dev — Kokonut UI (MIT), adapted to tokens and a11y |
+| **WordRotate** | `src/components/ui/word-rotate.tsx` | From 21st.dev — Magic UI (MIT), CSS motion, pause control |
 | Compass | `src/components/compass.tsx` | Hero illustration |
 | EnquiryForm | `src/app/contact/enquiry-form.tsx` | Client + server validation |
 
-Third-party components live in `src/components/ui21/` with their source and licence noted at the top of each file.
+| PerspectiveTunnelHero | `src/components/ui/perspective-tunnel-hero.tsx` | From 21st.dev; framer-motion 3D tunnel. Wheel/touch/keys drive it only while it is ≥85% visible and has travel left, then release to page scroll. Preview: `/preview/perspective-tunnel` |
+
+Third-party components live in `src/components/ui/` (shadcn convention, see `components.json`) with their source and licence noted at the top of each file.
 
 ---
 

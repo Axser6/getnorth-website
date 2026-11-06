@@ -5,7 +5,7 @@ import { whatsappHref } from "@/lib/site";
 import { ButtonLink, Container, Eyebrow, SectionHeading } from "@/components/ui";
 import { CtaBand } from "@/components/sections";
 import { ArrowRight, Check, GlyphAI, GlyphMarketing, GlyphWeb, Plus, WhatsApp } from "@/components/icons";
-import { BentoGrid, type BentoItem } from "@/components/ui21/bento-grid";
+import { BentoGrid, type BentoItem } from "@/components/ui/bento-grid";
 
 export const metadata: Metadata = pageMetadata({
   title: "AI Solutions & Business Automation",

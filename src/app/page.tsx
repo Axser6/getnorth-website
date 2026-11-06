@@ -8,8 +8,8 @@ import { Compass } from "@/components/compass";
 import { ButtonLink, Container, Eyebrow, SectionHeading, TextLink } from "@/components/ui";
 import { CtaBand } from "@/components/sections";
 import { LoopCardCarousel } from "@/components/loop-card-carousel";
-import { BentoGrid, type BentoItem } from "@/components/ui21/bento-grid";
-import { WordRotate } from "@/components/ui21/word-rotate";
+import { BentoGrid, type BentoItem } from "@/components/ui/bento-grid";
+import { WordRotate } from "@/components/ui/word-rotate";
 import { ArrowUpRight, Check, GlyphAI, GlyphMarketing, MapPin, WhatsApp, divisionGlyph } from "@/components/icons";
 
 export const metadata: Metadata = {

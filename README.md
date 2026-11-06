@@ -34,7 +34,17 @@ All copy and company facts live in typed data files. You don't need to touch the
 
 The full design system (direction, colour/type/spacing/motion tokens, accessibility and mobile rules, component inventory) is documented in [`design-system/getnorth/MASTER.md`](design-system/getnorth/MASTER.md), built with the ui-ux-pro-max skill's guidance. Tokens live in `src/app/globals.css`.
 
-Components sourced from [21st.dev](https://21st.dev) are in `src/components/ui21/`, each with its original author, licence (MIT) and changes noted at the top of the file.
+### shadcn / 21st.dev component structure
+
+The project follows the shadcn/ui conventions so components from shadcn or [21st.dev](https://21st.dev) drop straight in:
+
+- `components.json` — shadcn CLI config (Tailwind v4, CSS in `src/app/globals.css`, aliases below)
+- `src/components/ui/` — UI primitives and third-party components (`@/components/ui/...`)
+- `src/lib/utils.ts` — the standard `cn()` helper (`clsx` + `tailwind-merge`)
+
+Add a shadcn component with `npx shadcn@latest add <name>`. Third-party components note their source, licence and any changes at the top of the file.
+
+**Preview pages:** `/preview/perspective-tunnel` shows the Perspective Tunnel Hero (not linked from the site, `noindex`, and disallowed in robots.txt).
 
 ## Brand assets
 
