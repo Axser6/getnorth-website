@@ -114,7 +114,7 @@ Minimum rendered text size: **12px**. Base body: **16px**. Fonts load with `disp
 - **Mobile action bar** (< 768px): fixed bottom bar with Call / WhatsApp / Enquire, 56px targets, `env(safe-area-inset-bottom)` padding; body gets matching bottom padding so content is never hidden.
 - `viewport-fit=cover` for safe areas; the header is 72px and sticky.
 - Full-screen menu with focus trap, Esc to close, and route-change close.
-- Division cards become a snap carousel; bento tiles stack to one column.
+- Division cards: endless carousel driven by swipe/drag and buttons only — vertical page scrolling is never hijacked. Bento tiles stack to one column.
 - Test widths: 320, 375, 390, 768, 1024, 1440.
 
 ---
@@ -128,7 +128,7 @@ Minimum rendered text size: **12px**. Base body: **16px**. Fonts load with `disp
 | Logo, LogoMark, LogoStacked | `src/components/logo.tsx` | Official logo assets only (`src/assets/brand`) |
 | SiteHeader / mobile menu | `src/components/site-header.tsx` | Light variant over dark heroes |
 | PageHero, CtaBand, WhatsAppFloat, MobileActionBar | `src/components/sections.tsx` | |
-| DivisionCarousel | `src/components/division-carousel.tsx` | Snap carousel + dot controls |
+| LoopCardCarousel | `src/components/loop-card-carousel.tsx` | Endless ring carousel: swipe/drag, prev/next, indicators, ←/→, auto-advance with pause. Never captures page scroll |
 | **BentoGrid** | `src/components/ui21/bento-grid.tsx` | From 21st.dev — Kokonut UI (MIT), adapted to tokens and a11y |
 | **WordRotate** | `src/components/ui21/word-rotate.tsx` | From 21st.dev — Magic UI (MIT), CSS motion, pause control |
 | Compass | `src/components/compass.tsx` | Hero illustration |

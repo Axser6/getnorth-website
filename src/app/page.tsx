@@ -7,7 +7,7 @@ import { site, whatsappHref, defaultWhatsAppMessage } from "@/lib/site";
 import { Compass } from "@/components/compass";
 import { ButtonLink, Container, Eyebrow, SectionHeading, TextLink } from "@/components/ui";
 import { CtaBand } from "@/components/sections";
-import { ScrollCardCarousel } from "@/components/scroll-card-carousel";
+import { LoopCardCarousel } from "@/components/loop-card-carousel";
 import { BentoGrid, type BentoItem } from "@/components/ui21/bento-grid";
 import { WordRotate } from "@/components/ui21/word-rotate";
 import { ArrowUpRight, Check, GlyphAI, GlyphMarketing, MapPin, WhatsApp, divisionGlyph } from "@/components/icons";
@@ -257,20 +257,18 @@ export default function HomePage() {
         </Container>
       </section>
 
-      {/* ---------------- Divisions (scroll-driven carousel) ---------------- */}
-      <ScrollCardCarousel
+      {/* ---------------- Divisions (endless carousel) ---------------- */}
+      <LoopCardCarousel
         divisions={divisions}
         heading={
-          <div className="flex flex-col justify-between gap-4 md:flex-row md:items-end">
-            <div>
-              <Eyebrow className="[@media(max-height:700px)]:hidden">Core divisions</Eyebrow>
-              <h2 id="divisions-title" className="font-heading mt-4 max-w-2xl text-[clamp(1.75rem,4.2vw,3.25rem)] leading-[1.04] font-bold sm:mt-5 [@media(max-height:700px)]:mt-0 [@media(max-height:700px)]:text-[clamp(1.5rem,3.4vw,2.5rem)]">
+          <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end">
+            <div data-reveal>
+              <Eyebrow>Core divisions</Eyebrow>
+              <h2 id="divisions-title" className="font-heading mt-5 max-w-2xl text-[clamp(1.9rem,4.2vw,3.25rem)] leading-[1.04] font-bold">
                 Everything you need to grow, <span className="text-signal">in one place.</span>
               </h2>
             </div>
-            <span className="hidden md:block">
-              <TextLink href="/services">View all services</TextLink>
-            </span>
+            <TextLink href="/services">View all services</TextLink>
           </div>
         }
       />
