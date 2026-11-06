@@ -1,36 +1,72 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# GetNorth Media & AI Solutions — Official Website
 
-## Getting Started
+Corporate website for **GetNorth Media & AI Solutions**, Bengaluru.
+Built with Next.js 16 (App Router, Cache Components), React 19, TypeScript and Tailwind CSS v4.
 
-First, run the development server:
+## Pages
+
+| Route | Purpose |
+| --- | --- |
+| `/` | Home: hero, overview, four divisions, industries, why GetNorth, approach, featured services |
+| `/about` | Introduction, mission and vision, philosophy, approach, capabilities |
+| `/services` | Detailed sections per division: services, deliverables, benefits (`#media-creative`, `#digital-marketing`, `#ai-automation`, `#web-technology`) |
+| `/ai-solutions` | AI agents, automation, chatbots, WhatsApp, CRM, integrations, process, FAQ |
+| `/industries` | One section per target industry |
+| `/work` | Portfolio structure with **clearly marked placeholders** |
+| `/contact` | Contact details, validated enquiry form, WhatsApp, click-to-call, map |
+| `/privacy` | Plain-language privacy notice (have it legally reviewed) |
+
+Also generated: `/sitemap.xml`, `/robots.txt`, `/manifest.webmanifest`, favicons, and Open Graph images per page.
+
+## Editing content
+
+All copy and company facts live in typed data files. You don't need to touch the layouts:
+
+- `src/lib/site.ts`: company name, phone, location, social links, navigation
+- `src/data/divisions.ts`: divisions, services, deliverables, benefits
+- `src/data/industries.ts`: industries
+- `src/data/ai.ts`: AI solutions, problems, process, principles
+- `src/data/work.ts`: portfolio entries (**replace the placeholders with real, client-approved case studies and set `placeholder: false`**)
+
+## Local development
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+cp .env.example .env.local   # then fill in values
+npm run dev                  # http://localhost:3000
+npm run build && npm start   # production build
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Enquiry form
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+The form is validated in the browser and again on the server (Server Action in `src/app/contact/actions.ts`), with honeypot and minimum-fill-time spam protection.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+**It needs a delivery channel.** Set at least one of:
 
-## Learn More
+- **Email (Resend):** `RESEND_API_KEY`, `CONTACT_TO_EMAIL`, `CONTACT_FROM_EMAIL` (verify the sending domain in Resend)
+- **Webhook:** `CONTACT_WEBHOOK_URL`, which receives a JSON POST per enquiry (Zapier, Make, n8n, Google Apps Script, CRM)
 
-To learn more about Next.js, take a look at the following resources:
+If neither is set, visitors are told the form isn't connected yet and are offered a one-tap WhatsApp message pre-filled with their enquiry. Nothing is silently lost or faked.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Deploying to Vercel
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+1. Push this repository to GitHub, GitLab or Bitbucket.
+2. In Vercel: **Add New → Project**, import the repo. The framework is auto-detected (Next.js), so no build settings need changing.
+3. Add the environment variables from `.env.example` (Production and Preview).
+4. Deploy.
+5. Connect the domain: **Project → Settings → Domains**, add `getnorthmedia.com` and `www.getnorthmedia.com`.
+   At your domain registrar, create the DNS records Vercel shows. Typically:
+   - `A` record for `@` → `76.76.21.21`
+   - `CNAME` record for `www` → `cname.vercel-dns.com`
 
-## Deploy on Vercel
+   (Always use the exact values displayed in the Vercel dashboard.) Choose one as primary; Vercel redirects the other.
+6. After the domain is live, submit `https://getnorthmedia.com/sitemap.xml` in Google Search Console.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Before launch: checklist
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- [ ] Configure the enquiry delivery channel (Resend or webhook) and send a test enquiry
+- [ ] Set `NEXT_PUBLIC_CONTACT_EMAIL` once the business email is finalised
+- [ ] Confirm the LinkedIn URL in `src/lib/site.ts` (currently assumes a company page at `linkedin.com/company/getnorthmedia`) and the Instagram handle
+- [ ] Replace portfolio placeholders in `src/data/work.ts` with real, approved projects
+- [ ] Have the privacy notice reviewed
+- [ ] Optionally add analytics (e.g. Vercel Analytics) and update the privacy notice accordingly

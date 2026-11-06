@@ -1,26 +1,141 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+/* ------------------------------------------------------------------
+   GetNorth design tokens
+   Ink + Paper base, one "north needle" signal accent.
+   ------------------------------------------------------------------ */
+@theme {
+  --color-ink: #0b0f14;
+  --color-ink-2: #121821;
+  --color-ink-3: #1b2330;
+  --color-paper: #f4f1ea;
+  --color-paper-2: #ebe6da;
+  --color-paper-3: #dfd8c8;
+  --color-stone: #5a6170; /* muted text on paper, 5.6:1 */
+  --color-mist: #a3abb8; /* muted text on ink, 8:1 */
+  --color-signal: #e5482b; /* graphics, large type, buttons */
+  --color-signal-ink: #b5341a; /* accessible signal text on paper */
+  --color-signal-bright: #ff6a4d; /* signal text on ink */
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+  --font-display: var(--font-archivo), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-geist), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  --ease-north: cubic-bezier(0.22, 1, 0.36, 1);
+
+  --animate-needle: needle 2.4s var(--ease-north) both;
+  --animate-marquee: marquee 50s linear infinite;
+  --animate-pulse-dot: pulse-dot 2.4s ease-in-out infinite;
+
+  @keyframes needle {
+    0% { transform: rotate(-140deg); }
+    60% { transform: rotate(12deg); }
+    80% { transform: rotate(-5deg); }
+    100% { transform: rotate(0deg); }
+  }
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+  @keyframes pulse-dot {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.35; }
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    scroll-behavior: smooth;
+    scroll-padding-top: 6rem;
+  }
+  body {
+    background: var(--color-paper);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-feature-settings: "ss01", "cv11";
+    text-rendering: optimizeLegibility;
+  }
+  ::selection {
+    background: var(--color-signal);
+    color: #fff;
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-signal);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+  h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    text-wrap: balance;
+    letter-spacing: -0.02em;
+  }
+  p {
+    text-wrap: pretty;
+  }
+}
+
+@layer utilities {
+  /* Expanded display cut of Archivo */
+  .font-wide {
+    font-family: var(--font-display);
+    font-variation-settings: "wdth" 118;
+  }
+  .font-cond {
+    font-family: var(--font-display);
+    font-variation-settings: "wdth" 88;
+  }
+
+  /* Meridian grid used as a subtle surface texture */
+  .bg-meridian {
+    background-image:
+      linear-gradient(to right, rgb(11 15 20 / 0.06) 1px, transparent 1px),
+      linear-gradient(to bottom, rgb(11 15 20 / 0.06) 1px, transparent 1px);
+    background-size: 96px 96px;
+  }
+  .bg-meridian-dark {
+    background-image:
+      linear-gradient(to right, rgb(244 241 234 / 0.06) 1px, transparent 1px),
+      linear-gradient(to bottom, rgb(244 241 234 / 0.06) 1px, transparent 1px);
+    background-size: 96px 96px;
+  }
+  .grain::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.05;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+}
+
+/* Scroll reveal (progressively enhanced: content is visible without JS) */
+.js [data-reveal] {
+  opacity: 0;
+  transform: translateY(18px);
+  transition:
+    opacity 0.8s var(--ease-north),
+    transform 0.8s var(--ease-north);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+.js [data-reveal].is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  .js [data-reveal] {
+    opacity: 1;
+    transform: none;
+  }
 }
