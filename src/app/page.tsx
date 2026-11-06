@@ -10,7 +10,7 @@ import { CtaBand } from "@/components/sections";
 import { DivisionCarousel } from "@/components/division-carousel";
 import { BentoGrid, type BentoItem } from "@/components/ui21/bento-grid";
 import { WordRotate } from "@/components/ui21/word-rotate";
-import { ArrowUpRight, Check, WhatsApp, divisionGlyph } from "@/components/icons";
+import { ArrowUpRight, Check, GlyphAI, GlyphMarketing, MapPin, WhatsApp, divisionGlyph } from "@/components/icons";
 
 export const metadata: Metadata = {
   ...pageMetadata({
@@ -145,14 +145,13 @@ export default function HomePage() {
       {/* ---------------- Hero ---------------- */}
       <section className="bg-meridian relative overflow-hidden pt-[112px] sm:pt-[128px]">
         <Container className="relative">
-          <div className="grid items-center gap-10 pb-16 lg:grid-cols-12 lg:gap-6 lg:pb-24">
+          <div className="grid items-center gap-10 pb-10 lg:grid-cols-12 lg:gap-6 lg:pb-14">
             <div className="lg:col-span-7">
               <Eyebrow>Media · Marketing · Technology · AI</Eyebrow>
-              <h1 className="font-heading mt-7 text-[clamp(2.9rem,8.2vw,6.6rem)] leading-[0.92] font-extrabold tracking-[-0.035em]">
-                Point your <br className="hidden sm:block" />
-                business <span className="text-signal">north.</span>
+              <h1 className="font-heading mt-7 max-w-[11ch] text-[clamp(2.9rem,8.2vw,6.6rem)] leading-[0.92] font-extrabold tracking-[-0.035em] text-balance">
+                Point your business <span className="text-signal">north.</span>
               </h1>
-              <p className="font-heading mt-7 flex flex-wrap items-center gap-x-3 text-[clamp(1.35rem,2.6vw,1.9rem)] leading-[1.15] font-semibold text-ink/85">
+              <p className="font-heading mt-7 flex flex-wrap items-center gap-x-3 text-[clamp(1.05rem,4.4vw,1.9rem)] leading-[1.15] font-semibold text-ink/85">
                 <span>One in-house team for</span>
                 <WordRotate
                   words={["Media.", "Marketing.", "Technology.", "AI."]}
@@ -166,19 +165,12 @@ export default function HomePage() {
               </p>
               <div className="mt-10 flex flex-col gap-3 sm:flex-row">
                 <ButtonLink href="/contact" variant="primary" arrow>
-                  Start a project
+                  Get a quote
                 </ButtonLink>
                 <ButtonLink href={whatsappHref(defaultWhatsAppMessage)} variant="outline">
                   <WhatsApp size={18} /> Talk on WhatsApp
                 </ButtonLink>
               </div>
-              <ul className="mt-10 flex flex-wrap gap-x-7 gap-y-3 text-sm font-medium text-ink/80">
-                {["Full in-house team", "Four integrated divisions", "Serving businesses across India"].map((t) => (
-                  <li key={t} className="inline-flex items-center gap-2">
-                    <Check size={16} className="text-signal-ink" /> {t}
-                  </li>
-                ))}
-              </ul>
             </div>
             <div className="relative mx-auto w-full max-w-[420px] sm:max-w-[480px] lg:col-span-5 lg:max-w-none">
               <Compass />
@@ -187,6 +179,28 @@ export default function HomePage() {
               </p>
             </div>
           </div>
+        </Container>
+
+        {/* Credentials — "Proof" step of the Trust & Authority pattern (facts only, nothing invented) */}
+        <Container className="relative pb-12 sm:pb-16">
+          <dl className="grid grid-cols-2 gap-px overflow-hidden rounded-(--radius-card) border border-ink/10 bg-ink/10 lg:grid-cols-4">
+            {[
+              { k: "Headquarters", v: `${site.location.city}, ${site.location.region}`, icon: <MapPin size={20} /> },
+              { k: "Team", v: "Full in-house team", icon: <Check size={20} /> },
+              { k: "Capabilities", v: `${divisions.length} integrated divisions`, icon: <GlyphAI size={20} /> },
+              { k: "Industry focus", v: `${industries.length} sectors`, icon: <GlyphMarketing size={20} /> },
+            ].map((c) => (
+              <div key={c.k} className="flex items-center gap-3 bg-surface-raised/80 px-4 py-4 sm:gap-4 sm:px-6 sm:py-5">
+                <span aria-hidden="true" className="hidden h-10 w-10 shrink-0 items-center justify-center rounded-(--radius-control) bg-signal/[0.07] text-signal sm:inline-flex">
+                  {c.icon}
+                </span>
+                <div className="min-w-0">
+                  <dt className="text-xs font-semibold tracking-[0.14em] text-stone uppercase">{c.k}</dt>
+                  <dd className="mt-0.5 font-semibold text-ink">{c.v}</dd>
+                </div>
+              </div>
+            ))}
+          </dl>
         </Container>
 
         {/* Pillar strip */}
@@ -317,7 +331,7 @@ export default function HomePage() {
                   key={r.title}
                   className="bg-ink p-7 sm:p-8"
                   data-reveal
-                  style={{ "--reveal-delay": `${(i % 2) * 50}ms` } as React.CSSProperties}
+                  style={{ "--reveal-delay": `${(i % 2) * 60}ms` } as React.CSSProperties}
                 >
                   <span className="font-mono text-xs text-signal-bright">{String(i + 1).padStart(2, "0")}</span>
                   <h3 className="mt-4 text-xl font-bold">{r.title}</h3>
@@ -342,7 +356,7 @@ export default function HomePage() {
                 key={a.step}
                 className="relative lg:pr-8"
                 data-reveal
-                style={{ "--reveal-delay": `${i * 50}ms` } as React.CSSProperties}
+                style={{ "--reveal-delay": `${i * 60}ms` } as React.CSSProperties}
               >
                 <div className="flex items-center gap-4">
                   <span className="font-heading inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-ink text-sm font-bold text-paper">
@@ -379,7 +393,7 @@ export default function HomePage() {
                     key={d.slug}
                     className="rounded-(--radius-card) border border-ink/10 bg-surface-raised p-6 shadow-(--shadow-card) sm:p-7"
                     data-reveal
-                    style={{ "--reveal-delay": `${i * 50}ms` } as React.CSSProperties}
+                    style={{ "--reveal-delay": `${i * 60}ms` } as React.CSSProperties}
                   >
                     <div className="flex items-center gap-3">
                       <span aria-hidden="true" className="inline-flex h-11 w-11 items-center justify-center rounded-(--radius-control) bg-signal/[0.07] text-signal">
@@ -439,7 +453,7 @@ export default function HomePage() {
                   key={t}
                   className="rounded-(--radius-card) bg-paper-2 p-6"
                   data-reveal
-                  style={{ "--reveal-delay": `${i * 50}ms` } as React.CSSProperties}
+                  style={{ "--reveal-delay": `${i * 60}ms` } as React.CSSProperties}
                 >
                   <span className="font-mono text-xs text-signal">{String(i + 1).padStart(2, "0")}</span>
                   <h3 className="mt-2 text-lg font-bold">{t}</h3>

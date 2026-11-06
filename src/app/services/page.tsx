@@ -121,7 +121,7 @@ export default function ServicesPage() {
                         key={s.name}
                         className={cn("p-7 sm:p-8", dark ? "bg-ink" : "bg-paper")}
                         data-reveal
-                        style={{ "--reveal-delay": `${(i % 2) * 50}ms` } as React.CSSProperties}
+                        style={{ "--reveal-delay": `${(i % 2) * 60}ms` } as React.CSSProperties}
                       >
                         <span className={cn("font-mono text-xs", dark ? "text-signal-bright" : "text-signal-ink")}>
                           {d.number}.{String(i + 1).padStart(2, "0")}

@@ -42,7 +42,7 @@ export function BentoGrid({ items, className }: { items: BentoItem[]; className?
           key={item.title}
           className={cn(item.colSpan === 2 && "md:col-span-2")}
           data-reveal
-          style={{ "--reveal-delay": `${(index % 3) * 50}ms` } as React.CSSProperties}
+          style={{ "--reveal-delay": `${(index % 3) * 60}ms` } as React.CSSProperties}
         >
           <Link
             href={item.href}

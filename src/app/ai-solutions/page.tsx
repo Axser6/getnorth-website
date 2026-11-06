@@ -166,7 +166,7 @@ export default function AiSolutionsPage() {
           />
           <div className="mt-14 grid gap-px overflow-hidden rounded-[20px] border border-ink/10 bg-ink/10 md:grid-cols-2 lg:grid-cols-3">
             {aiProblems.map((p, i) => (
-              <div key={p.problem} className="bg-paper p-7 sm:p-8" data-reveal style={{ "--reveal-delay": `${(i % 3) * 50}ms` } as React.CSSProperties}>
+              <div key={p.problem} className="bg-paper p-7 sm:p-8" data-reveal style={{ "--reveal-delay": `${(i % 3) * 60}ms` } as React.CSSProperties}>
                 <p className="font-mono text-xs tracking-[0.15em] text-stone uppercase">Problem</p>
                 <h3 className="mt-2 text-xl font-bold">{p.problem}</h3>
                 <div className="mt-6 flex items-start gap-3 border-t border-ink/10 pt-5">
@@ -268,7 +268,7 @@ export default function AiSolutionsPage() {
           <SectionHeading tone="light" eyebrow="How we deliver AI projects" title={<span id="process-title">A careful, staged process.</span>} />
           <ol className="mt-14 grid gap-px overflow-hidden rounded-[20px] bg-paper/10 sm:grid-cols-2 lg:grid-cols-5">
             {aiProcess.map((p, i) => (
-              <li key={p.step} className="bg-ink p-7" data-reveal style={{ "--reveal-delay": `${i * 50}ms` } as React.CSSProperties}>
+              <li key={p.step} className="bg-ink p-7" data-reveal style={{ "--reveal-delay": `${i * 60}ms` } as React.CSSProperties}>
                 <span className="font-mono text-xs text-signal-bright">{String(i + 1).padStart(2, "0")}</span>
                 <h3 className="mt-4 text-lg font-bold">{p.step}</h3>
                 <p className="mt-2 text-[0.95rem] leading-relaxed text-mist">{p.body}</p>

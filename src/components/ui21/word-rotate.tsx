@@ -12,6 +12,7 @@
  * - Screen readers get the full, static list once (no repeated announcements)
  * - WCAG 2.2.2: visible pause/play control; stops automatically for
  *   prefers-reduced-motion and while the page is hidden
+ * - ui-ux-pro-max `auto-rotation-controls`: also pauses on hover and keyboard focus
  */
 import { useEffect, useState } from "react";
 import { cn } from "@/lib/cn";
@@ -29,6 +30,7 @@ export function WordRotate({
 }) {
   const [index, setIndex] = useState(0);
   const [paused, setPaused] = useState(false);
+  const [hovered, setHovered] = useState(false);
   const [reducedMotion, setReducedMotion] = useState(false);
 
   useEffect(() => {
@@ -39,7 +41,7 @@ export function WordRotate({
     return () => mq.removeEventListener("change", sync);
   }, []);
 
-  const running = !paused && !reducedMotion;
+  const running = !paused && !hovered && !reducedMotion;
 
   useEffect(() => {
     if (!running) return;
@@ -50,7 +52,13 @@ export function WordRotate({
   }, [running, words.length, duration]);
 
   return (
-    <span className="inline-flex items-center gap-3">
+    <span
+      className="inline-flex items-center gap-3"
+      onPointerEnter={() => setHovered(true)}
+      onPointerLeave={() => setHovered(false)}
+      onFocus={() => setHovered(true)}
+      onBlur={() => setHovered(false)}
+    >
       <span className="sr-only">{words.join(", ")}</span>
       <span aria-hidden="true" className="relative block overflow-hidden py-[0.08em] leading-[1.15]">
         <span

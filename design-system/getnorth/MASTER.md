@@ -13,6 +13,8 @@ Tokens are implemented in `src/app/globals.css` (`@theme`). Use the token, never
 |---|---|
 | **Product type** | B2B service + marketing/technology agency (hybrid) |
 | **Style** | Minimalism & Swiss Style + Accessible & Ethical, with Bento Grid showcases and micro-interactions |
+| **Skill output** | Pattern *Trust & Authority + Conversion*, style *Accessible & Ethical*, typography *Plus Jakarta Sans*. Full output: `skill-recommendation.md` |
+| **Primary CTA** | "Get a quote" (header, hero, mobile action bar); "Request a quote" in CTA bands |
 | **Landing pattern** | Feature-Rich Showcase + Trust: Hero (value prop) → Overview → Division cards → Industries → Why us → Process → **What we measure (ROI)** → Bento features → **Case studies** → CTA |
 | **Skill must-haves (B2B Service / Marketing Agency)** | Case studies (honest placeholders until approved) · ROI messaging (metrics we report, never invented results) · visible credentials |
 | **Personality** | Calm, credible, direct. Natural forest green; generous space; no hype |
@@ -50,12 +52,14 @@ Source: the `ui-ux-pro-max` skill's data (products: *B2B Service*, *Marketing Ag
 
 | Role | Font | Size | Weight | Notes |
 |---|---|---|---|---|
-| Display (H1) | Geist | `clamp(2.4rem, 6.4vw, 5.25rem)` (home: up to 6.6rem) | 800 | `.font-heading`, tracking −0.035em, leading 0.92–0.98 |
-| H2 | Geist | `clamp(1.9rem, 4.2vw, 3.25rem)` | 700 | leading 1.04 |
-| H3 | Geist | 1.25–1.75rem | 700 | |
-| Body | Geist | 1rem–1.25rem | 400 | leading 1.6–1.7, max ~65ch |
-| Eyebrow | Geist | 0.72rem (≥ 12px) | 600 | Uppercase, tracking 0.28em, preceded by a 24px rule |
+| Display (H1) | Plus Jakarta Sans | `clamp(2.4rem, 6.4vw, 5.25rem)` (home: up to 6.6rem) | 800 | `.font-heading`, tracking −0.035em, leading 0.92–0.98 |
+| H2 | Plus Jakarta Sans | `clamp(1.9rem, 4.2vw, 3.25rem)` | 700 | leading 1.04 |
+| H3 | Plus Jakarta Sans | 1.25–1.75rem | 700 | |
+| Body | Plus Jakarta Sans | 1rem–1.25rem | 400 | leading 1.6–1.7, max ~65ch |
+| Eyebrow | Plus Jakarta Sans | 0.72rem (≥ 12px) | 600 | Uppercase, tracking 0.28em, preceded by a 24px rule |
 | Meta / numbers | Geist Mono | 0.75rem (≥ 12px) | 400–500 | Indices, coordinates |
+
+Font choice comes from the ui-ux-pro-max `--design-system` output for "B2B service corporate consulting" (see `skill-recommendation.md`). Headline wrapping uses `max-width` in `ch` plus `text-wrap: balance`, never hard-coded `<br>`.
 
 Minimum rendered text size: **12px**. Base body: **16px**. Fonts load with `display: swap`.
 
@@ -83,10 +87,11 @@ Minimum rendered text size: **12px**. Base body: **16px**. Fonts load with `disp
 
 - Animate `transform` and `opacity` only (never width/height/top).
 - Buttons: `active:scale-[0.98]`.
-- List/grid entrance stagger: **50ms** per item.
+- Scroll reveal follows the skill's *Stagger List* preset: `translateY(16px) scale(0.96)` → none, 450ms, back-out `cubic-bezier(0.34, 1.4, 0.64, 1)`, **60ms** stagger.
 - Indicators (carousel dots) animate `transform: scaleX`, never `width`.
 - `prefers-reduced-motion`: reveals render final state, rotators stop, hover lifts are disabled.
-- Auto-rotating content (Word Rotate) has a visible pause/play button and stops when the tab is hidden.
+- Auto-rotating content (Word Rotate) has a visible pause/play button, pauses on hover and keyboard focus, and stops when the tab is hidden.
+- Fixed bars never hide focus: `scroll-padding-top` for the header and `scroll-padding-bottom` for the mobile action bar.
 
 ---
 
@@ -96,6 +101,7 @@ Minimum rendered text size: **12px**. Base body: **16px**. Fonts load with `disp
 - Visible focus ring: 2px brand green, 3px offset.
 - Skip link, semantic landmarks, sequential headings, `aria-current` for active nav.
 - Icon-only controls have `aria-label`; decorative icons are `aria-hidden`.
+- Forms are low-friction: required fields first; optional fields (company, industry, budget, timeline) sit in an "Add more details" disclosure that auto-opens when pre-filled or in error.
 - Forms: visible labels, helper text for complex fields, inline errors linked with `aria-describedby`. One error → focus that field; several → focus a linked **error summary** at the top (inline errors are kept).
 - After client-side navigation, focus moves to `<main>` (`RouteFocus`).
 - Carousels/swipe: always paired with button controls (dots) — never swipe-only.

@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist_Mono, Plus_Jakarta_Sans } from "next/font/google";
 import { site } from "@/lib/site";
 import { organizationJsonLd } from "@/lib/seo";
 import { SiteHeader } from "@/components/site-header";
@@ -9,8 +9,9 @@ import { RevealObserver } from "@/components/reveal-observer";
 import { RouteFocus } from "@/components/route-focus";
 import "./globals.css";
 
-const geist = Geist({
-  variable: "--font-geist",
+// Typography per the ui-ux-pro-max design system: Plus Jakarta Sans (headings + body).
+const jakarta = Plus_Jakarta_Sans({
+  variable: "--font-jakarta",
   subsets: ["latin"],
   display: "swap",
 });
@@ -70,7 +71,7 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en-IN" className={`${geist.variable} ${geistMono.variable} antialiased`}>
+    <html lang="en-IN" className={`${jakarta.variable} ${geistMono.variable} antialiased`}>
       <head>
         {/* Enables scroll-reveal styles only when JavaScript is running. */}
         <script dangerouslySetInnerHTML={{ __html: "document.documentElement.classList.add('js')" }} />

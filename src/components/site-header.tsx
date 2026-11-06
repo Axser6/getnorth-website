@@ -130,7 +130,7 @@ export function SiteHeader() {
           </a>
           <span className="hidden sm:block">
             <Link href="/contact" className={buttonClass(light ? "light" : "dark", "min-h-11 px-5 text-sm")}>
-              Start a project
+              Get a quote
               <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
             </Link>
           </span>

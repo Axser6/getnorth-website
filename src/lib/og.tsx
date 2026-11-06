@@ -7,9 +7,9 @@ export const ogContentType = "image/png";
 
 const root = process.cwd();
 
-/** Geist (SIL Open Font License) bundled in /assets/fonts so OG images need no network. */
-function loadFont(weight: 500 | 700) {
-  return readFile(join(root, "assets/fonts", `Geist-${weight}.ttf`));
+/** Plus Jakarta Sans (SIL Open Font License) bundled in /assets/fonts so OG images need no network. */
+function loadFont(weight: 500 | 800) {
+  return readFile(join(root, "assets/fonts", `PlusJakartaSans-${weight}.ttf`));
 }
 
 async function loadLogo() {
@@ -18,7 +18,7 @@ async function loadLogo() {
 }
 
 export async function renderOg({ kicker, title }: { kicker: string; title: string }) {
-  const [bold, medium, logo] = await Promise.all([loadFont(700), loadFont(500), loadLogo()]);
+  const [bold, medium, logo] = await Promise.all([loadFont(800), loadFont(500), loadLogo()]);
 
   return new ImageResponse(
     (
@@ -30,7 +30,7 @@ export async function renderOg({ kicker, title }: { kicker: string; title: strin
           padding: "72px",
           background: "linear-gradient(135deg, #0a3e23 0%, #0f1f17 100%)",
           color: "#f5f3ee",
-          fontFamily: "Geist",
+          fontFamily: "Plus Jakarta Sans",
         }}
       >
         <div style={{ display: "flex", flexDirection: "column", justifyContent: "space-between", flex: 1 }}>
@@ -38,7 +38,7 @@ export async function renderOg({ kicker, title }: { kicker: string; title: strin
             <div style={{ width: 36, height: 2, background: "#9fd0aa" }} />
             {kicker.toUpperCase()}
           </div>
-          <div style={{ fontSize: 72, fontWeight: 700, lineHeight: 1.04, letterSpacing: -2.5, maxWidth: 720 }}>{title}</div>
+          <div style={{ fontSize: 72, fontWeight: 800, lineHeight: 1.04, letterSpacing: -2.5, maxWidth: 720 }}>{title}</div>
           <div style={{ fontSize: 22, fontWeight: 500, color: "#a9b8ae" }}>Bengaluru, India · getnorthmedia.com</div>
         </div>
         <div style={{ display: "flex", alignItems: "center", justifyContent: "center", width: 300 }}>
@@ -50,8 +50,8 @@ export async function renderOg({ kicker, title }: { kicker: string; title: strin
     {
       ...ogSize,
       fonts: [
-        { name: "Geist", data: bold, weight: 700, style: "normal" },
-        { name: "Geist", data: medium, weight: 500, style: "normal" },
+        { name: "Plus Jakarta Sans", data: bold, weight: 800, style: "normal" },
+        { name: "Plus Jakarta Sans", data: medium, weight: 500, style: "normal" },
       ],
     },
   );

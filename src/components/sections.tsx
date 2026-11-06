@@ -64,7 +64,7 @@ export function CtaBand({
             </div>
             <div className="flex flex-col gap-3 sm:flex-row lg:col-span-5 lg:flex-col lg:items-stretch" data-reveal>
               <ButtonLink href="/contact" variant="light" arrow>
-                Send an enquiry
+                Request a quote
               </ButtonLink>
               <ButtonLink href={whatsappHref(defaultWhatsAppMessage)} variant="outline-light">
                 <WhatsApp size={18} /> WhatsApp us
@@ -131,7 +131,7 @@ export function MobileActionBar() {
         <li className="flex flex-[1.4]">
           <Link href="/contact" className={`${item} bg-signal text-paper active:bg-signal-hover`}>
             <ArrowRight size={20} />
-            Enquire
+            Get a quote
           </Link>
         </li>
       </ul>

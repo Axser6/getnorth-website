@@ -17,7 +17,7 @@ import {
 import { site, telHref, whatsappHref } from "@/lib/site";
 import { cn } from "@/lib/cn";
 import { buttonClass } from "@/components/ui";
-import { Alert, ArrowRight, Check, Phone, WhatsApp } from "@/components/icons";
+import { Alert, ArrowRight, Check, Phone, Plus, WhatsApp } from "@/components/icons";
 import { submitEnquiry } from "./actions";
 
 const initialState: EnquiryState = { status: "idle" };
@@ -34,6 +34,8 @@ const LABELS: Record<keyof EnquiryValues, string> = {
   message: "Project requirements",
   consent: "Consent",
 };
+
+const OPTIONAL_KEYS: (keyof EnquiryValues)[] = ["company", "industry", "budget", "timeline"];
 
 const HELP: Partial<Record<keyof EnquiryValues, string>> = {
   phone: "We'll call or WhatsApp you on this number. Include the country code if you're outside India.",
@@ -52,6 +54,7 @@ export function EnquiryForm() {
   const statusRef = useRef<HTMLDivElement>(null);
   const summaryRef = useRef<HTMLDivElement>(null);
   const [showSummary, setShowSummary] = useState(false);
+  const [moreOpen, setMoreOpen] = useState(false);
 
   // Pre-select service/industry from links such as /contact?service=ai-automation
   // and record when the form was opened (spam protection).
@@ -61,6 +64,7 @@ export function EnquiryForm() {
     const industry = params.get("industry");
     /* eslint-disable react-hooks/set-state-in-effect -- one-time sync from the URL after hydration */
     setStartedAt(String(Date.now()));
+    if (industry && industryOptions.some((o) => o.value === industry)) setMoreOpen(true);
     setValues((v) => ({
       ...v,
       service: service && serviceOptions.some((o) => o.value === service) ? service : v.service,
@@ -98,6 +102,7 @@ export function EnquiryForm() {
     const found = validateEnquiry(values);
     setErrors(found);
     const keys = Object.keys(found);
+    if (keys.some((k) => OPTIONAL_KEYS.includes(k as keyof EnquiryValues))) setMoreOpen(true);
     if (keys.length > 1) {
       setShowSummary(true);
       requestAnimationFrame(() => summaryRef.current?.focus());
@@ -194,9 +199,12 @@ export function EnquiryForm() {
                     href={`#${k === "consent" ? "consent" : k}`}
                     onClick={(e) => {
                       e.preventDefault();
-                      const el = formRef.current?.querySelector<HTMLElement>(`[name="${k}"]`);
-                      el?.focus();
-                      el?.scrollIntoView({ block: "center", behavior: "smooth" });
+                      if (OPTIONAL_KEYS.includes(k)) setMoreOpen(true);
+                      requestAnimationFrame(() => {
+                        const el = formRef.current?.querySelector<HTMLElement>(`[name="${k}"]`);
+                        el?.focus();
+                        el?.scrollIntoView({ block: "center", behavior: "smooth" });
+                      });
                     }}
                     className="inline-flex min-h-11 items-center text-danger underline underline-offset-4"
                   >
@@ -255,15 +263,6 @@ export function EnquiryForm() {
           {err("name")}
         </div>
         <div>
-          <label htmlFor="company" className="text-sm font-semibold">
-            Company / organisation
-          </label>
-          <input id="company" name="company" type="text" autoComplete="organization" value={values.company}
-            onChange={(e) => update("company", e.target.value)} onBlur={() => blur("company")}
-            className={cn(fieldBase, border("company"))} {...aria("company")} />
-          {err("company")}
-        </div>
-        <div>
           <label htmlFor="email" className="text-sm font-semibold">
             Email address <span aria-hidden="true">*</span>
           </label>
@@ -298,54 +297,8 @@ export function EnquiryForm() {
           </select>
           {err("service")}
         </div>
-        <div>
-          <label htmlFor="industry" className="text-sm font-semibold">
-            Industry
-          </label>
-          <select id="industry" name="industry" value={values.industry}
-            onChange={(e) => update("industry", e.target.value)}
-            className={cn(fieldBase, border("industry"), "appearance-none bg-[length:16px] bg-[right_1rem_center] bg-no-repeat pr-10")}
-            style={{ backgroundImage: "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230f1f17' stroke-width='2'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E\")" }}
-            {...aria("industry")}>
-            <option value="">Select your industry</option>
-            {industryOptions.map((o) => (
-              <option key={o.value} value={o.value}>{o.label}</option>
-            ))}
-          </select>
-          {err("industry")}
-        </div>
 
-        <fieldset className="sm:col-span-2">
-          <legend className="text-sm font-semibold">Approximate budget</legend>
-          <div className="mt-3 flex flex-wrap gap-2">
-            {budgetOptions.map((b) => (
-              <label key={b} className={cn(
-                "inline-flex min-h-11 cursor-pointer items-center rounded-full border px-4 py-2 text-sm transition-colors has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-2 has-[:focus-visible]:outline-signal",
-                values.budget === b ? "border-ink bg-ink text-paper" : "border-ink/15 bg-white hover:border-ink/40",
-              )}>
-                <input type="radio" name="budget" value={b} checked={values.budget === b}
-                  onChange={() => update("budget", b)} className="sr-only" />
-                {b}
-              </label>
-            ))}
-          </div>
-        </fieldset>
 
-        <fieldset className="sm:col-span-2">
-          <legend className="text-sm font-semibold">Timeline</legend>
-          <div className="mt-3 flex flex-wrap gap-2">
-            {timelineOptions.map((t) => (
-              <label key={t} className={cn(
-                "inline-flex min-h-11 cursor-pointer items-center rounded-full border px-4 py-2 text-sm transition-colors has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-2 has-[:focus-visible]:outline-signal",
-                values.timeline === t ? "border-ink bg-ink text-paper" : "border-ink/15 bg-white hover:border-ink/40",
-              )}>
-                <input type="radio" name="timeline" value={t} checked={values.timeline === t}
-                  onChange={() => update("timeline", t)} className="sr-only" />
-                {t}
-              </label>
-            ))}
-          </div>
-        </fieldset>
 
         <div className="sm:col-span-2">
           <label htmlFor="message" className="text-sm font-semibold">
@@ -361,6 +314,79 @@ export function EnquiryForm() {
             <span className="mt-2 text-xs text-stone tabular-nums">{values.message.length}/3000</span>
           </div>
         </div>
+
+        {/* Progressive disclosure: optional details stay out of the way (low-friction form) */}
+        <details
+          open={moreOpen}
+          onToggle={(e) => setMoreOpen(e.currentTarget.open)}
+          className="group/more rounded-2xl border border-ink/10 bg-white/60 sm:col-span-2"
+        >
+          <summary className="flex min-h-14 cursor-pointer list-none items-center justify-between gap-4 px-5 text-sm font-semibold [&::-webkit-details-marker]:hidden">
+            <span>
+              Add more details <span className="font-normal text-stone">(optional: company, industry, budget, timeline)</span>
+            </span>
+            <Plus size={18} className="shrink-0 transition-transform duration-(--duration-base) group-open/more:rotate-45" />
+          </summary>
+          <div className="grid gap-6 border-t border-ink/10 px-5 pt-5 pb-6 sm:grid-cols-2">
+            <div>
+              <label htmlFor="company" className="text-sm font-semibold">
+                Company / organisation
+              </label>
+              <input id="company" name="company" type="text" autoComplete="organization" value={values.company}
+                onChange={(e) => update("company", e.target.value)} onBlur={() => blur("company")}
+                className={cn(fieldBase, border("company"))} {...aria("company")} />
+              {err("company")}
+            </div>
+            <div>
+              <label htmlFor="industry" className="text-sm font-semibold">
+                Industry
+              </label>
+              <select id="industry" name="industry" value={values.industry}
+                onChange={(e) => update("industry", e.target.value)}
+                className={cn(fieldBase, border("industry"), "appearance-none bg-[length:16px] bg-[right_1rem_center] bg-no-repeat pr-10")}
+                style={{ backgroundImage: "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230f1f17' stroke-width='2'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E\")" }}
+                {...aria("industry")}>
+                <option value="">Select your industry</option>
+                {industryOptions.map((o) => (
+                  <option key={o.value} value={o.value}>{o.label}</option>
+                ))}
+              </select>
+              {err("industry")}
+            </div>
+
+            <fieldset className="sm:col-span-2">
+              <legend className="text-sm font-semibold">Approximate budget</legend>
+              <div className="mt-3 flex flex-wrap gap-2">
+                {budgetOptions.map((b) => (
+                  <label key={b} className={cn(
+                    "inline-flex min-h-11 cursor-pointer items-center rounded-full border px-4 py-2 text-sm transition-colors has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-2 has-[:focus-visible]:outline-signal",
+                    values.budget === b ? "border-ink bg-ink text-paper" : "border-ink/15 bg-white hover:border-ink/40",
+                  )}>
+                    <input type="radio" name="budget" value={b} checked={values.budget === b}
+                      onChange={() => update("budget", b)} className="sr-only" />
+                    {b}
+                  </label>
+                ))}
+              </div>
+            </fieldset>
+
+            <fieldset className="sm:col-span-2">
+              <legend className="text-sm font-semibold">Timeline</legend>
+              <div className="mt-3 flex flex-wrap gap-2">
+                {timelineOptions.map((t) => (
+                  <label key={t} className={cn(
+                    "inline-flex min-h-11 cursor-pointer items-center rounded-full border px-4 py-2 text-sm transition-colors has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-2 has-[:focus-visible]:outline-signal",
+                    values.timeline === t ? "border-ink bg-ink text-paper" : "border-ink/15 bg-white hover:border-ink/40",
+                  )}>
+                    <input type="radio" name="timeline" value={t} checked={values.timeline === t}
+                      onChange={() => update("timeline", t)} className="sr-only" />
+                    {t}
+                  </label>
+                ))}
+              </div>
+            </fieldset>
+          </div>
+        </details>
 
         <div className="sm:col-span-2">
           <label className="flex cursor-pointer items-start gap-3 text-[0.95rem] leading-relaxed">
