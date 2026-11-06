@@ -43,7 +43,7 @@ export async function renderOg({ kicker, title }: { kicker: string; title: strin
         </div>
         <div style={{ display: "flex", alignItems: "center", justifyContent: "center", width: 300 }}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={logo} width={280} height={149} alt="" />
+          <img src={logo} width={280} height={148} alt="" />
         </div>
       </div>
     ),

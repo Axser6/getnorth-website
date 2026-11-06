@@ -21,14 +21,14 @@ export function LogoMark({ className, tone = "dark" }: { className?: string; ton
   );
 }
 
-/** Horizontal lockup for the header: symbol + "GETNORTH / MEDIA & GROWTH" wordmark. */
+/** Horizontal lockup for the header: symbol + "GETNORTH / MEDIA & AI SOLUTIONS" wordmark. */
 export function Logo({ tone = "dark", className }: { tone?: "dark" | "light"; className?: string }) {
   return (
     <span className={cn("inline-flex items-center gap-2.5", className)}>
       <LogoMark tone={tone} className="h-9 sm:h-10" />
       <Image
         src={tone === "dark" ? wordmarkGreen : wordmarkLight}
-        alt="GetNorth — Media & Growth"
+        alt="GetNorth Media & AI Solutions"
         width={320}
         className="h-[26px] w-auto sm:h-[29px]"
         priority
@@ -42,7 +42,7 @@ export function LogoStacked({ tone = "dark", className }: { tone?: "dark" | "lig
   return (
     <Image
       src={tone === "dark" ? logoGreen : logoLight}
-      alt="GetNorth — Media & Growth"
+      alt="GetNorth Media & AI Solutions"
       width={400}
       className={cn("h-auto w-40", className)}
     />
