@@ -86,8 +86,8 @@ export function DivisionCarousel({ divisions }: { divisions: Division[] }) {
           >
             <span
               className={cn(
-                "block h-[3px] rounded-full transition-all duration-300",
-                active === i ? "w-12 bg-signal" : "w-8 bg-ink/15",
+                "block h-[3px] w-12 origin-center rounded-full transition-[transform,background-color] duration-(--duration-base) ease-(--ease-north)",
+                active === i ? "scale-x-100 bg-signal" : "scale-x-[0.66] bg-ink/15",
               )}
             />
           </button>

@@ -22,6 +22,24 @@ import { submitEnquiry } from "./actions";
 
 const initialState: EnquiryState = { status: "idle" };
 
+const LABELS: Record<keyof EnquiryValues, string> = {
+  name: "Full name",
+  company: "Company",
+  email: "Email address",
+  phone: "Phone / WhatsApp number",
+  service: "Service required",
+  industry: "Industry",
+  budget: "Budget",
+  timeline: "Timeline",
+  message: "Project requirements",
+  consent: "Consent",
+};
+
+const HELP: Partial<Record<keyof EnquiryValues, string>> = {
+  phone: "We'll call or WhatsApp you on this number. Include the country code if you're outside India.",
+  message: "Tell us what you want to achieve, any deadlines, and what isn't working today.",
+};
+
 const fieldBase =
   "mt-2 block w-full rounded-xl border bg-white px-4 py-3.5 text-[1rem] text-ink placeholder:text-ink/35 transition-colors focus:border-ink focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-signal";
 
@@ -32,6 +50,8 @@ export function EnquiryForm() {
   const [startedAt, setStartedAt] = useState("");
   const formRef = useRef<HTMLFormElement>(null);
   const statusRef = useRef<HTMLDivElement>(null);
+  const summaryRef = useRef<HTMLDivElement>(null);
+  const [showSummary, setShowSummary] = useState(false);
 
   // Pre-select service/industry from links such as /contact?service=ai-automation
   // and record when the form was opened (spam protection).
@@ -53,7 +73,10 @@ export function EnquiryForm() {
   const [seenState, setSeenState] = useState(state);
   if (state !== seenState) {
     setSeenState(state);
-    if (state.status === "invalid" && state.errors) setErrors(state.errors);
+    if (state.status === "invalid" && state.errors) {
+      setErrors(state.errors);
+      setShowSummary(Object.keys(state.errors).length > 1);
+    }
   }
   useEffect(() => {
     if (state.status === "idle" || !statusRef.current) return;
@@ -74,9 +97,15 @@ export function EnquiryForm() {
     e.preventDefault();
     const found = validateEnquiry(values);
     setErrors(found);
-    const firstKey = Object.keys(found)[0];
-    if (firstKey) {
-      formRef.current?.querySelector<HTMLElement>(`[name="${firstKey}"]`)?.focus();
+    const keys = Object.keys(found);
+    if (keys.length > 1) {
+      setShowSummary(true);
+      requestAnimationFrame(() => summaryRef.current?.focus());
+      return;
+    }
+    setShowSummary(false);
+    if (keys.length === 1) {
+      formRef.current?.querySelector<HTMLElement>(`[name="${keys[0]}"]`)?.focus();
       return;
     }
     const fd = new FormData(e.currentTarget);
@@ -110,17 +139,23 @@ export function EnquiryForm() {
 
   const err = (k: keyof EnquiryValues) =>
     errors[k] ? (
-      <p id={`${k}-error`} className="mt-2 flex items-center gap-1.5 text-sm font-medium text-signal-ink">
+      <p id={`${k}-error`} className="mt-2 flex items-center gap-1.5 text-sm font-medium text-danger">
         <Alert size={15} /> {errors[k]}
       </p>
     ) : null;
 
-  const aria = (k: keyof EnquiryValues) => ({
-    "aria-invalid": errors[k] ? true : undefined,
-    "aria-describedby": errors[k] ? `${k}-error` : undefined,
-  });
+  const aria = (k: keyof EnquiryValues) => {
+    const ids = [HELP[k] ? `${k}-help` : null, errors[k] ? `${k}-error` : null].filter(Boolean).join(" ");
+    return { "aria-invalid": errors[k] ? true : undefined, "aria-describedby": ids || undefined };
+  };
+  const help = (k: keyof EnquiryValues) =>
+    HELP[k] ? (
+      <p id={`${k}-help`} className="mt-2 text-sm text-stone">
+        {HELP[k]}
+      </p>
+    ) : null;
 
-  const border = (k: keyof EnquiryValues) => (errors[k] ? "border-signal-ink" : "border-ink/15 hover:border-ink/35");
+  const border = (k: keyof EnquiryValues) => (errors[k] ? "border-danger" : "border-ink/15 hover:border-ink/35");
 
   return (
     <form
@@ -139,6 +174,40 @@ export function EnquiryForm() {
         <span className="sr-only">with an asterisk</span> are required.
       </p>
 
+      {showSummary && Object.values(errors).some(Boolean) && (
+        <div
+          ref={summaryRef}
+          tabIndex={-1}
+          role="alert"
+          aria-labelledby="error-summary-title"
+          className="mt-6 rounded-2xl border border-danger/40 bg-danger-surface p-5 focus:outline-none focus-visible:outline-2 focus-visible:outline-danger"
+        >
+          <p id="error-summary-title" className="flex items-center gap-2 font-semibold text-danger">
+            <Alert size={20} /> Please fix {Object.values(errors).filter(Boolean).length} fields before sending:
+          </p>
+          <ul className="mt-3 space-y-1 pl-7">
+            {(Object.keys(errors) as (keyof EnquiryValues)[])
+              .filter((k) => errors[k])
+              .map((k) => (
+                <li key={k}>
+                  <a
+                    href={`#${k === "consent" ? "consent" : k}`}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      const el = formRef.current?.querySelector<HTMLElement>(`[name="${k}"]`);
+                      el?.focus();
+                      el?.scrollIntoView({ block: "center", behavior: "smooth" });
+                    }}
+                    className="inline-flex min-h-11 items-center text-danger underline underline-offset-4"
+                  >
+                    {LABELS[k]}: {errors[k]}
+                  </a>
+                </li>
+              ))}
+          </ul>
+        </div>
+      )}
+
       {(state.status === "unconfigured" || state.status === "failed" || state.status === "invalid") && (
         <div
           ref={statusRef}
@@ -146,11 +215,11 @@ export function EnquiryForm() {
           role="alert"
           className={cn(
             "mt-6 rounded-2xl border p-5 focus:outline-none",
-            state.status === "invalid" ? "border-signal-ink/40 bg-signal/5" : "border-ink/15 bg-white",
+            state.status === "invalid" ? "border-danger/40 bg-danger-surface" : "border-ink/15 bg-white",
           )}
         >
           <p className="flex items-start gap-2.5 font-medium">
-            <Alert size={20} className="mt-0.5 shrink-0 text-signal-ink" />
+            <Alert size={20} className={cn("mt-0.5 shrink-0", state.status === "invalid" ? "text-danger" : "text-signal")} />
             {state.message}
           </p>
           {state.status !== "invalid" && (
@@ -210,6 +279,7 @@ export function EnquiryForm() {
           <input id="phone" name="phone" type="tel" inputMode="tel" autoComplete="tel" required placeholder="+91" value={values.phone}
             onChange={(e) => update("phone", e.target.value)} onBlur={() => blur("phone")}
             className={cn(fieldBase, border("phone"))} {...aria("phone")} />
+          {help("phone")}
           {err("phone")}
         </div>
         <div>
@@ -282,9 +352,10 @@ export function EnquiryForm() {
             Project requirements <span aria-hidden="true">*</span>
           </label>
           <textarea id="message" name="message" rows={6} required value={values.message}
-            placeholder="What would you like to achieve? Share any details about your business, goals, current challenges or deadlines."
+            placeholder="e.g. We want more enquiries for our new project and faster replies on WhatsApp."
             onChange={(e) => update("message", e.target.value)} onBlur={() => blur("message")}
             className={cn(fieldBase, border("message"), "resize-y")} {...aria("message")} />
+          {help("message")}
           <div className="flex justify-between gap-4">
             {err("message") ?? <span />}
             <span className="mt-2 text-xs text-stone tabular-nums">{values.message.length}/3000</span>

@@ -13,7 +13,8 @@ Tokens are implemented in `src/app/globals.css` (`@theme`). Use the token, never
 |---|---|
 | **Product type** | B2B service + marketing/technology agency (hybrid) |
 | **Style** | Minimalism & Swiss Style + Accessible & Ethical, with Bento Grid showcases and micro-interactions |
-| **Landing pattern** | Feature-Rich Showcase: Hero (value prop) → Overview → Division cards → Industries → Why us → Process → Bento features → CTA |
+| **Landing pattern** | Feature-Rich Showcase + Trust: Hero (value prop) → Overview → Division cards → Industries → Why us → Process → **What we measure (ROI)** → Bento features → **Case studies** → CTA |
+| **Skill must-haves (B2B Service / Marketing Agency)** | Case studies (honest placeholders until approved) · ROI messaging (metrics we report, never invented results) · visible credentials |
 | **Personality** | Calm, credible, direct. Natural forest green; generous space; no hype |
 | **Brand line** | Media. Marketing. Technology. AI. |
 
@@ -39,6 +40,7 @@ Source: the `ui-ux-pro-max` skill's data (products: *B2B Service*, *Marketing Ag
 | `stone` / `text-muted` | `#5A645E` | Secondary text on light (5.8:1) |
 | `mist` / `text-inverse-muted` | `#A9B8AE` | Secondary text on dark (≥ 6:1 on green) |
 | `whatsapp` | `#25D366` | WhatsApp mark only |
+| `danger` / `danger-surface` | `#B42318` / `#FDF0EE` | Form errors only (6.6:1 on paper). Never use brand green for errors |
 
 **Contrast rules:** body text ≥ 4.5:1 in every context. Never put brand green text or buttons on `ink`/`signal` backgrounds. On dark sections, use the `light` button variant and `signal-bright` accents.
 
@@ -66,6 +68,8 @@ Minimum rendered text size: **12px**. Base body: **16px**. Fonts load with `disp
 - **Radius:** `--radius-chip` (pill), `--radius-control` 12px, `--radius-card` 20px, `--radius-panel` 28px.
 - **Elevation:** `--shadow-card` (resting), `--shadow-card-hover` (hover lift). Shadows are soft and green-tinted.
 
+- **Z-index scale:** content `0` · sticky sub-nav `30` · floating actions / mobile action bar `40` · header & mobile menu `50` · skip link `60`.
+
 ---
 
 ## 5. Motion
@@ -79,6 +83,8 @@ Minimum rendered text size: **12px**. Base body: **16px**. Fonts load with `disp
 
 - Animate `transform` and `opacity` only (never width/height/top).
 - Buttons: `active:scale-[0.98]`.
+- List/grid entrance stagger: **50ms** per item.
+- Indicators (carousel dots) animate `transform: scaleX`, never `width`.
 - `prefers-reduced-motion`: reveals render final state, rotators stop, hover lifts are disabled.
 - Auto-rotating content (Word Rotate) has a visible pause/play button and stops when the tab is hidden.
 
@@ -90,7 +96,8 @@ Minimum rendered text size: **12px**. Base body: **16px**. Fonts load with `disp
 - Visible focus ring: 2px brand green, 3px offset.
 - Skip link, semantic landmarks, sequential headings, `aria-current` for active nav.
 - Icon-only controls have `aria-label`; decorative icons are `aria-hidden`.
-- Forms: visible labels, inline errors next to fields linked with `aria-describedby`, focus moves to the first invalid field.
+- Forms: visible labels, helper text for complex fields, inline errors linked with `aria-describedby`. One error → focus that field; several → focus a linked **error summary** at the top (inline errors are kept).
+- After client-side navigation, focus moves to `<main>` (`RouteFocus`).
 - Carousels/swipe: always paired with button controls (dots) — never swipe-only.
 - No horizontal page scroll at 320px+.
 

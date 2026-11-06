@@ -19,6 +19,8 @@
 
   --color-signal-hover: #072e1a; /* pressed/hover state of brand green */
   --color-whatsapp: #25d366; /* WhatsApp brand mark only */
+  --color-danger: #b42318; /* errors only, 6.6:1 on paper */
+  --color-danger-surface: #fdf0ee;
 
   /* Semantic aliases — prefer these in new components */
   --color-surface: var(--color-paper);

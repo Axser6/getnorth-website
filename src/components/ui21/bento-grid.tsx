@@ -10,6 +10,7 @@
  * - Optional "feature" tile rendered on brand green for hierarchy
  * - Hover lift disabled for reduced motion; no hover-only information
  *   (the CTA label is always visible on touch screens)
+ * - Tile titles are <h3> so screen-reader heading navigation works
  * - Server component: no client JavaScript required
  */
 import Link from "next/link";
@@ -41,7 +42,7 @@ export function BentoGrid({ items, className }: { items: BentoItem[]; className?
           key={item.title}
           className={cn(item.colSpan === 2 && "md:col-span-2")}
           data-reveal
-          style={{ "--reveal-delay": `${(index % 3) * 70}ms` } as React.CSSProperties}
+          style={{ "--reveal-delay": `${(index % 3) * 50}ms` } as React.CSSProperties}
         >
           <Link
             href={item.href}
@@ -90,14 +91,14 @@ export function BentoGrid({ items, className }: { items: BentoItem[]; className?
             </span>
 
             <span className="relative mt-8 block">
-              <span className="font-heading block text-xl font-bold tracking-tight">
+              <h3 className="font-heading block text-xl font-bold tracking-tight">
                 {item.title}
                 {item.meta && (
                   <span className={cn("ml-2 text-sm font-normal", item.feature ? "text-mist" : "text-stone")}>
                     {item.meta}
                   </span>
                 )}
-              </span>
+              </h3>
               <span className={cn("mt-2 block leading-relaxed", item.feature ? "text-paper/80" : "text-stone")}>
                 {item.description}
               </span>

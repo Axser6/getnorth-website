@@ -16,6 +16,8 @@ export type Division = {
   services: Service[];
   deliverables: string[];
   benefits: { title: string; body: string }[];
+  /** Metrics typically agreed and reported on — not claimed results. */
+  metrics: string[];
 };
 
 export const divisions: Division[] = [
@@ -71,6 +73,7 @@ export const divisions: Division[] = [
       "Campaign creative kits",
       "Content strategy document",
     ],
+    metrics: ["Engagement rate", "Video completion rate", "Follower growth", "Content delivered vs plan"],
     benefits: [
       {
         title: "Instant credibility",
@@ -143,6 +146,7 @@ export const divisions: Division[] = [
       "Lead generation landing pages",
       "Monthly performance reports",
     ],
+    metrics: ["Qualified leads", "Cost per lead", "Conversion rate", "Return on ad spend", "Organic search visibility"],
     benefits: [
       {
         title: "Spend with accountability",
@@ -220,6 +224,7 @@ export const divisions: Division[] = [
       "Team handover, documentation and training",
       "Ongoing monitoring and improvement",
     ],
+    metrics: ["First-response time", "Leads captured vs missed", "Manual hours removed", "Follow-ups completed on time"],
     benefits: [
       {
         title: "Faster response, every time",
@@ -297,6 +302,7 @@ export const divisions: Division[] = [
       "Content management handover",
       "Maintenance and support plan",
     ],
+    metrics: ["Enquiry conversion rate", "Core Web Vitals (speed)", "Search visibility", "Uptime"],
     benefits: [
       {
         title: "A credible first impression",

@@ -121,7 +121,7 @@ export default function ServicesPage() {
                         key={s.name}
                         className={cn("p-7 sm:p-8", dark ? "bg-ink" : "bg-paper")}
                         data-reveal
-                        style={{ "--reveal-delay": `${(i % 2) * 70}ms` } as React.CSSProperties}
+                        style={{ "--reveal-delay": `${(i % 2) * 50}ms` } as React.CSSProperties}
                       >
                         <span className={cn("font-mono text-xs", dark ? "text-signal-bright" : "text-signal-ink")}>
                           {d.number}.{String(i + 1).padStart(2, "0")}
@@ -130,6 +130,26 @@ export default function ServicesPage() {
                         <p className={cn("mt-3 leading-relaxed", dark ? "text-mist" : "text-stone")}>{s.description}</p>
                       </div>
                     ))}
+                  </div>
+
+                  <div className="mt-12">
+                    <h3 className={cn("font-mono text-xs font-medium tracking-[0.2em] uppercase", dark ? "text-mist" : "text-stone")}>
+                      What we measure
+                    </h3>
+                    <ul className="mt-5 flex flex-wrap gap-2">
+                      {d.metrics.map((m) => (
+                        <li
+                          key={m}
+                          className={cn(
+                            "inline-flex items-center gap-2 rounded-full border px-3.5 py-2 text-sm",
+                            dark ? "border-paper/15 text-paper/90" : "border-ink/12 bg-surface-raised text-ink/85",
+                          )}
+                        >
+                          <Check size={15} className={dark ? "text-signal-bright" : "text-signal"} />
+                          {m}
+                        </li>
+                      ))}
+                    </ul>
                   </div>
 
                   <div className="mt-12">

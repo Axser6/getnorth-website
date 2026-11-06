@@ -6,6 +6,7 @@ import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { MobileActionBar, WhatsAppFloat } from "@/components/sections";
 import { RevealObserver } from "@/components/reveal-observer";
+import { RouteFocus } from "@/components/route-focus";
 import "./globals.css";
 
 const geist = Geist({
@@ -80,13 +81,14 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       </head>
       <body className="flex min-h-dvh flex-col pb-[calc(4.75rem+env(safe-area-inset-bottom))] md:pb-0">
         <SiteHeader />
-        <main id="main" className="flex-1">
+        <main id="main" tabIndex={-1} className="flex-1 focus:outline-none">
           {children}
         </main>
         <SiteFooter />
         <WhatsAppFloat />
         <MobileActionBar />
         <RevealObserver />
+        <RouteFocus />
       </body>
     </html>
   );

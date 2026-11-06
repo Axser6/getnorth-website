@@ -120,7 +120,7 @@ export default function AboutPage() {
                 key={p.title}
                 className="rounded-[20px] border border-ink/10 p-8 sm:p-10"
                 data-reveal
-                style={{ "--reveal-delay": `${(i % 2) * 80}ms` } as React.CSSProperties}
+                style={{ "--reveal-delay": `${(i % 2) * 50}ms` } as React.CSSProperties}
               >
                 <span className="font-mono text-xs text-signal-ink">{String(i + 1).padStart(2, "0")}</span>
                 <h3 className="font-heading mt-4 text-2xl font-bold">{p.title}</h3>

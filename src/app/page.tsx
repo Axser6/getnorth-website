@@ -317,7 +317,7 @@ export default function HomePage() {
                   key={r.title}
                   className="bg-ink p-7 sm:p-8"
                   data-reveal
-                  style={{ "--reveal-delay": `${(i % 2) * 80}ms` } as React.CSSProperties}
+                  style={{ "--reveal-delay": `${(i % 2) * 50}ms` } as React.CSSProperties}
                 >
                   <span className="font-mono text-xs text-signal-bright">{String(i + 1).padStart(2, "0")}</span>
                   <h3 className="mt-4 text-xl font-bold">{r.title}</h3>
@@ -342,7 +342,7 @@ export default function HomePage() {
                 key={a.step}
                 className="relative lg:pr-8"
                 data-reveal
-                style={{ "--reveal-delay": `${i * 90}ms` } as React.CSSProperties}
+                style={{ "--reveal-delay": `${i * 50}ms` } as React.CSSProperties}
               >
                 <div className="flex items-center gap-4">
                   <span className="font-heading inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-ink text-sm font-bold text-paper">
@@ -360,6 +360,49 @@ export default function HomePage() {
         </Container>
       </section>
 
+      {/* ---------------- What we measure (ROI) ---------------- */}
+      <section className="border-t border-ink/10 py-24 sm:py-32" aria-labelledby="measure-title">
+        <Container>
+          <div className="grid gap-12 lg:grid-cols-12">
+            <div className="lg:col-span-4">
+              <SectionHeading
+                eyebrow="Measurable outcomes"
+                title={<span id="measure-title">Results you can measure.</span>}
+                intro="Every engagement starts by agreeing the numbers that matter to your business. These are the metrics we typically track and report on, in plain language, every month."
+              />
+            </div>
+            <ul className="grid gap-4 sm:grid-cols-2 lg:col-span-8">
+              {divisions.map((d, i) => {
+                const Glyph = divisionGlyph[d.slug];
+                return (
+                  <li
+                    key={d.slug}
+                    className="rounded-(--radius-card) border border-ink/10 bg-surface-raised p-6 shadow-(--shadow-card) sm:p-7"
+                    data-reveal
+                    style={{ "--reveal-delay": `${i * 50}ms` } as React.CSSProperties}
+                  >
+                    <div className="flex items-center gap-3">
+                      <span aria-hidden="true" className="inline-flex h-11 w-11 items-center justify-center rounded-(--radius-control) bg-signal/[0.07] text-signal">
+                        <Glyph size={22} />
+                      </span>
+                      <h3 className="text-lg font-bold">{d.short}</h3>
+                    </div>
+                    <ul className="mt-5 space-y-2.5">
+                      {d.metrics.map((m) => (
+                        <li key={m} className="flex items-start gap-2.5 text-[0.95rem] text-ink/85">
+                          <Check size={18} className="mt-0.5 shrink-0 text-signal" />
+                          {m}
+                        </li>
+                      ))}
+                    </ul>
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+        </Container>
+      </section>
+
       {/* ---------------- Featured services ---------------- */}
       <section className="border-t border-ink/10 bg-paper-2 py-24 sm:py-32" aria-labelledby="featured-title">
         <Container>
@@ -368,6 +411,43 @@ export default function HomePage() {
             <TextLink href="/services">All services</TextLink>
           </div>
           <BentoGrid items={featured} className="mt-14" />
+        </Container>
+      </section>
+
+      {/* ---------------- Case studies ---------------- */}
+      <section className="py-24 sm:py-32" aria-labelledby="work-title">
+        <Container>
+          <div className="grid gap-12 lg:grid-cols-12 lg:items-center">
+            <div className="lg:col-span-5">
+              <SectionHeading
+                eyebrow="Case studies"
+                title={<span id="work-title">Our work, told honestly.</span>}
+                intro="We are preparing detailed case studies with our clients' approval. Each one shows the challenge, our approach, what we delivered and the measured outcome — nothing invented."
+              />
+              <div className="mt-8">
+                <TextLink href="/work">See how case studies are presented</TextLink>
+              </div>
+            </div>
+            <ol className="grid gap-4 sm:grid-cols-2 lg:col-span-7">
+              {[
+                ["Challenge", "The business situation and what needed to change."],
+                ["Approach", "The strategy, creative and technology decisions."],
+                ["Deliverables", "What our in-house team designed and built."],
+                ["Outcome", "Measured results, shared with client approval."],
+              ].map(([t, b], i) => (
+                <li
+                  key={t}
+                  className="rounded-(--radius-card) bg-paper-2 p-6"
+                  data-reveal
+                  style={{ "--reveal-delay": `${i * 50}ms` } as React.CSSProperties}
+                >
+                  <span className="font-mono text-xs text-signal">{String(i + 1).padStart(2, "0")}</span>
+                  <h3 className="mt-2 text-lg font-bold">{t}</h3>
+                  <p className="mt-1.5 leading-relaxed text-stone">{b}</p>
+                </li>
+              ))}
+            </ol>
+          </div>
         </Container>
       </section>
 
