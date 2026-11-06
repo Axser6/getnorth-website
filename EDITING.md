@@ -157,6 +157,10 @@ Replace the files in **both** `src/assets/brand/` and `public/brand/`, keeping t
 
 ---
 
+## Using Unsplash stock photos
+
+Write Unsplash photos as `unsplash("photo-…")` (from `src/lib/unsplash.ts`), never as a full URL with your own `?w=…` settings — the site only accepts Unsplash links in that exact format, and any other format is rejected (the photo won't show). Your own photos in `public/images/` don't have this restriction.
+
 ## Image tips
 
 - **Format:** JPG for photos, PNG for logos/graphics with transparency, WebP for both if you can.

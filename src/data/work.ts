@@ -1,3 +1,5 @@
+import { unsplash } from "@/lib/unsplash";
+
 /**
  * Portfolio entries.
  *
@@ -41,7 +43,7 @@ export const workItems: WorkItem[] = [
     approach: "To be added: research, concept routes and the final identity system.",
     deliverables: ["Logo suite", "Brand guidelines", "Launch creatives"],
     outcome: "To be added once results are confirmed and approved by the client.",
-    image: "https://images.unsplash.com/photo-1561070791-2526d30994b5?auto=format&fit=crop&w=1200&q=80",
+    image: unsplash("photo-1561070791-2526d30994b5"),
     imageAlt: "Designer sketching brand concepts (illustrative stock photo)",
   },
   {
@@ -55,7 +57,7 @@ export const workItems: WorkItem[] = [
     approach: "To be added: channel strategy, targeting and creative testing.",
     deliverables: ["Campaign structure", "Landing page", "Conversion tracking"],
     outcome: "To be added once results are confirmed and approved by the client.",
-    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1200&q=80",
+    image: unsplash("photo-1460925895917-afdab827c52f"),
     imageAlt: "Marketing analytics on a laptop (illustrative stock photo)",
   },
   {
@@ -69,7 +71,7 @@ export const workItems: WorkItem[] = [
     approach: "To be added: automation design, integrations and team handover.",
     deliverables: ["WhatsApp flows", "CRM integration", "Lead routing"],
     outcome: "To be added once results are confirmed and approved by the client.",
-    image: "https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?auto=format&fit=crop&w=1200&q=80",
+    image: unsplash("photo-1611162617213-7d7a39e9b1d7"),
     imageAlt: "Smartphone with messaging and social apps (illustrative stock photo)",
   },
   {
@@ -83,7 +85,7 @@ export const workItems: WorkItem[] = [
     approach: "To be added: structure, design system and technical build.",
     deliverables: ["UX & visual design", "Responsive build", "SEO foundations"],
     outcome: "To be added once results are confirmed and approved by the client.",
-    image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1200&q=80",
+    image: unsplash("photo-1498050108023-c5249f4df085"),
     imageAlt: "Website code on a laptop screen (illustrative stock photo)",
   },
   {
@@ -97,7 +99,7 @@ export const workItems: WorkItem[] = [
     approach: "To be added: scripting, production and editing approach.",
     deliverables: ["Brand film", "Reels series", "Cut-downs for ads"],
     outcome: "To be added once results are confirmed and approved by the client.",
-    image: "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&w=1200&q=80",
+    image: unsplash("photo-1542744173-8e7e53415bb0"),
     imageAlt: "Team reviewing a presentation (illustrative stock photo)",
   },
   {
@@ -111,7 +113,7 @@ export const workItems: WorkItem[] = [
     approach: "To be added: knowledge design, integrations and safeguards.",
     deliverables: ["AI chatbot", "Knowledge base", "Hand-off to team"],
     outcome: "To be added once results are confirmed and approved by the client.",
-    image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=1200&q=80",
+    image: unsplash("photo-1677442136019-21780ecad995"),
     imageAlt: "Abstract artificial intelligence visual (illustrative stock photo)",
   },
 ];

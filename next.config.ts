@@ -4,8 +4,16 @@ const nextConfig: NextConfig = {
   /* config options here */
   poweredByHeader: false,
   images: {
-    // Stock photography used by components/ui/perspective-tunnel-hero.tsx
-    remotePatterns: [new URL("https://images.unsplash.com/**")],
+    // Unsplash stock photography. Only this exact query string is allowed (see src/lib/unsplash.ts):
+    // a `new URL(...)` pattern has an empty query, which rejected every Unsplash URL with HTTP 400.
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "images.unsplash.com",
+        pathname: "/**",
+        search: "?auto=format&fit=crop&w=1600&q=80",
+      },
+    ],
   },
   cacheComponents: true,
   async headers() {

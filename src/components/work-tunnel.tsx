@@ -14,7 +14,7 @@
  * - Escape route: "Skip to projects" is always available; thin progress bar shows position.
  * - Motion is tied to scroll only (no autoplay); spring-smoothed; transform/opacity only.
  * - Reduced motion: no pinning, a still frame with the call to action.
- * - A photo that fails to load hides its card instead of showing an empty box.
+ * - A photo that fails to load is replaced by a branded card (never an empty box, never an empty tunnel).
  */
 import {
   motion,
@@ -101,7 +101,6 @@ function TunnelCard({
   const transform = useTransform([z, pointer.x, pointer.y], ([cz, px, py]: number[]) =>
     `translate3d(calc(-50% + ${bx - px * pan}px), calc(-50% + ${by - py * pan}px), ${cz}px) rotateZ(${card.rot}deg)`,
   );
-  if (failed) return null;
   return (
     <motion.div
       style={{ width, transform, opacity, zIndex: card.index + 1 }}
@@ -109,15 +108,19 @@ function TunnelCard({
       data-tunnel-card
     >
       <div className="relative h-full w-full overflow-hidden rounded-2xl bg-ink-3 shadow-2xl ring-1 shadow-black/60 ring-paper/15">
-        <Image
-          src={card.item.src}
-          alt=""
-          fill
-          sizes={`${Math.round(width * 2)}px`}
-          draggable={false}
-          onError={() => setFailed(true)}
-          className="object-cover"
-        />
+        {failed ? (
+          <div className="absolute inset-0 bg-[radial-gradient(120%_90%_at_100%_0%,rgb(10_62_35)_0%,transparent_60%),linear-gradient(160deg,rgb(27_53_39),rgb(15_31_23))]" />
+        ) : (
+          <Image
+            src={card.item.src}
+            alt=""
+            fill
+            sizes={`${Math.round(width * 2)}px`}
+            draggable={false}
+            onError={() => setFailed(true)}
+            className="object-cover"
+          />
+        )}
         <div className="absolute inset-0 flex items-end bg-gradient-to-t from-ink/85 via-ink/10 to-transparent p-4">
           <span className="font-mono text-xs tracking-widest text-paper uppercase drop-shadow-md">{card.item.title}</span>
         </div>

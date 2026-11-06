@@ -34,13 +34,13 @@ import {
 import Image from "next/image";
 import { useEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import { cn } from "@/lib/utils";
+import { unsplash } from "@/lib/unsplash";
 
 export interface TunnelImage {
     src: string;
     title: string;
 }
 
-const unsplash = (id: string) => `https://images.unsplash.com/${id}?auto=format&fit=crop&w=800&q=80`;
 
 export const DEFAULT_TUNNEL_IMAGES: TunnelImage[] = [
     { src: unsplash("photo-1497366216548-37526070297c"), title: "Workspace" },

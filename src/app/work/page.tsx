@@ -5,12 +5,11 @@ import { Container, PlaceholderBadge, SectionHeading } from "@/components/ui";
 import { CtaBand } from "@/components/sections";
 import { WorkGrid } from "./work-grid";
 import { WorkTunnel } from "@/components/work-tunnel";
+import { unsplash } from "@/lib/unsplash";
 import type { TunnelImage } from "@/components/ui/perspective-tunnel-hero";
 
 /** Minimum number of real project photos before the tunnel switches to them. */
 const MIN_PROJECT_PHOTOS = 5;
-
-const unsplash = (id: string) => `https://images.unsplash.com/${id}?auto=format&fit=crop&w=800&q=80`;
 
 /**
  * Illustrative stock imagery (Unsplash, free licence), labelled with service names — NOT client
