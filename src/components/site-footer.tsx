@@ -31,10 +31,10 @@ export function SiteFooter() {
 
           <nav aria-label="Services" className="lg:col-span-3">
             <h2 className="font-mono text-xs font-medium uppercase tracking-[0.2em] text-mist">Services</h2>
-            <ul className="mt-5 space-y-3">
+            <ul className="mt-3 lg:mt-5 lg:space-y-3">
               {divisions.map((d) => (
                 <li key={d.slug}>
-                  <Link href={`/services#${d.slug}`} className="text-paper/85 hover:text-paper hover:underline underline-offset-4">
+                  <Link href={`/services#${d.slug}`} className="inline-flex min-h-11 items-center text-paper/85 underline-offset-4 hover:text-paper hover:underline lg:min-h-0">
                     {d.name}
                   </Link>
                 </li>
@@ -44,10 +44,10 @@ export function SiteFooter() {
 
           <nav aria-label="Company" className="lg:col-span-2">
             <h2 className="font-mono text-xs font-medium uppercase tracking-[0.2em] text-mist">Company</h2>
-            <ul className="mt-5 space-y-3">
+            <ul className="mt-3 lg:mt-5 lg:space-y-3">
               {company.map((c) => (
                 <li key={c.href}>
-                  <Link href={c.href} className="text-paper/85 hover:text-paper hover:underline underline-offset-4">
+                  <Link href={c.href} className="inline-flex min-h-11 items-center text-paper/85 underline-offset-4 hover:text-paper hover:underline lg:min-h-0">
                     {c.label}
                   </Link>
                 </li>
@@ -57,9 +57,9 @@ export function SiteFooter() {
 
           <div className="lg:col-span-3">
             <h2 className="font-mono text-xs font-medium uppercase tracking-[0.2em] text-mist">Get in touch</h2>
-            <ul className="mt-5 space-y-3.5">
+            <ul className="mt-3 lg:mt-5 lg:space-y-3.5">
               <li>
-                <a href={telHref} className="inline-flex items-center gap-3 text-paper/85 hover:text-paper">
+                <a href={telHref} className="inline-flex min-h-11 items-center gap-3 text-paper/85 hover:text-paper lg:min-h-0">
                   <Phone size={18} className="text-signal-bright" /> {site.phone.display}
                 </a>
               </li>
@@ -68,14 +68,14 @@ export function SiteFooter() {
                   href={whatsappHref(defaultWhatsAppMessage)}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-3 text-paper/85 hover:text-paper"
+                  className="inline-flex min-h-11 items-center gap-3 text-paper/85 hover:text-paper lg:min-h-0"
                 >
                   <WhatsApp size={18} className="text-signal-bright" /> Chat on WhatsApp
                 </a>
               </li>
               {site.email && (
                 <li>
-                  <a href={`mailto:${site.email}`} className="inline-flex items-center gap-3 text-paper/85 hover:text-paper">
+                  <a href={`mailto:${site.email}`} className="inline-flex min-h-11 items-center gap-3 text-paper/85 hover:text-paper lg:min-h-0">
                     <Mail size={18} className="text-signal-bright" /> {site.email}
                   </a>
                 </li>
@@ -121,7 +121,7 @@ export function SiteFooter() {
           </p>
           <div className="flex items-center gap-6">
             <span className="font-mono text-xs tracking-wider">{site.location.coordinates}</span>
-            <Link href="/privacy" className="hover:text-paper hover:underline underline-offset-4">
+            <Link href="/privacy" className="inline-flex min-h-11 items-center underline-offset-4 hover:text-paper hover:underline">
               Privacy
             </Link>
           </div>

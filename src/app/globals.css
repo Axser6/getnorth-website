@@ -17,6 +17,39 @@
   --color-signal-ink: #0a3e23; /* brand green text on paper, 11:1 */
   --color-signal-bright: #9fd0aa; /* sage accent on dark green */
 
+  --color-signal-hover: #072e1a; /* pressed/hover state of brand green */
+  --color-whatsapp: #25d366; /* WhatsApp brand mark only */
+
+  /* Semantic aliases — prefer these in new components */
+  --color-surface: var(--color-paper);
+  --color-surface-muted: var(--color-paper-2);
+  --color-surface-raised: #ffffff;
+  --color-surface-inverse: var(--color-ink);
+  --color-text: var(--color-ink);
+  --color-text-muted: var(--color-stone);
+  --color-text-inverse: var(--color-paper);
+  --color-text-inverse-muted: var(--color-mist);
+  --color-accent: var(--color-signal);
+  --color-accent-on-dark: var(--color-signal-bright);
+
+  /* Radii */
+  --radius-chip: 9999px;
+  --radius-control: 0.75rem;
+  --radius-card: 1.25rem;
+  --radius-panel: 1.75rem;
+
+  /* Elevation */
+  --shadow-card: 0 1px 2px rgb(15 31 23 / 0.04), 0 8px 24px -12px rgb(15 31 23 / 0.12);
+  --shadow-card-hover: 0 2px 4px rgb(15 31 23 / 0.05), 0 20px 40px -20px rgb(10 62 35 / 0.35);
+
+  /* Motion: fast = feedback, base = state change, slow = entrance */
+  --duration-fast: 150ms;
+  --duration-base: 250ms;
+  --duration-slow: 600ms;
+
+  /* Minimum touch target (WCAG / Apple HIG) */
+  --spacing-touch: 2.75rem;
+
   --font-display: var(--font-geist), ui-sans-serif, system-ui, sans-serif;
   --font-sans: var(--font-geist), ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-geist-mono), ui-monospace, monospace;
@@ -26,6 +59,7 @@
   --animate-needle: needle 2.4s var(--ease-north) both;
   --animate-marquee: marquee 50s linear infinite;
   --animate-pulse-dot: pulse-dot 2.4s ease-in-out infinite;
+  --animate-word-in: word-in 320ms cubic-bezier(0.22, 1, 0.36, 1) both;
 
   @keyframes needle {
     0% { transform: rotate(-140deg); }
@@ -36,6 +70,10 @@
   @keyframes marquee {
     from { transform: translateX(0); }
     to { transform: translateX(-50%); }
+  }
+  @keyframes word-in {
+    from { opacity: 0; transform: translateY(-60%); }
+    to { opacity: 1; transform: translateY(0); }
   }
   @keyframes pulse-dot {
     0%, 100% { opacity: 1; }
@@ -50,11 +88,15 @@
     scroll-padding-top: 6rem;
   }
   body {
+    -webkit-tap-highlight-color: transparent;
     background: var(--color-paper);
     color: var(--color-ink);
     font-family: var(--font-sans);
     font-feature-settings: "ss01", "cv11";
     text-rendering: optimizeLegibility;
+  }
+  a, button, summary, label, select {
+    touch-action: manipulation;
   }
   ::selection {
     background: var(--color-signal);

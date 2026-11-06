@@ -22,7 +22,7 @@ export function WorkGrid({ items }: { items: WorkItem[] }) {
             aria-pressed={filter === f.slug}
             onClick={() => setFilter(f.slug)}
             className={cn(
-              "rounded-full border px-4 py-2 text-sm font-medium transition-colors",
+              "min-h-11 cursor-pointer rounded-full border px-4 py-2 text-sm font-medium transition-colors active:scale-[0.97]",
               filter === f.slug ? "border-ink bg-ink text-paper" : "border-ink/15 hover:border-ink",
             )}
           >
@@ -51,20 +51,20 @@ export function WorkGrid({ items }: { items: WorkItem[] }) {
                 >
                   <div className="text-center">
                     <Glyph size={36} className="mx-auto text-ink/35" />
-                    <p className="mt-3 font-mono text-[0.68rem] tracking-[0.15em] text-stone uppercase">
+                    <p className="mt-3 font-mono text-xs tracking-[0.15em] text-stone uppercase">
                       Project image to be supplied
                     </p>
                   </div>
                   <div className="absolute top-4 left-4">{item.placeholder && <PlaceholderBadge />}</div>
                 </div>
                 <div className="flex flex-1 flex-col p-7">
-                  <p className="font-mono text-[0.7rem] tracking-[0.15em] text-stone uppercase">
+                  <p className="font-mono text-xs tracking-[0.15em] text-stone uppercase">
                     {d.pillar} · {item.industry}
                   </p>
                   <h2 className="mt-3 text-xl font-bold">{item.title}</h2>
                   <p className="mt-2 leading-relaxed text-stone">{item.summary}</p>
                   <details className="group mt-auto pt-6">
-                    <summary className="cursor-pointer list-none text-sm font-semibold underline-offset-4 hover:underline [&::-webkit-details-marker]:hidden">
+                    <summary className="flex min-h-11 cursor-pointer list-none items-center text-sm font-semibold underline-offset-4 hover:underline [&::-webkit-details-marker]:hidden">
                       <span className="group-open:hidden">View case study structure</span>
                       <span className="hidden group-open:inline">Hide details</span>
                     </summary>
@@ -78,7 +78,7 @@ export function WorkGrid({ items }: { items: WorkItem[] }) {
                         ] as const
                       ).map(([k, v]) => (
                         <div key={k}>
-                          <dt className="font-mono text-[0.68rem] tracking-[0.15em] text-stone uppercase">{k}</dt>
+                          <dt className="font-mono text-xs tracking-[0.15em] text-stone uppercase">{k}</dt>
                           <dd className="mt-1 text-ink/80">{v}</dd>
                         </div>
                       ))}

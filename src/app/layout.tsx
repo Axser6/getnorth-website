@@ -4,7 +4,7 @@ import { site } from "@/lib/site";
 import { organizationJsonLd } from "@/lib/seo";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
-import { WhatsAppFloat } from "@/components/sections";
+import { MobileActionBar, WhatsAppFloat } from "@/components/sections";
 import { RevealObserver } from "@/components/reveal-observer";
 import "./globals.css";
 
@@ -64,6 +64,7 @@ export const viewport: Viewport = {
   themeColor: "#f5f3ee",
   width: "device-width",
   initialScale: 1,
+  viewportFit: "cover",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
@@ -77,13 +78,14 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd()) }}
         />
       </head>
-      <body className="flex min-h-dvh flex-col">
+      <body className="flex min-h-dvh flex-col pb-[calc(4.75rem+env(safe-area-inset-bottom))] md:pb-0">
         <SiteHeader />
         <main id="main" className="flex-1">
           {children}
         </main>
         <SiteFooter />
         <WhatsAppFloat />
+        <MobileActionBar />
         <RevealObserver />
       </body>
     </html>

@@ -8,6 +8,8 @@ import { Compass } from "@/components/compass";
 import { ButtonLink, Container, Eyebrow, SectionHeading, TextLink } from "@/components/ui";
 import { CtaBand } from "@/components/sections";
 import { DivisionCarousel } from "@/components/division-carousel";
+import { BentoGrid, type BentoItem } from "@/components/ui21/bento-grid";
+import { WordRotate } from "@/components/ui21/word-rotate";
 import { ArrowUpRight, Check, WhatsApp, divisionGlyph } from "@/components/icons";
 
 export const metadata: Metadata = {
@@ -65,14 +67,77 @@ const approach = [
   },
 ];
 
-const featured = [
-  { name: "AI chatbots & agents", division: "ai-automation", body: "Instant, accurate answers and lead capture on your website and messaging channels." },
-  { name: "WhatsApp automation", division: "ai-automation", body: "Automated enquiry replies, reminders and follow-ups on the channel your customers prefer." },
-  { name: "Corporate websites", division: "web-technology", body: "Fast, credible websites structured to explain what you do and generate enquiries." },
-  { name: "Performance marketing", division: "digital-marketing", body: "Google and Meta campaigns measured on leads, cost per acquisition and return." },
-  { name: "Reels & video production", division: "media-creative", body: "Short-form and corporate video that captures attention and explains your value." },
-  { name: "Search engine optimisation", division: "digital-marketing", body: "Technical, on-page and local SEO so customers find you when they search." },
+const featuredBase: Array<Omit<BentoItem, "icon"> & { division: string; icon: null }> = [
+  {
+    title: "AI chatbots & agents",
+    division: "ai-automation",
+    description: "Instant, accurate answers and lead capture on your website and messaging channels — with a human hand-off whenever it matters.",
+    href: "/ai-solutions#ai-agents",
+    tags: ["Lead capture", "24/7 replies", "CRM"],
+    colSpan: 2,
+    feature: true,
+    icon: null,
+  },
+  {
+    title: "WhatsApp automation",
+    division: "ai-automation",
+    description: "Automated enquiry replies, reminders and follow-ups on the channel your customers prefer.",
+    href: "/ai-solutions#whatsapp-automation",
+    tags: ["Business Platform"],
+    icon: null,
+  },
+  {
+    title: "Corporate websites",
+    division: "web-technology",
+    description: "Fast, credible websites structured to explain what you do and generate enquiries.",
+    href: "/services#web-technology",
+    tags: ["Design", "Build", "SEO-ready"],
+    icon: null,
+  },
+  {
+    title: "Performance marketing",
+    division: "digital-marketing",
+    description: "Google and Meta campaigns planned around leads, cost per acquisition and return on spend.",
+    href: "/services#digital-marketing",
+    tags: ["Google Ads", "Meta Ads", "Tracking"],
+    colSpan: 2,
+    icon: null,
+  },
+  {
+    title: "Reels & video production",
+    division: "media-creative",
+    description: "Short-form and corporate video that captures attention and explains your value.",
+    href: "/services#media-creative",
+    tags: ["Reels", "Brand films"],
+    icon: null,
+  },
+  {
+    title: "Search engine optimisation",
+    division: "digital-marketing",
+    description: "Technical, on-page and local SEO so customers find you when they search.",
+    href: "/services#digital-marketing",
+    tags: ["Local SEO", "Technical"],
+    icon: null,
+  },
+  {
+    title: "Brand identity",
+    division: "media-creative",
+    description: "Logos, colour, typography and guidelines that make your business instantly recognisable.",
+    href: "/services#media-creative",
+    tags: ["Logo", "Guidelines"],
+    icon: null,
+  },
 ];
+
+const featured: BentoItem[] = featuredBase.map((f) => {
+  const Glyph = divisionGlyph[f.division];
+  return {
+    ...f,
+    icon: <Glyph size={22} />,
+    status: divisions.find((d) => d.slug === f.division)!.pillar,
+    cta: "Learn more",
+  };
+});
 
 export default function HomePage() {
   return (
@@ -87,7 +152,14 @@ export default function HomePage() {
                 Point your <br className="hidden sm:block" />
                 business <span className="text-signal">north.</span>
               </h1>
-              <p className="mt-8 max-w-xl text-lg leading-relaxed text-stone sm:text-xl">
+              <p className="font-heading mt-7 flex flex-wrap items-center gap-x-3 text-[clamp(1.35rem,2.6vw,1.9rem)] leading-[1.15] font-semibold text-ink/85">
+                <span>One in-house team for</span>
+                <WordRotate
+                  words={["Media.", "Marketing.", "Technology.", "AI."]}
+                  className="text-signal"
+                />
+              </p>
+              <p className="mt-6 max-w-xl text-lg leading-relaxed text-stone sm:text-xl">
                 GetNorth brings media, digital marketing, web technology and artificial intelligence together in one
                 in-house team — so your brand, your customer acquisition and your operations move in the same
                 direction.
@@ -110,7 +182,7 @@ export default function HomePage() {
             </div>
             <div className="relative mx-auto w-full max-w-[420px] sm:max-w-[480px] lg:col-span-5 lg:max-w-none">
               <Compass />
-              <p className="mt-2 text-center font-mono text-[0.68rem] tracking-[0.2em] text-stone uppercase">
+              <p className="mt-2 text-center font-mono text-xs tracking-[0.2em] text-stone uppercase">
                 {site.location.coordinates}
               </p>
             </div>
@@ -131,7 +203,7 @@ export default function HomePage() {
                     className="group flex h-full items-center justify-between gap-3 px-2 py-6 sm:px-6"
                   >
                     <span>
-                      <span className="block font-mono text-[0.7rem] text-stone">
+                      <span className="block font-mono text-xs text-stone">
                         {d.number} · {d.point}
                       </span>
                       <span className="font-heading mt-1 block text-lg font-bold sm:text-2xl">{d.pillar}.</span>
@@ -295,32 +367,7 @@ export default function HomePage() {
             <SectionHeading eyebrow="Featured services" title={<span id="featured-title">Where most clients start.</span>} />
             <TextLink href="/services">All services</TextLink>
           </div>
-          <div className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-            {featured.map((f, i) => {
-              const Glyph = divisionGlyph[f.division];
-              const division = divisions.find((d) => d.slug === f.division)!;
-              return (
-                <Link
-                  key={f.name}
-                  href={f.division === "ai-automation" ? "/ai-solutions" : `/services#${f.division}`}
-                  className="group flex flex-col rounded-[20px] border border-ink/10 bg-paper p-7 transition-all duration-300 hover:-translate-y-1 hover:border-ink/25 hover:bg-white hover:shadow-[0_20px_40px_-24px_rgb(11_15_20/0.35)]"
-                  data-reveal
-                  style={{ "--reveal-delay": `${(i % 3) * 80}ms` } as React.CSSProperties}
-                >
-                  <div className="flex items-center justify-between">
-                    <Glyph size={22} className="text-signal" />
-                    <span className="font-mono text-[0.68rem] tracking-wider text-stone uppercase">{division.pillar}</span>
-                  </div>
-                  <h3 className="mt-8 text-xl font-bold">{f.name}</h3>
-                  <p className="mt-3 leading-relaxed text-stone">{f.body}</p>
-                  <span className="mt-6 inline-flex items-center gap-1.5 text-sm font-semibold">
-                    Learn more
-                    <ArrowUpRight size={16} className="text-signal transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
-                  </span>
-                </Link>
-              );
-            })}
-          </div>
+          <BentoGrid items={featured} className="mt-14" />
         </Container>
       </section>
 

@@ -19,7 +19,7 @@ export function Eyebrow({
   return (
     <p
       className={cn(
-        "inline-flex items-center gap-3 text-[0.72rem] font-semibold uppercase tracking-[0.28em]",
+        "inline-flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.16em] sm:tracking-[0.28em]",
         tone === "dark" ? "text-stone" : "text-mist",
         className,
       )}
@@ -33,7 +33,7 @@ export function Eyebrow({
 type ButtonVariant = "primary" | "dark" | "outline" | "outline-light" | "light";
 
 const variants: Record<ButtonVariant, string> = {
-  primary: "bg-signal text-white hover:bg-[#072e1a] shadow-[0_1px_0_rgb(0_0_0/0.2)]",
+  primary: "bg-signal text-white hover:bg-signal-hover shadow-[0_1px_0_rgb(0_0_0/0.2)]",
   dark: "bg-ink text-paper hover:bg-ink-3",
   light: "bg-paper text-ink hover:bg-white",
   outline: "border border-ink/25 text-ink hover:border-ink hover:bg-ink hover:text-paper",
@@ -41,7 +41,7 @@ const variants: Record<ButtonVariant, string> = {
 };
 
 const buttonBase =
-  "group inline-flex min-h-12 items-center justify-center gap-2.5 rounded-full px-6 text-[0.95rem] font-semibold transition-colors duration-300 disabled:cursor-not-allowed disabled:opacity-60";
+  "group inline-flex min-h-12 cursor-pointer items-center justify-center gap-2.5 rounded-full px-6 text-[0.95rem] font-semibold transition-[background-color,color,border-color,transform] duration-(--duration-base) active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-60";
 
 export function ButtonLink({
   href,
@@ -106,7 +106,7 @@ export function TextLink({
     <Link
       href={href}
       className={cn(
-        "group inline-flex items-center gap-2 text-[0.95rem] font-semibold underline-offset-4 hover:underline",
+        "group inline-flex min-h-11 items-center gap-2 text-[0.95rem] font-semibold underline-offset-4 hover:underline",
         tone === "dark" ? "text-ink" : "text-paper",
         className,
       )}
@@ -155,7 +155,7 @@ export function SectionHeading({
 /** A labelled "placeholder" badge — used wherever content is not yet supplied. */
 export function PlaceholderBadge({ children = "Sample placeholder" }: { children?: ReactNode }) {
   return (
-    <span className="inline-flex items-center gap-1.5 rounded-full border border-dashed border-signal-ink/60 bg-signal/5 px-2.5 py-1 font-mono text-[0.65rem] font-semibold uppercase tracking-[0.14em] text-signal-ink">
+    <span className="inline-flex items-center gap-1.5 rounded-full border border-dashed border-signal-ink/60 bg-signal/5 px-2.5 py-1 font-mono text-xs font-semibold uppercase tracking-[0.14em] text-signal-ink">
       {children}
     </span>
   );

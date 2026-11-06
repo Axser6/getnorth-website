@@ -74,7 +74,7 @@ export function DivisionCarousel({ divisions }: { divisions: Division[] }) {
         })}
       </ul>
 
-      <div className="mt-8 flex justify-center gap-2 lg:hidden" role="group" aria-label="Choose division">
+      <div className="mt-6 flex justify-center gap-1 lg:hidden" role="group" aria-label="Choose division">
         {divisions.map((d, i) => (
           <button
             key={d.slug}
@@ -82,7 +82,7 @@ export function DivisionCarousel({ divisions }: { divisions: Division[] }) {
             onClick={() => goTo(i)}
             aria-label={`Show ${d.short}`}
             aria-current={active === i ? "true" : undefined}
-            className="flex h-6 items-center"
+            className="flex h-11 min-w-11 cursor-pointer items-center justify-center"
           >
             <span
               className={cn(

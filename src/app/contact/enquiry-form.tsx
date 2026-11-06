@@ -250,7 +250,7 @@ export function EnquiryForm() {
           <div className="mt-3 flex flex-wrap gap-2">
             {budgetOptions.map((b) => (
               <label key={b} className={cn(
-                "cursor-pointer rounded-full border px-4 py-2 text-sm transition-colors has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-2 has-[:focus-visible]:outline-signal",
+                "inline-flex min-h-11 cursor-pointer items-center rounded-full border px-4 py-2 text-sm transition-colors has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-2 has-[:focus-visible]:outline-signal",
                 values.budget === b ? "border-ink bg-ink text-paper" : "border-ink/15 bg-white hover:border-ink/40",
               )}>
                 <input type="radio" name="budget" value={b} checked={values.budget === b}
@@ -266,7 +266,7 @@ export function EnquiryForm() {
           <div className="mt-3 flex flex-wrap gap-2">
             {timelineOptions.map((t) => (
               <label key={t} className={cn(
-                "cursor-pointer rounded-full border px-4 py-2 text-sm transition-colors has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-2 has-[:focus-visible]:outline-signal",
+                "inline-flex min-h-11 cursor-pointer items-center rounded-full border px-4 py-2 text-sm transition-colors has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-2 has-[:focus-visible]:outline-signal",
                 values.timeline === t ? "border-ink bg-ink text-paper" : "border-ink/15 bg-white hover:border-ink/40",
               )}>
                 <input type="radio" name="timeline" value={t} checked={values.timeline === t}
@@ -295,7 +295,7 @@ export function EnquiryForm() {
           <label className="flex cursor-pointer items-start gap-3 text-[0.95rem] leading-relaxed">
             <input type="checkbox" name="consent" checked={values.consent}
               onChange={(e) => update("consent", e.target.checked)}
-              className="mt-1 h-5 w-5 shrink-0 accent-[#0a3e23]" {...aria("consent")} />
+              className="mt-0.5 h-6 w-6 shrink-0 cursor-pointer accent-signal" {...aria("consent")} />
             <span>
               I agree that GetNorth may contact me about this enquiry by phone, WhatsApp or email.{" "}
               <a href="/privacy" className="underline underline-offset-4 hover:text-signal-ink">Privacy notice</a>
@@ -313,7 +313,7 @@ export function EnquiryForm() {
         </button>
         <p className="text-sm text-stone">
           Prefer to chat?{" "}
-          <a href={whatsappEnquiry} target="_blank" rel="noopener noreferrer" className="font-semibold text-ink underline underline-offset-4">
+          <a href={whatsappEnquiry} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-11 items-center font-semibold text-ink underline underline-offset-4">
             Send via WhatsApp
           </a>
         </p>

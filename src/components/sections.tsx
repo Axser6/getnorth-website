@@ -2,7 +2,8 @@ import type { ReactNode } from "react";
 import { site, telHref, whatsappHref, defaultWhatsAppMessage } from "@/lib/site";
 import { cn } from "@/lib/cn";
 import { ButtonLink, Container, Eyebrow } from "./ui";
-import { Phone, WhatsApp } from "./icons";
+import Link from "next/link";
+import { ArrowRight, Phone, WhatsApp } from "./icons";
 
 /** Inner-page hero with breadcrumb-style eyebrow. */
 export function PageHero({
@@ -79,7 +80,7 @@ export function CtaBand({
   );
 }
 
-/** Floating WhatsApp shortcut, visible on every page. */
+/** Floating WhatsApp shortcut (tablet/desktop; phones use MobileActionBar). */
 export function WhatsAppFloat() {
   return (
     <a
@@ -87,12 +88,53 @@ export function WhatsAppFloat() {
       target="_blank"
       rel="noopener noreferrer"
       aria-label="Chat with GetNorth on WhatsApp"
-      className="group fixed right-4 bottom-4 z-40 inline-flex h-14 w-14 items-center justify-center gap-2 rounded-full bg-ink sm:w-auto sm:justify-start sm:pr-5 sm:pl-4 text-paper shadow-[0_10px_30px_-10px_rgb(11_15_20/0.6)] transition-transform duration-300 hover:-translate-y-0.5 sm:right-6 sm:bottom-6"
+      className="group fixed right-6 bottom-6 z-40 hidden h-14 items-center gap-2 rounded-full bg-ink pr-5 pl-4 md:inline-flex text-paper shadow-[0_10px_30px_-10px_rgb(11_15_20/0.6)] transition-transform duration-300 hover:-translate-y-0.5 sm:right-6 sm:bottom-6"
     >
-      <span className="relative inline-flex h-8 w-8 items-center justify-center rounded-full bg-[#25D366] text-white">
+      <span className="relative inline-flex h-8 w-8 items-center justify-center rounded-full bg-whatsapp text-white">
         <WhatsApp size={18} />
       </span>
-      <span className="hidden text-sm font-semibold sm:inline">Chat on WhatsApp</span>
+      <span className="text-sm font-semibold">Chat on WhatsApp</span>
     </a>
+  );
+}
+
+/**
+ * Thumb-zone action bar for phones: the three ways to reach GetNorth,
+ * always one tap away. Respects the iOS home-indicator safe area.
+ */
+export function MobileActionBar() {
+  const item =
+    "flex min-h-14 flex-1 flex-col items-center justify-center gap-1 rounded-xl text-xs font-semibold transition-[background-color,transform] duration-(--duration-fast) active:scale-[0.97]";
+  return (
+    <nav
+      aria-label="Quick contact"
+      className="fixed inset-x-0 bottom-0 z-40 border-t border-ink/10 bg-paper/95 px-3 pt-2 pb-[calc(0.5rem+env(safe-area-inset-bottom))] shadow-[0_-8px_24px_-16px_rgb(15_31_23/0.35)] backdrop-blur-md md:hidden"
+    >
+      <ul className="flex gap-2">
+        <li className="flex flex-1">
+          <a href={telHref} className={`${item} text-ink active:bg-ink/5`}>
+            <Phone size={20} />
+            Call
+          </a>
+        </li>
+        <li className="flex flex-1">
+          <a
+            href={whatsappHref(defaultWhatsAppMessage)}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={`${item} text-ink active:bg-ink/5`}
+          >
+            <WhatsApp size={20} className="text-signal" />
+            WhatsApp
+          </a>
+        </li>
+        <li className="flex flex-[1.4]">
+          <Link href="/contact" className={`${item} bg-signal text-paper active:bg-signal-hover`}>
+            <ArrowRight size={20} />
+            Enquire
+          </Link>
+        </li>
+      </ul>
+    </nav>
   );
 }

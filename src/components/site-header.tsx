@@ -86,7 +86,7 @@ export function SiteHeader() {
         Skip to content
       </a>
       <div className="mx-auto flex h-[72px] max-w-[1280px] items-center justify-between gap-6 px-5 sm:px-8">
-        <Link href="/" aria-label={`${site.name} — home`} className="shrink-0">
+        <Link href="/" aria-label={`${site.name} — home`} className="inline-flex min-h-11 shrink-0 items-center">
           <Logo tone={light ? "light" : "dark"} className={light ? "text-paper" : undefined} />
         </Link>
 

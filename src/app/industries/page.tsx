@@ -31,7 +31,7 @@ export default function IndustriesPage() {
             <li key={i.slug}>
               <a
                 href={`#${i.slug}`}
-                className="inline-flex rounded-full border border-ink/15 bg-paper px-4 py-2 text-sm font-medium transition-colors hover:border-ink hover:bg-ink hover:text-paper"
+                className="inline-flex min-h-11 items-center rounded-full border border-ink/15 bg-paper px-4 py-2 text-sm font-medium transition-colors hover:border-ink hover:bg-ink hover:text-paper"
               >
                 {i.name}
               </a>
@@ -61,7 +61,7 @@ export default function IndustriesPage() {
                         <Link
                           key={slug}
                           href={`/services#${slug}`}
-                          className="inline-flex items-center gap-2 rounded-full bg-paper-2 px-3 py-1.5 text-[0.8rem] font-medium hover:bg-ink hover:text-paper"
+                          className="inline-flex min-h-11 items-center gap-2 rounded-full bg-paper-2 px-4 py-1.5 text-[0.8rem] font-medium hover:bg-ink hover:text-paper"
                         >
                           <Glyph size={14} /> {d.pillar}
                         </Link>
@@ -72,11 +72,11 @@ export default function IndustriesPage() {
 
                 <div className="grid gap-6 sm:grid-cols-2 lg:col-span-7">
                   <div className="rounded-[20px] bg-paper-2 p-7">
-                    <h3 className="font-mono text-[0.7rem] tracking-[0.15em] text-stone uppercase">The challenge</h3>
+                    <h3 className="font-mono text-xs tracking-[0.15em] text-stone uppercase">The challenge</h3>
                     <p className="mt-4 leading-relaxed text-ink/85">{ind.challenge}</p>
                   </div>
                   <div className="rounded-[20px] border border-ink/10 p-7">
-                    <h3 className="font-mono text-[0.7rem] tracking-[0.15em] text-stone uppercase">How GetNorth helps</h3>
+                    <h3 className="font-mono text-xs tracking-[0.15em] text-stone uppercase">How GetNorth helps</h3>
                     <ul className="mt-4 space-y-3">
                       {ind.approach.map((a) => (
                         <li key={a} className="flex items-start gap-3 text-[0.95rem] leading-relaxed">
@@ -87,7 +87,7 @@ export default function IndustriesPage() {
                     </ul>
                     <Link
                       href={`/contact?industry=${ind.slug}`}
-                      className="group mt-6 inline-flex items-center gap-2 text-sm font-semibold hover:underline underline-offset-4"
+                      className="group mt-4 inline-flex min-h-11 items-center gap-2 text-sm font-semibold hover:underline underline-offset-4"
                     >
                       Discuss your {ind.name.toLowerCase()} project
                       <ArrowRight size={16} className="text-signal transition-transform group-hover:translate-x-1" />

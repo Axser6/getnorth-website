@@ -4,13 +4,35 @@ import { pageMetadata } from "@/lib/seo";
 import { whatsappHref } from "@/lib/site";
 import { ButtonLink, Container, Eyebrow, SectionHeading } from "@/components/ui";
 import { CtaBand } from "@/components/sections";
-import { ArrowRight, Check, Plus, WhatsApp } from "@/components/icons";
+import { ArrowRight, Check, GlyphAI, GlyphMarketing, GlyphWeb, Plus, WhatsApp } from "@/components/icons";
+import { BentoGrid, type BentoItem } from "@/components/ui21/bento-grid";
 
 export const metadata: Metadata = pageMetadata({
   title: "AI Solutions & Business Automation",
   description:
     "Custom AI agents, AI chatbots, WhatsApp automation, CRM automation and business process automation for Indian businesses — designed to respond faster, reduce manual work and capture every lead.",
   path: "/ai-solutions",
+});
+
+const tileLayout: Record<string, { colSpan?: 1 | 2; feature?: boolean; text: string; icon: React.ReactNode; tags: string[] }> = {
+  "ai-agents": { colSpan: 2, feature: true, text: "Digital team members trained on your business knowledge — they answer, qualify enquiries and complete defined tasks, with a person always able to step in.", icon: <GlyphAI size={22} />, tags: ["Qualify", "Answer", "Act"] },
+  "ai-chatbots": { text: "Instant, accurate answers on your website, and lead details captured for your team.", icon: <GlyphWeb size={22} />, tags: ["Website chat"] },
+  "whatsapp-automation": { text: "Replies, reminders and follow-ups on the channel your customers already use.", icon: <WhatsApp size={22} />, tags: ["Official API"] },
+  "crm-automation": { colSpan: 2, text: "Every lead from ads, forms and messages captured in one pipeline, assigned instantly and followed up on schedule.", icon: <GlyphMarketing size={22} />, tags: ["Capture", "Route", "Follow up"] },
+  "business-automation": { text: "Data entry, documents, approvals and reports handled in the background.", icon: <Check size={22} />, tags: ["Workflows"] },
+  "custom-integrations": { colSpan: 2, text: "AI capabilities — reading documents, classifying enquiries, searching knowledge — built into the tools you already use.", icon: <Plus size={22} />, tags: ["Documents", "Search", "Classification"] },
+};
+
+const solutionTiles: BentoItem[] = Object.entries(tileLayout).map(([id, { text, ...layout }]) => {
+  const s = aiSolutions.find((x) => x.id === id)!;
+  return {
+    title: s.name,
+    description: text,
+    href: `#${id}`,
+    status: `AI.${String(aiSolutions.indexOf(s) + 1).padStart(2, "0")}`,
+    cta: "Details",
+    ...layout,
+  };
 });
 
 const journey = [
@@ -107,7 +129,7 @@ export default function AiSolutionsPage() {
                         }`}
                       >
                         <span
-                          className={`inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-xl font-mono text-[0.7rem] font-semibold ${
+                          className={`inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-xl font-mono text-xs font-semibold ${
                             n.hl ? "bg-signal-bright text-ink" : "bg-paper/10 text-paper"
                           }`}
                         >
@@ -126,7 +148,7 @@ export default function AiSolutionsPage() {
                   ))}
                 </ol>
               </div>
-              <figcaption className="mt-3 font-mono text-[0.68rem] tracking-[0.15em] text-mist uppercase">
+              <figcaption className="mt-3 font-mono text-xs tracking-[0.15em] text-mist uppercase">
                 Illustrative workflow
               </figcaption>
             </figure>
@@ -145,7 +167,7 @@ export default function AiSolutionsPage() {
           <div className="mt-14 grid gap-px overflow-hidden rounded-[20px] border border-ink/10 bg-ink/10 md:grid-cols-2 lg:grid-cols-3">
             {aiProblems.map((p, i) => (
               <div key={p.problem} className="bg-paper p-7 sm:p-8" data-reveal style={{ "--reveal-delay": `${(i % 3) * 70}ms` } as React.CSSProperties}>
-                <p className="font-mono text-[0.7rem] tracking-[0.15em] text-stone uppercase">Problem</p>
+                <p className="font-mono text-xs tracking-[0.15em] text-stone uppercase">Problem</p>
                 <h3 className="mt-2 text-xl font-bold">{p.problem}</h3>
                 <div className="mt-6 flex items-start gap-3 border-t border-ink/10 pt-5">
                   <ArrowRight size={18} className="mt-0.5 shrink-0 text-signal-ink" />
@@ -162,12 +184,8 @@ export default function AiSolutionsPage() {
         <Container>
           <SectionHeading eyebrow="What we build" title={<span id="solutions-title">Our AI solutions.</span>} />
 
-          <nav aria-label="AI solutions" className="mt-10 flex flex-wrap gap-2">
-            {aiSolutions.map((s) => (
-              <a key={s.id} href={`#${s.id}`} className="rounded-full border border-ink/15 bg-paper px-4 py-2 text-sm font-medium hover:border-ink hover:bg-ink hover:text-paper">
-                {s.name}
-              </a>
-            ))}
+          <nav aria-label="AI solutions overview" className="mt-12">
+            <BentoGrid items={solutionTiles} />
           </nav>
 
           <div className="mt-12 space-y-5">
@@ -186,16 +204,16 @@ export default function AiSolutionsPage() {
                 <div className="grid gap-8 sm:grid-cols-2 lg:col-span-8">
                   <div className="space-y-6">
                     <div>
-                      <h4 className="font-mono text-[0.7rem] tracking-[0.15em] text-stone uppercase">The problem</h4>
+                      <h4 className="font-mono text-xs tracking-[0.15em] text-stone uppercase">The problem</h4>
                       <p className="mt-2 leading-relaxed text-ink/85">{s.problem}</p>
                     </div>
                     <div>
-                      <h4 className="font-mono text-[0.7rem] tracking-[0.15em] text-stone uppercase">Our solution</h4>
+                      <h4 className="font-mono text-xs tracking-[0.15em] text-stone uppercase">Our solution</h4>
                       <p className="mt-2 leading-relaxed text-ink/85">{s.solution}</p>
                     </div>
                   </div>
                   <div className="rounded-[16px] bg-paper-2 p-6">
-                    <h4 className="font-mono text-[0.7rem] tracking-[0.15em] text-stone uppercase">Capabilities</h4>
+                    <h4 className="font-mono text-xs tracking-[0.15em] text-stone uppercase">Capabilities</h4>
                     <ul className="mt-4 space-y-3">
                       {s.capabilities.map((c) => (
                         <li key={c} className="flex items-start gap-3 text-[0.95rem]">
@@ -233,7 +251,7 @@ export default function AiSolutionsPage() {
                     {i + 1}
                   </span>
                   <div className="pt-1.5">
-                    <p className="font-mono text-[0.7rem] tracking-[0.15em] text-signal-ink uppercase">{j.time}</p>
+                    <p className="font-mono text-xs tracking-[0.15em] text-signal-ink uppercase">{j.time}</p>
                     <h3 className="mt-1.5 text-xl font-bold">{j.title}</h3>
                     <p className="mt-2 leading-relaxed text-stone">{j.body}</p>
                   </div>

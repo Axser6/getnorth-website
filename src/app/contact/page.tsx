@@ -42,11 +42,11 @@ export default function ContactPage() {
                 rel="noopener noreferrer"
                 className="group flex items-start gap-4 rounded-[20px] bg-ink p-6 text-paper transition-transform hover:-translate-y-0.5"
               >
-                <span className="inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[#25D366] text-white">
+                <span className="inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-whatsapp text-white">
                   <WhatsApp size={22} />
                 </span>
                 <span className="flex-1">
-                  <span className="block font-mono text-[0.7rem] tracking-[0.15em] text-mist uppercase">WhatsApp</span>
+                  <span className="block font-mono text-xs tracking-[0.15em] text-mist uppercase">WhatsApp</span>
                   <span className="mt-1 block text-lg font-bold">Chat with our team</span>
                   <span className="mt-0.5 block text-sm text-mist">{site.phone.display}</span>
                 </span>
@@ -61,7 +61,7 @@ export default function ContactPage() {
                   <Phone size={20} />
                 </span>
                 <span className="flex-1">
-                  <span className="block font-mono text-[0.7rem] tracking-[0.15em] text-stone uppercase">Call</span>
+                  <span className="block font-mono text-xs tracking-[0.15em] text-stone uppercase">Call</span>
                   <span className="mt-1 block text-lg font-bold">{site.phone.display}</span>
                   <span className="mt-0.5 block text-sm text-stone">Tap to call</span>
                 </span>
@@ -72,7 +72,7 @@ export default function ContactPage() {
                   <Mail size={20} />
                 </span>
                 <span className="flex-1">
-                  <span className="block font-mono text-[0.7rem] tracking-[0.15em] text-stone uppercase">Email</span>
+                  <span className="block font-mono text-xs tracking-[0.15em] text-stone uppercase">Email</span>
                   {site.email ? (
                     <a href={`mailto:${site.email}`} className="mt-1 block text-lg font-bold break-all hover:underline">
                       {site.email}
@@ -93,7 +93,7 @@ export default function ContactPage() {
                   <MapPin size={20} />
                 </span>
                 <span className="flex-1">
-                  <span className="block font-mono text-[0.7rem] tracking-[0.15em] text-stone uppercase">Headquarters</span>
+                  <span className="block font-mono text-xs tracking-[0.15em] text-stone uppercase">Headquarters</span>
                   <span className="mt-1 block text-lg font-bold">
                     {site.location.city}, {site.location.region}
                   </span>

@@ -35,9 +35,9 @@ export default function ServicesPage() {
               <li key={d.slug} className="shrink-0">
                 <a
                   href={`#${d.slug}`}
-                  className="inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-medium text-ink/75 transition-colors hover:bg-ink hover:text-paper"
+                  className="inline-flex min-h-11 items-center gap-2 rounded-full px-4 py-2 text-sm font-medium text-ink/75 transition-colors hover:bg-ink hover:text-paper"
                 >
-                  <span className="font-mono text-[0.7rem] opacity-70">{d.number}</span>
+                  <span className="font-mono text-xs opacity-70">{d.number}</span>
                   {d.short}
                 </a>
               </li>
