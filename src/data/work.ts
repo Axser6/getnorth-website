@@ -18,6 +18,14 @@ export type WorkItem = {
   approach: string;
   deliverables: string[];
   outcome: string;
+  /**
+   * Optional cover image. Put the file in /public/images/work/ and write its path
+   * starting with "/images/…", e.g. "/images/work/acme-website.jpg".
+   * Recommended: 1600×1200 px (4:3), JPG or WebP, under 500 KB.
+   */
+  image?: string;
+  /** Short description of the image for screen readers and SEO. Required when `image` is set. */
+  imageAlt?: string;
 };
 
 export const workItems: WorkItem[] = [

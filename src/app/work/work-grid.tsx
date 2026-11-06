@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useState } from "react";
 import { divisions } from "@/data/divisions";
 import type { WorkItem } from "@/data/work";
@@ -49,12 +50,22 @@ export function WorkGrid({ items }: { items: WorkItem[] }) {
                       "repeating-linear-gradient(135deg, rgb(11 15 20 / 0.045) 0 1px, transparent 1px 14px)",
                   }}
                 >
-                  <div className="text-center">
-                    <Glyph size={36} className="mx-auto text-ink/35" />
-                    <p className="mt-3 font-mono text-xs tracking-[0.15em] text-stone uppercase">
-                      Project image to be supplied
-                    </p>
-                  </div>
+                  {item.image ? (
+                    <Image
+                      src={item.image}
+                      alt={item.imageAlt ?? item.title}
+                      fill
+                      sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
+                      className="object-cover"
+                    />
+                  ) : (
+                    <div className="text-center">
+                      <Glyph size={36} className="mx-auto text-ink/35" />
+                      <p className="mt-3 font-mono text-xs tracking-[0.15em] text-stone uppercase">
+                        Project image to be supplied
+                      </p>
+                    </div>
+                  )}
                   <div className="absolute top-4 left-4">{item.placeholder && <PlaceholderBadge />}</div>
                 </div>
                 <div className="flex flex-1 flex-col p-7">

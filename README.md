@@ -3,6 +3,8 @@
 Corporate website for **GetNorth Media & AI Solutions**, Bengaluru.
 Built with Next.js 16 (App Router, Cache Components), React 19, TypeScript and Tailwind CSS v4.
 
+> **Editing the site yourself?** See [EDITING.md](EDITING.md) — step-by-step guide for text, images, portfolio items and settings.
+
 ## Pages
 
 | Route | Purpose |
