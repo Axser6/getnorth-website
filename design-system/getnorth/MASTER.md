@@ -134,7 +134,7 @@ Minimum rendered text size: **12px**. Base body: **16px**. Fonts load with `disp
 | Compass | `src/components/compass.tsx` | Hero illustration |
 | EnquiryForm | `src/app/contact/enquiry-form.tsx` | Client + server validation |
 
-| PerspectiveTunnelHero | `src/components/ui/perspective-tunnel-hero.tsx` | From 21st.dev; framer-motion 3D tunnel. Wheel/touch/keys drive it only while it is ≥85% visible and has travel left, then release to page scroll. Preview: `/preview/perspective-tunnel` |
+| PerspectiveTunnelHero | `src/components/ui/perspective-tunnel-hero.tsx` | From 21st.dev; framer-motion 3D tunnel. Wheel/touch/keys drive it only while it is ≥85% visible and has travel left, then release to page scroll. Restyled to brand tokens. On **Our Work** it runs with `trigger="scroll"` (follows page scroll, captures nothing) and switches from labelled illustrative stock to real project photos once ≥5 exist. Preview: `/preview/perspective-tunnel` |
 
 Third-party components live in `src/components/ui/` (shadcn convention, see `components.json`) with their source and licence noted at the top of each file.
 

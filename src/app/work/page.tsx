@@ -4,6 +4,28 @@ import { pageMetadata } from "@/lib/seo";
 import { Container, PlaceholderBadge, SectionHeading } from "@/components/ui";
 import { CtaBand, PageHero } from "@/components/sections";
 import { WorkGrid } from "./work-grid";
+import PerspectiveTunnelHero, { type TunnelImage } from "@/components/ui/perspective-tunnel-hero";
+
+/** Minimum number of real project photos before the tunnel switches to them. */
+const MIN_PROJECT_PHOTOS = 5;
+
+const unsplash = (id: string) => `https://images.unsplash.com/${id}?auto=format&fit=crop&w=800&q=80`;
+
+/**
+ * Illustrative stock imagery (Unsplash), labelled with service names — NOT client work.
+ * Shown only until enough real project photos exist in src/data/work.ts.
+ */
+const ILLUSTRATIVE: TunnelImage[] = [
+  { src: unsplash("photo-1497366216548-37526070297c"), title: "Brand identity" },
+  { src: unsplash("photo-1522071820081-009f0129c71c"), title: "Content strategy" },
+  { src: unsplash("photo-1460925895917-afdab827c52f"), title: "Performance marketing" },
+  { src: unsplash("photo-1677442136019-21780ecad995"), title: "AI agents" },
+  { src: unsplash("photo-1551434678-e076c223a692"), title: "SEO" },
+  { src: unsplash("photo-1498050108023-c5249f4df085"), title: "Web development" },
+  { src: unsplash("photo-1557804506-669a67965ba0"), title: "Campaign planning" },
+  { src: unsplash("photo-1519389950473-47ba0277781c"), title: "WhatsApp automation" },
+  { src: unsplash("photo-1550751827-4bd374c3f58b"), title: "Business dashboards" },
+];
 
 export const metadata: Metadata = pageMetadata({
   title: "Our Work",
@@ -21,6 +43,10 @@ const caseStructure = [
 
 export default function WorkPage() {
   const hasRealWork = workItems.some((w) => !w.placeholder);
+  const projectPhotos: TunnelImage[] = workItems
+    .filter((w) => !w.placeholder && w.image)
+    .map((w) => ({ src: w.image!, title: w.title }));
+  const useProjectPhotos = projectPhotos.length >= MIN_PROJECT_PHOTOS;
 
   return (
     <>
@@ -32,6 +58,25 @@ export default function WorkPage() {
           </>
         }
         intro="A portfolio of brand, marketing, AI and web projects. Case studies are being prepared and will be published here as they are approved by our clients."
+      />
+
+      {/* Scroll-linked 3D showcase: follows normal page scrolling, never captures it. */}
+      <PerspectiveTunnelHero
+        trigger="scroll"
+        headingLevel="h2"
+        images={useProjectPhotos ? projectPhotos : ILLUSTRATIVE}
+        eyebrow="What we build"
+        title={
+          <>
+            Media. Marketing.
+            <br />
+            Technology. AI.
+          </>
+        }
+        description="Four disciplines, one team. Keep scrolling to fly through what we build."
+        prompt="Keep scrolling"
+        titleClassName="text-[clamp(2.3rem,7vw,5.25rem)]"
+        note={useProjectPhotos ? undefined : "Illustrative imagery · client project photos coming soon"}
       />
 
       {!hasRealWork && (

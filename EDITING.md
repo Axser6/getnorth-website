@@ -113,7 +113,8 @@ If your text contains a double quote `"`, write it as `\"`. Apostrophes `'` are 
 },
 ```
 
-3. As soon as **one** project has `placeholder: false`, the "Portfolio in preparation" notice on the Our Work page disappears automatically. Delete the sample blocks you no longer need, so placeholders don't sit beside real work.
+3. **3D showcase on the Our Work page:** it shows illustrative stock photos (with an "Illustrative imagery" note) until **5 or more** real projects have an `image`. From then on it automatically uses your project photos and titles, and the note disappears.
+4. As soon as **one** project has `placeholder: false`, the "Portfolio in preparation" notice on the Our Work page disappears automatically. Delete the sample blocks you no longer need, so placeholders don't sit beside real work.
 
 > Only add client names and results the client has approved.
 

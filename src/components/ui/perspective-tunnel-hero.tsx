@@ -16,12 +16,18 @@
  * - Optional props for images and copy (defaults keep the original text);
  *   configurable heading level so pages keep a single <h1>.
  * - next/image for the photos (requires images.unsplash.com in next.config remotePatterns).
+ * - `trigger="scroll"`: progress follows the page's normal scroll position as the section
+ *   passes through the viewport (useScroll) — no input is captured at all.
+ * - Restyled to the GetNorth design system (deep green, sage accent) instead of indigo/neutral,
+ *   and no `dark:` variants (the site has a single light theme with dark sections).
  */
 import {
     motion,
     useTransform,
     useReducedMotion,
     useMotionValue,
+    useMotionValueEvent,
+    useScroll,
     useSpring,
     MotionValue,
 } from "framer-motion";
@@ -147,7 +153,7 @@ function TunnelCard({ card, progress, pointer, total, stage }: TunnelCardProps) 
             className="pointer-events-auto absolute top-1/2 left-1/2 aspect-[4/5] select-none will-change-transform"
             data-tunnel-card
         >
-            <div className="group relative h-full w-full overflow-hidden rounded-2xl bg-neutral-200 shadow-2xl ring-1 shadow-neutral-950/20 ring-black/10 transition-all duration-500 hover:shadow-indigo-500/25 hover:ring-indigo-500/70 dark:bg-neutral-900 dark:shadow-black/90 dark:ring-white/15 dark:hover:ring-indigo-400/70">
+            <div className="group relative h-full w-full overflow-hidden rounded-2xl bg-ink-3 shadow-2xl ring-1 shadow-black/60 ring-paper/15 transition-all duration-500 hover:shadow-signal/40 hover:ring-signal-bright/70">
                 <Image
                     src={card.item.src}
                     alt={card.item.title}
@@ -156,8 +162,8 @@ function TunnelCard({ card, progress, pointer, total, stage }: TunnelCardProps) 
                     draggable={false}
                     className="object-cover transition-transform duration-700 ease-out group-hover:scale-110"
                 />
-                <div className="absolute inset-0 flex items-end bg-gradient-to-t from-black/80 via-black/10 to-transparent p-4 sm:p-5">
-                    <span className="font-mono text-xs tracking-widest text-white/95 uppercase drop-shadow-md sm:text-sm">
+                <div className="absolute inset-0 flex items-end bg-gradient-to-t from-ink/85 via-ink/10 to-transparent p-4 sm:p-5">
+                    <span className="font-mono text-xs tracking-widest text-paper uppercase drop-shadow-md sm:text-sm">
                         {card.item.title}
                     </span>
                 </div>
@@ -174,6 +180,15 @@ export interface PerspectiveTunnelHeroProps {
     prompt?: string;
     /** Use "h2" when the page already has an <h1>. */
     headingLevel?: "h1" | "h2";
+    /**
+     * "wheel" (default, original behaviour): wheel/touch/keys fly the tunnel while the hero is
+     * on screen, then release to the page. "scroll": follows normal page scrolling; captures nothing.
+     */
+    trigger?: "wheel" | "scroll";
+    /** Small note shown in the top-left corner, clear of the fixed site header (e.g. "Illustrative imagery"). */
+    note?: ReactNode;
+    /** Extra classes for the heading, e.g. a smaller size for longer titles. */
+    titleClassName?: string;
     className?: string;
 }
 
@@ -190,6 +205,9 @@ export default function PerspectiveTunnelHero({
     description = "Scroll your trackpad or mouse wheel to fly through the spatial 3D corridor.",
     prompt = "Scroll to Explore",
     headingLevel = "h1",
+    trigger = "wheel",
+    note,
+    titleClassName,
     className,
 }: PerspectiveTunnelHeroProps) {
     const containerRef = useRef<HTMLDivElement>(null);
@@ -224,10 +242,25 @@ export default function PerspectiveTunnelHero({
         }
     }, [reduce, rawProgress, smoothProgress]);
 
+    // trigger="scroll": map the section's journey through the viewport to tunnel progress.
+    // 0 → section top reaches the bottom of the screen; 1 → section bottom reaches the top.
+    const { scrollYProgress } = useScroll({ target: containerRef, offset: ["start end", "end start"] });
+    const fromScroll = (v: number) => Math.min(1, Math.max(0, (v - 0.15) / 0.7));
+    useMotionValueEvent(scrollYProgress, "change", (v) => {
+        if (trigger === "scroll" && !reduce) rawProgress.set(fromScroll(v));
+    });
+    useEffect(() => {
+        if (trigger === "scroll" && !reduce) {
+            const v = fromScroll(scrollYProgress.get());
+            rawProgress.set(v);
+            smoothProgress.jump(v);
+        }
+    }, [trigger, reduce, scrollYProgress, rawProgress, smoothProgress]);
+
     // Wheel / touch / keyboard drive the tunnel — but never trap the page.
     useEffect(() => {
         const el = containerRef.current;
-        if (!el || reduce) return;
+        if (!el || reduce || trigger !== "wheel") return;
 
         const mostlyVisible = () => {
             const r = el.getBoundingClientRect();
@@ -283,7 +316,7 @@ export default function PerspectiveTunnelHero({
             el.removeEventListener("touchend", onTouchEnd);
             el.removeEventListener("keydown", onKey);
         };
-    }, [rawProgress, reduce]);
+    }, [rawProgress, reduce, trigger]);
 
     const pointer = useCameraParallax(!reduce);
 
@@ -294,44 +327,50 @@ export default function PerspectiveTunnelHero({
     return (
         <div
             ref={containerRef}
-            tabIndex={reduce ? undefined : 0}
+            tabIndex={reduce || trigger !== "wheel" ? undefined : 0}
             role="region"
             aria-roledescription="3D gallery"
             aria-label={typeof eyebrow === "string" ? eyebrow : "Gallery"}
             data-progress-source
             className={cn(
-                "relative flex h-[100svh] w-full items-center justify-center overflow-hidden bg-neutral-50 text-neutral-900 select-none focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-inset dark:bg-neutral-950 dark:text-white",
+                "relative flex h-[100svh] w-full items-center justify-center overflow-hidden bg-ink text-paper select-none focus:outline-none focus-visible:ring-2 focus-visible:ring-signal-bright focus-visible:ring-inset",
                 className,
             )}
             style={{ perspective: stage.isMobile ? "900px" : "1200px", transformStyle: "preserve-3d" }}
         >
             {/* Immersive Background Grid & Glow */}
-            <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(#cbd5e1_1px,transparent_1px)] [background-size:28px_28px] opacity-70 [mask-image:radial-gradient(ellipse_70%_70%_at_50%_50%,#000_60%,transparent_100%)] dark:bg-[radial-gradient(#1e1b4b_1px,transparent_1px)] dark:opacity-65" />
-            <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(99,102,241,0.15)_0%,transparent_70%)] dark:bg-[radial-gradient(circle_at_center,rgba(99,102,241,0.2)_0%,transparent_75%)]" />
+            <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(rgb(159_208_170/0.28)_1px,transparent_1px)] [background-size:28px_28px] opacity-70 [mask-image:radial-gradient(ellipse_70%_70%_at_50%_50%,#000_60%,transparent_100%)]" />
+            <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_center,rgb(10_62_35/0.9)_0%,transparent_72%)]" />
+
+            {note && (
+                <p className="absolute top-20 left-4 z-30 rounded-full sm:top-24 sm:left-7 border border-paper/20 bg-ink/70 px-3 py-1.5 text-xs text-paper/85 backdrop-blur-sm ">
+                    {note}
+                </p>
+            )}
 
             {/* Depth Ring Guides */}
-            <div className="pointer-events-none absolute h-[48vmin] w-[48vmin] rounded-full border border-indigo-500/15 dark:border-indigo-400/10" />
-            <div className="pointer-events-none absolute h-[76vmin] w-[76vmin] rounded-full border border-dashed border-neutral-300/60 dark:border-white/10" />
+            <div className="pointer-events-none absolute h-[48vmin] w-[48vmin] rounded-full border border-signal-bright/20" />
+            <div className="pointer-events-none absolute h-[76vmin] w-[76vmin] rounded-full border border-dashed border-paper/10" />
 
             {/* Central Anchor Typography */}
             <motion.div
                 style={{ scale: titleScale, opacity: titleOpacity }}
                 className="pointer-events-none z-0 flex max-w-xl flex-col items-center px-6 text-center"
             >
-                <p className="mb-4 font-mono text-xs tracking-[0.4em] text-indigo-600 uppercase dark:text-indigo-400">{eyebrow}</p>
-                <Heading className="bg-gradient-to-b from-neutral-950 via-neutral-800 to-neutral-400 bg-clip-text text-5xl leading-[0.9] font-bold tracking-tighter text-transparent sm:text-7xl md:text-8xl dark:from-white dark:via-white dark:to-white/40">
+                <p className="mb-4 font-mono text-xs tracking-[0.4em] text-signal-bright uppercase">{eyebrow}</p>
+                <Heading className={cn("font-heading bg-gradient-to-b from-paper via-paper to-paper/40 bg-clip-text pb-[0.08em] text-5xl leading-[0.95] font-extrabold tracking-tighter text-transparent sm:text-7xl md:text-8xl", titleClassName)}>
                     {title}
                 </Heading>
-                <p className="mt-4 max-w-[36ch] text-sm font-light text-neutral-600 sm:text-base dark:text-neutral-400">{description}</p>
+                <p className="mt-4 max-w-[36ch] text-sm text-mist sm:text-base">{description}</p>
             </motion.div>
 
             {/* Scroll Prompt */}
             <motion.div
                 style={{ opacity: promptOpacity }}
-                className="pointer-events-none absolute bottom-8 z-20 flex flex-col items-center gap-2 font-mono text-xs tracking-[0.3em] text-neutral-500 uppercase dark:text-neutral-400"
+                className="pointer-events-none absolute bottom-8 z-20 flex flex-col items-center gap-2 font-mono text-xs tracking-[0.3em] text-mist uppercase"
             >
                 <span>{prompt}</span>
-                <div className="h-6 w-px bg-gradient-to-b from-indigo-500 to-transparent" />
+                <div className="h-6 w-px bg-gradient-to-b from-signal-bright to-transparent" />
             </motion.div>
 
             {/* 3D Z-Space Plane */}
