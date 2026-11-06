@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Archivo, Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono } from "next/font/google";
 import { site } from "@/lib/site";
 import { organizationJsonLd } from "@/lib/seo";
 import { SiteHeader } from "@/components/site-header";
@@ -7,13 +7,6 @@ import { SiteFooter } from "@/components/site-footer";
 import { WhatsAppFloat } from "@/components/sections";
 import { RevealObserver } from "@/components/reveal-observer";
 import "./globals.css";
-
-const archivo = Archivo({
-  variable: "--font-archivo",
-  subsets: ["latin"],
-  axes: ["wdth"],
-  display: "swap",
-});
 
 const geist = Geist({
   variable: "--font-geist",
@@ -68,14 +61,14 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#f4f1ea",
+  themeColor: "#f5f3ee",
   width: "device-width",
   initialScale: 1,
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en-IN" className={`${archivo.variable} ${geist.variable} ${geistMono.variable} antialiased`}>
+    <html lang="en-IN" className={`${geist.variable} ${geistMono.variable} antialiased`}>
       <head>
         {/* Enables scroll-reveal styles only when JavaScript is running. */}
         <script dangerouslySetInnerHTML={{ __html: "document.documentElement.classList.add('js')" }} />

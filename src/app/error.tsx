@@ -14,7 +14,7 @@ export default function Error({ error, reset }: { error: Error & { digest?: stri
       <Container>
         <div className="max-w-2xl">
           <Eyebrow>Something went wrong</Eyebrow>
-          <h1 className="font-wide mt-5 text-[clamp(2.2rem,5vw,3.75rem)] leading-[1.02] font-extrabold">
+          <h1 className="font-heading mt-5 text-[clamp(2.2rem,5vw,3.75rem)] leading-[1.02] font-extrabold">
             We hit an unexpected problem.
           </h1>
           <p className="mt-6 text-lg leading-relaxed text-stone">

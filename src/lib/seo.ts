@@ -40,7 +40,7 @@ export function organizationJsonLd() {
     name: site.name,
     alternateName: site.shortName,
     url: site.url,
-    logo: `${site.url}/icon.svg`,
+    logo: `${site.url}/brand/logo-green.png`,
     image: `${site.url}/opengraph-image`,
     description: site.description,
     slogan: site.tagline,

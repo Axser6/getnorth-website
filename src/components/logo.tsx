@@ -1,33 +1,50 @@
+import Image from "next/image";
 import { cn } from "@/lib/cn";
+import markGreen from "@/assets/brand/mark-green.png";
+import markLight from "@/assets/brand/mark-light.png";
+import wordmarkGreen from "@/assets/brand/wordmark-green.png";
+import wordmarkLight from "@/assets/brand/wordmark-light.png";
+import logoGreen from "@/assets/brand/logo-green.png";
+import logoLight from "@/assets/brand/logo-light.png";
 
-/** The GetNorth mark: a compass needle — signal red points north. */
+/** The GetNorth symbol (from the official logo). */
 export function LogoMark({ className, tone = "dark" }: { className?: string; tone?: "dark" | "light" }) {
-  const south = tone === "dark" ? "#0b0f14" : "#f4f1ea";
   return (
-    <svg viewBox="0 0 32 32" className={cn("h-8 w-8", className)} aria-hidden="true" focusable="false">
-      <circle cx="16" cy="16" r="15" fill="none" stroke={south} strokeOpacity="0.25" strokeWidth="1.2" />
-      <path d="M16 2.5 21 16H11Z" fill="#e5482b" />
-      <path d="M11 16h10l-5 13.5Z" fill={south} />
-      <circle cx="16" cy="16" r="1.6" fill={tone === "dark" ? "#f4f1ea" : "#0b0f14"} />
-    </svg>
+    <Image
+      src={tone === "dark" ? markGreen : markLight}
+      alt=""
+      aria-hidden="true"
+      width={96}
+      className={cn("h-9 w-auto", className)}
+      priority
+    />
   );
 }
 
+/** Horizontal lockup for the header: symbol + "GETNORTH / MEDIA & GROWTH" wordmark. */
 export function Logo({ tone = "dark", className }: { tone?: "dark" | "light"; className?: string }) {
   return (
     <span className={cn("inline-flex items-center gap-2.5", className)}>
-      <LogoMark tone={tone} />
-      <span className="flex flex-col leading-none">
-        <span className="font-wide text-[1.05rem] font-extrabold tracking-[0.06em]">GETNORTH</span>
-        <span
-          className={cn(
-            "mt-1 font-mono text-[0.58rem] uppercase tracking-[0.22em]",
-            tone === "dark" ? "text-stone" : "text-mist",
-          )}
-        >
-          Media &amp; AI Solutions
-        </span>
-      </span>
+      <LogoMark tone={tone} className="h-9 sm:h-10" />
+      <Image
+        src={tone === "dark" ? wordmarkGreen : wordmarkLight}
+        alt="GetNorth — Media & Growth"
+        width={320}
+        className="h-[26px] w-auto sm:h-[29px]"
+        priority
+      />
     </span>
+  );
+}
+
+/** Full stacked logo, as supplied by the company. */
+export function LogoStacked({ tone = "dark", className }: { tone?: "dark" | "light"; className?: string }) {
+  return (
+    <Image
+      src={tone === "dark" ? logoGreen : logoLight}
+      alt="GetNorth — Media & Growth"
+      width={400}
+      className={cn("h-auto w-40", className)}
+    />
   );
 }

@@ -19,7 +19,8 @@ const points = [
  * one needle pointing to the client's goal.
  */
 export function Compass({ className, tone = "dark" }: { className?: string; tone?: "dark" | "light" }) {
-  const stroke = tone === "dark" ? "#0b0f14" : "#f4f1ea";
+  const stroke = tone === "dark" ? "#0a3e23" : "#f5f3ee";
+  const accent = tone === "dark" ? "#0a3e23" : "#9fd0aa";
   const ticks = Array.from({ length: 72 }, (_, i) => i * 5);
 
   return (
@@ -51,7 +52,7 @@ export function Compass({ className, tone = "dark" }: { className?: string; tone
             y1={a.y}
             x2={b.x}
             y2={b.y}
-            stroke={major && deg === 0 ? "#e5482b" : stroke}
+            stroke={major && deg === 0 ? accent : stroke}
             strokeOpacity={major ? 0.9 : mid ? 0.45 : 0.22}
             strokeWidth={major ? 2 : 1}
           />
@@ -82,7 +83,7 @@ export function Compass({ className, tone = "dark" }: { className?: string; tone
               fontFamily="var(--font-geist-mono), monospace"
               fontSize="11"
               letterSpacing="2.5"
-              fill={p.code === "N" ? "#e5482b" : stroke}
+              fill={p.code === "N" ? accent : stroke}
               fillOpacity={p.code === "N" ? 1 : 0.55}
             >
               {p.code}
@@ -106,11 +107,11 @@ export function Compass({ className, tone = "dark" }: { className?: string; tone
 
       {/* Needle */}
       <g className="animate-needle" style={{ transformOrigin: `${C}px ${C}px` }}>
-        <path d={`M${C} ${C - 132} L${C + 17} ${C} L${C - 17} ${C} Z`} fill="#e5482b" />
-        <path d={`M${C - 17} ${C} L${C + 17} ${C} L${C} ${C + 132} Z`} fill={stroke} />
-        <path d={`M${C} ${C - 132} L${C} ${C} L${C - 17} ${C} Z`} fill="#000" fillOpacity={0.12} />
+        <path d={`M${C} ${C - 132} L${C + 17} ${C} L${C - 17} ${C} Z`} fill={accent} />
+        <path d={`M${C - 17} ${C} L${C + 17} ${C} L${C} ${C + 132} Z`} fill="none" stroke={stroke} strokeOpacity={0.55} strokeWidth={1.5} />
+        <path d={`M${C} ${C - 132} L${C} ${C} L${C - 17} ${C} Z`} fill="#000" fillOpacity={0.18} />
       </g>
-      <circle cx={C} cy={C} r={7} fill={tone === "dark" ? "#f4f1ea" : "#0b0f14"} stroke={stroke} strokeWidth={2} />
+      <circle cx={C} cy={C} r={7} fill={tone === "dark" ? "#f5f3ee" : "#0f1f17"} stroke={stroke} strokeWidth={2} />
     </svg>
   );
 }

@@ -2,7 +2,9 @@ import Link from "next/link";
 import { divisions } from "@/data/divisions";
 import { site, telHref, whatsappHref, defaultWhatsAppMessage } from "@/lib/site";
 import { Container } from "./ui";
-import { Logo } from "./logo";
+import Image from "next/image";
+import { LogoStacked } from "./logo";
+import wordmarkLight from "@/assets/brand/wordmark-light.png";
 import { Instagram, LinkedIn, Mail, MapPin, Phone, WhatsApp } from "./icons";
 import { CopyrightYear } from "./copyright-year";
 
@@ -16,11 +18,11 @@ const company = [
 
 export function SiteFooter() {
   return (
-    <footer className="relative overflow-hidden bg-ink text-paper">
+    <footer className="relative overflow-hidden bg-signal text-paper">
       <Container className="pt-20 pb-10">
         <div className="grid gap-12 lg:grid-cols-12">
           <div className="lg:col-span-4">
-            <Logo tone="light" />
+            <LogoStacked tone="light" className="w-44" />
             <p className="mt-6 max-w-sm leading-relaxed text-mist">
               An integrated media, marketing, technology and AI partner for businesses across India.
             </p>
@@ -106,12 +108,12 @@ export function SiteFooter() {
           </div>
         </div>
 
-        <p
+        <Image
+          src={wordmarkLight}
+          alt=""
           aria-hidden="true"
-          className="font-wide pointer-events-none mt-20 select-none text-center whitespace-nowrap text-[clamp(2.75rem,12.5vw,11rem)] leading-[0.8] font-extrabold tracking-tight text-paper/[0.06]"
-        >
-          GETNORTH
-        </p>
+          className="pointer-events-none mx-auto mt-20 h-auto w-full max-w-[1100px] opacity-[0.07] select-none"
+        />
 
         <div className="mt-10 flex flex-col gap-4 border-t border-paper/10 pt-8 text-sm text-mist sm:flex-row sm:items-center sm:justify-between">
           <p>

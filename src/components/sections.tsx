@@ -24,7 +24,7 @@ export function PageHero({
         <div className="grid items-end gap-12 lg:grid-cols-12">
           <div className="lg:col-span-8">
             <Eyebrow>{eyebrow}</Eyebrow>
-            <h1 className="font-wide mt-6 text-[clamp(2.4rem,6.4vw,5.25rem)] leading-[0.98] font-extrabold">
+            <h1 className="font-heading mt-6 text-[clamp(2.4rem,6.4vw,5.25rem)] leading-[0.98] font-extrabold">
               {title}
             </h1>
             <p className="mt-8 max-w-2xl text-lg leading-relaxed text-stone sm:text-xl">{intro}</p>
@@ -50,19 +50,19 @@ export function CtaBand({
   return (
     <section className={cn("bg-paper py-20 sm:py-28", className)}>
       <Container>
-        <div className="bg-meridian-dark grain relative overflow-hidden rounded-[28px] bg-ink px-6 py-14 text-paper sm:px-12 sm:py-20 lg:px-16">
+        <div className="bg-meridian-dark grain relative overflow-hidden rounded-[28px] bg-signal px-6 py-14 text-paper sm:px-12 sm:py-20 lg:px-16">
           <div
             aria-hidden="true"
-            className="absolute -right-24 -top-24 h-80 w-80 rounded-full bg-signal/25 blur-3xl"
+            className="absolute -right-24 -top-24 h-80 w-80 rounded-full bg-signal-bright/15 blur-3xl"
           />
           <div className="relative grid gap-10 lg:grid-cols-12 lg:items-end">
             <div className="lg:col-span-7" data-reveal>
               <Eyebrow tone="light">Start a conversation</Eyebrow>
-              <h2 className="font-wide mt-5 text-[clamp(2rem,4.6vw,3.6rem)] leading-[1.02] font-extrabold">{title}</h2>
+              <h2 className="font-heading mt-5 text-[clamp(2rem,4.6vw,3.6rem)] leading-[1.02] font-extrabold">{title}</h2>
               <p className="mt-6 max-w-xl text-lg leading-relaxed text-mist">{body}</p>
             </div>
             <div className="flex flex-col gap-3 sm:flex-row lg:col-span-5 lg:flex-col lg:items-stretch" data-reveal>
-              <ButtonLink href="/contact" variant="primary" arrow>
+              <ButtonLink href="/contact" variant="light" arrow>
                 Send an enquiry
               </ButtonLink>
               <ButtonLink href={whatsappHref(defaultWhatsAppMessage)} variant="outline-light">

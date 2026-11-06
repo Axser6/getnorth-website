@@ -91,7 +91,7 @@ export function EnquiryForm() {
         <span className="inline-flex h-14 w-14 items-center justify-center rounded-full bg-ink text-paper">
           <Check size={26} />
         </span>
-        <h2 className="font-wide mt-8 text-3xl font-extrabold">Thank you — your enquiry has been sent.</h2>
+        <h2 className="font-heading mt-8 text-3xl font-extrabold">Thank you — your enquiry has been sent.</h2>
         <p className="mt-4 max-w-lg text-lg leading-relaxed text-stone">
           Our team will review your requirements and get back to you. If your project is urgent, you&apos;re welcome
           to message or call us directly.
@@ -131,7 +131,7 @@ export function EnquiryForm() {
       className="rounded-[24px] border border-ink/10 bg-paper-2/60 p-6 sm:p-10"
       aria-labelledby="enquiry-title"
     >
-      <h2 id="enquiry-title" className="font-wide text-2xl font-extrabold sm:text-3xl">
+      <h2 id="enquiry-title" className="font-heading text-2xl font-extrabold sm:text-3xl">
         Tell us about your project
       </h2>
       <p className="mt-2 text-stone">
@@ -219,7 +219,7 @@ export function EnquiryForm() {
           <select id="service" name="service" required value={values.service}
             onChange={(e) => update("service", e.target.value)} onBlur={() => blur("service")}
             className={cn(fieldBase, border("service"), "appearance-none bg-[length:16px] bg-[right_1rem_center] bg-no-repeat pr-10")}
-            style={{ backgroundImage: "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230b0f14' stroke-width='2'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E\")" }}
+            style={{ backgroundImage: "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230f1f17' stroke-width='2'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E\")" }}
             {...aria("service")}>
             <option value="">Select a service</option>
             {serviceOptions.map((o) => (
@@ -235,7 +235,7 @@ export function EnquiryForm() {
           <select id="industry" name="industry" value={values.industry}
             onChange={(e) => update("industry", e.target.value)}
             className={cn(fieldBase, border("industry"), "appearance-none bg-[length:16px] bg-[right_1rem_center] bg-no-repeat pr-10")}
-            style={{ backgroundImage: "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230b0f14' stroke-width='2'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E\")" }}
+            style={{ backgroundImage: "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230f1f17' stroke-width='2'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E\")" }}
             {...aria("industry")}>
             <option value="">Select your industry</option>
             {industryOptions.map((o) => (
@@ -295,7 +295,7 @@ export function EnquiryForm() {
           <label className="flex cursor-pointer items-start gap-3 text-[0.95rem] leading-relaxed">
             <input type="checkbox" name="consent" checked={values.consent}
               onChange={(e) => update("consent", e.target.checked)}
-              className="mt-1 h-5 w-5 shrink-0 accent-[#0b0f14]" {...aria("consent")} />
+              className="mt-1 h-5 w-5 shrink-0 accent-[#0a3e23]" {...aria("consent")} />
             <span>
               I agree that GetNorth may contact me about this enquiry by phone, WhatsApp or email.{" "}
               <a href="/privacy" className="underline underline-offset-4 hover:text-signal-ink">Privacy notice</a>

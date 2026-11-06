@@ -165,7 +165,7 @@ export function SiteHeader() {
                 <Link
                   href={item.href}
                   aria-current={pathname === item.href ? "page" : undefined}
-                  className="flex items-center justify-between py-4 font-wide text-2xl font-bold"
+                  className="flex items-center justify-between py-4 font-heading text-2xl font-bold"
                 >
                   <span>{item.label}</span>
                   <span className="font-mono text-xs font-normal text-stone">

@@ -12,9 +12,9 @@ export default function NotFound() {
     <section className="bg-meridian flex min-h-[80vh] items-center pt-[120px] pb-24">
       <Container>
         <div className="max-w-2xl">
-          <LogoMark className="h-14 w-14 rotate-[135deg]" />
+          <LogoMark className="h-16 w-auto" />
           <Eyebrow className="mt-10">Error 404</Eyebrow>
-          <h1 className="font-wide mt-5 text-[clamp(2.4rem,6vw,4.5rem)] leading-[1] font-extrabold">
+          <h1 className="font-heading mt-5 text-[clamp(2.4rem,6vw,4.5rem)] leading-[1] font-extrabold">
             This page is off the map.
           </h1>
           <p className="mt-6 text-lg leading-relaxed text-stone">

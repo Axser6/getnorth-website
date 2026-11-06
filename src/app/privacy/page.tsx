@@ -20,8 +20,8 @@ export default function PrivacyPage() {
       <Container>
         <div className="mx-auto max-w-3xl">
           <Eyebrow>Legal</Eyebrow>
-          <h1 className="font-wide mt-6 text-[clamp(2.2rem,5vw,3.75rem)] leading-[1.02] font-extrabold">Privacy notice</h1>
-          <div className="mt-10 space-y-8 text-lg leading-relaxed text-ink/85 [&_h2]:font-wide [&_h2]:mt-12 [&_h2]:text-2xl [&_h2]:font-bold [&_h2]:text-ink">
+          <h1 className="font-heading mt-6 text-[clamp(2.2rem,5vw,3.75rem)] leading-[1.02] font-extrabold">Privacy notice</h1>
+          <div className="mt-10 space-y-8 text-lg leading-relaxed text-ink/85 [&_h2]:font-heading [&_h2]:mt-12 [&_h2]:text-2xl [&_h2]:font-bold [&_h2]:text-ink">
             <p>
               This notice explains how {site.name} (&ldquo;GetNorth&rdquo;, &ldquo;we&rdquo;) handles information you
               share with us through this website.

@@ -49,7 +49,7 @@ export default function IndustriesPage() {
                   <span className="font-mono text-xs text-signal-ink">
                     {String(idx + 1).padStart(2, "0")} / {String(industries.length).padStart(2, "0")}
                   </span>
-                  <h2 id={`${ind.slug}-title`} className="font-wide mt-4 text-[clamp(1.8rem,3.6vw,2.75rem)] leading-[1.05] font-extrabold">
+                  <h2 id={`${ind.slug}-title`} className="font-heading mt-4 text-[clamp(1.8rem,3.6vw,2.75rem)] leading-[1.05] font-extrabold">
                     {ind.name}
                   </h2>
                   <p className="mt-4 text-lg leading-relaxed text-stone">{ind.short}</p>

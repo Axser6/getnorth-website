@@ -7,6 +7,7 @@ import { site, whatsappHref, defaultWhatsAppMessage } from "@/lib/site";
 import { Compass } from "@/components/compass";
 import { ButtonLink, Container, Eyebrow, SectionHeading, TextLink } from "@/components/ui";
 import { CtaBand } from "@/components/sections";
+import { DivisionCarousel } from "@/components/division-carousel";
 import { ArrowUpRight, Check, WhatsApp, divisionGlyph } from "@/components/icons";
 
 export const metadata: Metadata = {
@@ -81,8 +82,8 @@ export default function HomePage() {
         <Container className="relative">
           <div className="grid items-center gap-10 pb-16 lg:grid-cols-12 lg:gap-6 lg:pb-24">
             <div className="lg:col-span-7">
-              <Eyebrow>Bengaluru · Media &amp; AI Solutions</Eyebrow>
-              <h1 className="font-wide mt-7 text-[clamp(2.9rem,8.2vw,6.6rem)] leading-[0.92] font-extrabold tracking-[-0.035em]">
+              <Eyebrow>Media · Marketing · Technology · AI</Eyebrow>
+              <h1 className="font-heading mt-7 text-[clamp(2.9rem,8.2vw,6.6rem)] leading-[0.92] font-extrabold tracking-[-0.035em]">
                 Point your <br className="hidden sm:block" />
                 business <span className="text-signal">north.</span>
               </h1>
@@ -133,7 +134,7 @@ export default function HomePage() {
                       <span className="block font-mono text-[0.7rem] text-stone">
                         {d.number} · {d.point}
                       </span>
-                      <span className="font-wide mt-1 block text-lg font-bold sm:text-2xl">{d.pillar}.</span>
+                      <span className="font-heading mt-1 block text-lg font-bold sm:text-2xl">{d.pillar}.</span>
                     </span>
                     <ArrowUpRight
                       size={20}
@@ -176,52 +177,15 @@ export default function HomePage() {
           <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end">
             <div data-reveal>
               <Eyebrow>Core divisions</Eyebrow>
-              <h2 id="divisions-title" className="font-wide mt-5 max-w-2xl text-[clamp(1.9rem,4.2vw,3.25rem)] leading-[1.04] font-bold">
-                Four disciplines. One direction.
+              <h2 id="divisions-title" className="font-heading mt-5 max-w-2xl text-[clamp(1.9rem,4.2vw,3.25rem)] leading-[1.04] font-bold">
+                Everything you need to grow, <span className="text-signal">in one place.</span>
               </h2>
             </div>
             <TextLink href="/services">View all services</TextLink>
           </div>
 
-          <div className="mt-14 grid gap-px overflow-hidden rounded-[24px] border border-ink/10 bg-ink/10 md:grid-cols-2">
-            {divisions.map((d, i) => {
-              const Glyph = divisionGlyph[d.slug];
-              return (
-                <article
-                  key={d.slug}
-                  className="group relative flex flex-col bg-paper p-8 transition-colors duration-500 hover:bg-white sm:p-10"
-                  data-reveal
-                  style={{ "--reveal-delay": `${i * 80}ms` } as React.CSSProperties}
-                >
-                  <div className="flex items-start justify-between">
-                    <span className="inline-flex h-12 w-12 items-center justify-center rounded-full border border-ink/15 text-ink transition-colors group-hover:border-signal group-hover:bg-signal group-hover:text-white">
-                      <Glyph size={22} />
-                    </span>
-                    <span className="font-mono text-xs text-stone">
-                      {d.number} / {d.point}
-                    </span>
-                  </div>
-                  <h3 className="font-wide mt-10 text-2xl font-bold sm:text-[1.75rem]">{d.name}</h3>
-                  <p className="mt-4 leading-relaxed text-stone">{d.summary}</p>
-                  <ul className="mt-6 flex flex-wrap gap-2">
-                    {d.services.slice(0, 5).map((s) => (
-                      <li key={s.name} className="rounded-full border border-ink/12 px-3 py-1 text-[0.8rem] text-ink/80">
-                        {s.name}
-                      </li>
-                    ))}
-                  </ul>
-                  <div className="mt-auto pt-8">
-                    <Link
-                      href={`/services#${d.slug}`}
-                      className="inline-flex items-center gap-2 font-semibold after:absolute after:inset-0"
-                    >
-                      Explore {d.short}
-                      <ArrowUpRight size={18} className="text-signal transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
-                    </Link>
-                  </div>
-                </article>
-              );
-            })}
+          <div className="mt-14">
+            <DivisionCarousel divisions={divisions} />
           </div>
         </Container>
       </section>
@@ -232,7 +196,7 @@ export default function HomePage() {
           <div className="grid gap-12 lg:grid-cols-12">
             <div className="lg:col-span-5" data-reveal>
               <Eyebrow>Industries served</Eyebrow>
-              <h2 id="industries-title" className="font-wide mt-5 text-[clamp(1.9rem,4.2vw,3.25rem)] leading-[1.04] font-bold">
+              <h2 id="industries-title" className="font-heading mt-5 text-[clamp(1.9rem,4.2vw,3.25rem)] leading-[1.04] font-bold">
                 Built around how your sector wins customers.
               </h2>
               <p className="mt-6 text-lg leading-relaxed text-stone">
@@ -267,7 +231,7 @@ export default function HomePage() {
           <div className="grid gap-12 lg:grid-cols-12">
             <div className="lg:col-span-4" data-reveal>
               <Eyebrow tone="light">Why GetNorth</Eyebrow>
-              <h2 id="why-title" className="font-wide mt-5 text-[clamp(1.9rem,4.2vw,3.25rem)] leading-[1.04] font-bold">
+              <h2 id="why-title" className="font-heading mt-5 text-[clamp(1.9rem,4.2vw,3.25rem)] leading-[1.04] font-bold">
                 Everything your growth needs, <span className="text-signal-bright">aligned.</span>
               </h2>
               <p className="mt-6 text-lg leading-relaxed text-mist">
@@ -309,14 +273,14 @@ export default function HomePage() {
                 style={{ "--reveal-delay": `${i * 90}ms` } as React.CSSProperties}
               >
                 <div className="flex items-center gap-4">
-                  <span className="font-wide inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-ink text-sm font-bold text-paper">
+                  <span className="font-heading inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-ink text-sm font-bold text-paper">
                     {String(i + 1).padStart(2, "0")}
                   </span>
                   {i < approach.length - 1 && (
                     <span aria-hidden="true" className="hidden h-px flex-1 bg-gradient-to-r from-ink/30 to-ink/0 lg:block" />
                   )}
                 </div>
-                <h3 className="font-wide mt-6 text-xl font-bold">{a.step}</h3>
+                <h3 className="font-heading mt-6 text-xl font-bold">{a.step}</h3>
                 <p className="mt-3 leading-relaxed text-stone">{a.body}</p>
               </li>
             ))}

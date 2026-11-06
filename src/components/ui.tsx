@@ -19,12 +19,12 @@ export function Eyebrow({
   return (
     <p
       className={cn(
-        "inline-flex items-center gap-2.5 font-mono text-[0.72rem] font-medium uppercase tracking-[0.2em]",
+        "inline-flex items-center gap-3 text-[0.72rem] font-semibold uppercase tracking-[0.28em]",
         tone === "dark" ? "text-stone" : "text-mist",
         className,
       )}
     >
-      <span aria-hidden="true" className="inline-block h-[7px] w-[7px] rotate-45 bg-signal" />
+      <span aria-hidden="true" className={cn("inline-block h-px w-6", tone === "dark" ? "bg-signal" : "bg-signal-bright")} />
       {children}
     </p>
   );
@@ -33,7 +33,7 @@ export function Eyebrow({
 type ButtonVariant = "primary" | "dark" | "outline" | "outline-light" | "light";
 
 const variants: Record<ButtonVariant, string> = {
-  primary: "bg-signal text-white hover:bg-[#cf3b20] shadow-[0_1px_0_rgb(0_0_0/0.2)]",
+  primary: "bg-signal text-white hover:bg-[#072e1a] shadow-[0_1px_0_rgb(0_0_0/0.2)]",
   dark: "bg-ink text-paper hover:bg-ink-3",
   light: "bg-paper text-ink hover:bg-white",
   outline: "border border-ink/25 text-ink hover:border-ink hover:bg-ink hover:text-paper",
@@ -137,7 +137,7 @@ export function SectionHeading({
       {eyebrow && <Eyebrow tone={tone}>{eyebrow}</Eyebrow>}
       <Tag
         className={cn(
-          "font-wide mt-5 text-[clamp(1.9rem,4.2vw,3.25rem)] leading-[1.04] font-bold",
+          "font-heading mt-5 text-[clamp(1.9rem,4.2vw,3.25rem)] leading-[1.04] font-bold",
           tone === "dark" ? "text-ink" : "text-paper",
         )}
       >

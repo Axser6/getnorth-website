@@ -76,7 +76,7 @@ export default function ServicesPage() {
                         Division {d.number} · {d.pillar}
                       </Eyebrow>
                     </div>
-                    <h2 id={`${d.slug}-title`} className="font-wide mt-8 text-[clamp(2rem,4.4vw,3.4rem)] leading-[1.02] font-extrabold">
+                    <h2 id={`${d.slug}-title`} className="font-heading mt-8 text-[clamp(2rem,4.4vw,3.4rem)] leading-[1.02] font-extrabold">
                       {d.name}
                     </h2>
                     <p className={cn("mt-6 text-lg leading-relaxed", dark ? "text-mist" : "text-stone")}>{d.intro}</p>
@@ -96,7 +96,7 @@ export default function ServicesPage() {
                     </div>
 
                     <div className="mt-10 flex flex-wrap gap-3">
-                      <ButtonLink href={`/contact?service=${d.slug}`} variant="primary" arrow>
+                      <ButtonLink href={`/contact?service=${d.slug}`} variant={dark ? "light" : "primary"} arrow>
                         Enquire about {d.short}
                       </ButtonLink>
                       {d.slug === "ai-automation" && (

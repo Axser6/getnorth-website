@@ -22,7 +22,7 @@ export default function ContactPage() {
       <section className="bg-meridian border-b border-ink/10 pt-[132px] pb-16 sm:pt-[152px] sm:pb-20">
         <Container>
           <Eyebrow>Contact</Eyebrow>
-          <h1 className="font-wide mt-6 max-w-4xl text-[clamp(2.4rem,6.4vw,5.25rem)] leading-[0.98] font-extrabold">
+          <h1 className="font-heading mt-6 max-w-4xl text-[clamp(2.4rem,6.4vw,5.25rem)] leading-[0.98] font-extrabold">
             Let&apos;s find your <span className="text-signal">north.</span>
           </h1>
           <p className="mt-8 max-w-2xl text-lg leading-relaxed text-stone sm:text-xl">
@@ -133,7 +133,7 @@ export default function ContactPage() {
           <div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
             <div>
               <Eyebrow>Location</Eyebrow>
-              <h2 id="map-title" className="font-wide mt-4 text-3xl font-bold">
+              <h2 id="map-title" className="font-heading mt-4 text-3xl font-bold">
                 Based in {site.location.city}.
               </h2>
             </div>

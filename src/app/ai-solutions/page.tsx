@@ -64,12 +64,12 @@ export default function AiSolutionsPage() {
     <>
       {/* Hero */}
       <section className="bg-meridian-dark grain relative overflow-hidden bg-ink pt-[132px] pb-20 text-paper sm:pt-[152px] sm:pb-28">
-        <div aria-hidden="true" className="absolute top-20 -right-40 h-[520px] w-[520px] rounded-full bg-signal/20 blur-[120px]" />
+        <div aria-hidden="true" className="absolute top-20 -right-40 h-[520px] w-[520px] rounded-full bg-signal/60 blur-[120px]" />
         <Container className="relative">
           <div className="grid items-center gap-14 lg:grid-cols-12">
             <div className="lg:col-span-7">
               <Eyebrow tone="light">AI Solutions</Eyebrow>
-              <h1 className="font-wide mt-6 text-[clamp(2.4rem,6.4vw,5.25rem)] leading-[0.98] font-extrabold">
+              <h1 className="font-heading mt-6 text-[clamp(2.4rem,6.4vw,5.25rem)] leading-[0.98] font-extrabold">
                 AI that does real work for your <span className="text-signal-bright">business.</span>
               </h1>
               <p className="mt-8 max-w-2xl text-lg leading-relaxed text-mist sm:text-xl">
@@ -78,7 +78,7 @@ export default function AiSolutionsPage() {
                 works.
               </p>
               <div className="mt-10 flex flex-col gap-3 sm:flex-row">
-                <ButtonLink href="/contact?service=ai-automation" variant="primary" arrow>
+                <ButtonLink href="/contact?service=ai-automation" variant="light" arrow>
                   Discuss an AI project
                 </ButtonLink>
                 <ButtonLink
@@ -103,12 +103,12 @@ export default function AiSolutionsPage() {
                     <li key={n.k}>
                       <div
                         className={`flex items-center gap-4 rounded-2xl border px-4 py-4 ${
-                          n.hl ? "border-signal/70 bg-signal/10" : "border-paper/10 bg-ink"
+                          n.hl ? "border-signal-bright/50 bg-signal" : "border-paper/10 bg-ink"
                         }`}
                       >
                         <span
                           className={`inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-xl font-mono text-[0.7rem] font-semibold ${
-                            n.hl ? "bg-signal text-white" : "bg-paper/10 text-paper"
+                            n.hl ? "bg-signal-bright text-ink" : "bg-paper/10 text-paper"
                           }`}
                         >
                           {n.k}
@@ -180,7 +180,7 @@ export default function AiSolutionsPage() {
               >
                 <div className="lg:col-span-4">
                   <span className="font-mono text-xs text-signal-ink">AI.{String(i + 1).padStart(2, "0")}</span>
-                  <h3 className="font-wide mt-3 text-[1.9rem] leading-tight font-extrabold">{s.name}</h3>
+                  <h3 className="font-heading mt-3 text-[1.9rem] leading-tight font-extrabold">{s.name}</h3>
                   <p className="mt-3 text-lg text-stone">{s.tagline}</p>
                 </div>
                 <div className="grid gap-8 sm:grid-cols-2 lg:col-span-8">
@@ -261,7 +261,7 @@ export default function AiSolutionsPage() {
           <div className="mt-20 grid gap-12 lg:grid-cols-12">
             <div className="lg:col-span-4" data-reveal>
               <Eyebrow tone="light">Responsible AI</Eyebrow>
-              <h3 className="font-wide mt-5 text-3xl font-bold">Principles we build by.</h3>
+              <h3 className="font-heading mt-5 text-3xl font-bold">Principles we build by.</h3>
             </div>
             <div className="grid gap-6 sm:grid-cols-2 lg:col-span-8">
               {aiPrinciples.map((p) => (

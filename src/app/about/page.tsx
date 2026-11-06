@@ -92,13 +92,13 @@ export default function AboutPage() {
           <div className="grid md:grid-cols-2">
             <div className="border-ink/10 py-16 md:border-r md:py-24 md:pr-12" data-reveal>
               <Eyebrow>Mission</Eyebrow>
-              <p className="font-wide mt-6 text-[clamp(1.6rem,3.2vw,2.5rem)] leading-[1.12] font-bold">
+              <p className="font-heading mt-6 text-[clamp(1.6rem,3.2vw,2.5rem)] leading-[1.12] font-bold">
                 To empower businesses through creative, digital and intelligent technology solutions.
               </p>
             </div>
             <div className="border-t border-ink/10 py-16 md:border-t-0 md:py-24 md:pl-12" data-reveal>
               <Eyebrow>Vision</Eyebrow>
-              <p className="font-wide mt-6 text-[clamp(1.6rem,3.2vw,2.5rem)] leading-[1.12] font-bold">
+              <p className="font-heading mt-6 text-[clamp(1.6rem,3.2vw,2.5rem)] leading-[1.12] font-bold">
                 To become a trusted media, marketing and AI solutions partner for businesses across India.
               </p>
             </div>
@@ -123,7 +123,7 @@ export default function AboutPage() {
                 style={{ "--reveal-delay": `${(i % 2) * 80}ms` } as React.CSSProperties}
               >
                 <span className="font-mono text-xs text-signal-ink">{String(i + 1).padStart(2, "0")}</span>
-                <h3 className="font-wide mt-4 text-2xl font-bold">{p.title}</h3>
+                <h3 className="font-heading mt-4 text-2xl font-bold">{p.title}</h3>
                 <p className="mt-4 leading-relaxed text-stone">{p.body}</p>
               </div>
             ))}
@@ -139,7 +139,7 @@ export default function AboutPage() {
             {approach.map((a, i) => (
               <li key={a.title} className="grid gap-3 py-7 sm:grid-cols-12 sm:items-baseline" data-reveal>
                 <span className="font-mono text-sm text-signal-bright sm:col-span-1">{String(i + 1).padStart(2, "0")}</span>
-                <h3 className="font-wide text-2xl font-bold sm:col-span-4">{a.title}</h3>
+                <h3 className="font-heading text-2xl font-bold sm:col-span-4">{a.title}</h3>
                 <p className="text-lg leading-relaxed text-mist sm:col-span-7">{a.body}</p>
               </li>
             ))}

@@ -2,22 +2,22 @@
 
 /* ------------------------------------------------------------------
    GetNorth design tokens
-   Ink + Paper base, one "north needle" signal accent.
+   Paper base, deep green ink, brand forest-green accent (from the logo).
    ------------------------------------------------------------------ */
 @theme {
-  --color-ink: #0b0f14;
-  --color-ink-2: #121821;
-  --color-ink-3: #1b2330;
-  --color-paper: #f4f1ea;
-  --color-paper-2: #ebe6da;
-  --color-paper-3: #dfd8c8;
-  --color-stone: #5a6170; /* muted text on paper, 5.6:1 */
-  --color-mist: #a3abb8; /* muted text on ink, 8:1 */
-  --color-signal: #e5482b; /* graphics, large type, buttons */
-  --color-signal-ink: #b5341a; /* accessible signal text on paper */
-  --color-signal-bright: #ff6a4d; /* signal text on ink */
+  --color-ink: #0f1f17;
+  --color-ink-2: #13291e;
+  --color-ink-3: #1b3527;
+  --color-paper: #f5f3ee;
+  --color-paper-2: #ece9e1;
+  --color-paper-3: #dfdbd0;
+  --color-stone: #5a645e; /* muted text on paper, 5.8:1 */
+  --color-mist: #a9b8ae; /* muted text on ink, 8.5:1 */
+  --color-signal: #0a3e23; /* brand forest green (from logo) */
+  --color-signal-ink: #0a3e23; /* brand green text on paper, 11:1 */
+  --color-signal-bright: #9fd0aa; /* sage accent on dark green */
 
-  --font-display: var(--font-archivo), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-geist), ui-sans-serif, system-ui, sans-serif;
   --font-sans: var(--font-geist), ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-geist-mono), ui-monospace, monospace;
 
@@ -68,7 +68,7 @@
   h1, h2, h3, h4 {
     font-family: var(--font-display);
     text-wrap: balance;
-    letter-spacing: -0.02em;
+    letter-spacing: -0.03em;
   }
   p {
     text-wrap: pretty;
@@ -76,21 +76,17 @@
 }
 
 @layer utilities {
-  /* Expanded display cut of Archivo */
-  .font-wide {
+  /* Heading face: tight, confident grotesk */
+  .font-heading {
     font-family: var(--font-display);
-    font-variation-settings: "wdth" 118;
-  }
-  .font-cond {
-    font-family: var(--font-display);
-    font-variation-settings: "wdth" 88;
+    letter-spacing: -0.035em;
   }
 
   /* Meridian grid used as a subtle surface texture */
   .bg-meridian {
     background-image:
-      linear-gradient(to right, rgb(11 15 20 / 0.06) 1px, transparent 1px),
-      linear-gradient(to bottom, rgb(11 15 20 / 0.06) 1px, transparent 1px);
+      linear-gradient(to right, rgb(10 62 35 / 0.06) 1px, transparent 1px),
+      linear-gradient(to bottom, rgb(10 62 35 / 0.06) 1px, transparent 1px);
     background-size: 96px 96px;
   }
   .bg-meridian-dark {

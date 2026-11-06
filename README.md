@@ -28,6 +28,10 @@ All copy and company facts live in typed data files. You don't need to touch the
 - `src/data/ai.ts`: AI solutions, problems, process, principles
 - `src/data/work.ts`: portfolio entries (**replace the placeholders with real, client-approved case studies and set `placeholder: false`**)
 
+## Brand assets
+
+The official logo lives in `src/assets/brand/` (used by the site via `next/image`) and `public/brand/` (direct URLs, structured data, OG images), in green (`#0A3E23`) and light versions with transparent backgrounds: `mark-*`, `wordmark-*`, `logo-*` (stacked). Favicons are `src/app/icon.png` and `src/app/apple-icon.png`. To swap in a vector (SVG) version of the logo later, replace these files and keep the same names.
+
 ## Local development
 
 ```bash

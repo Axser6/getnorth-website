@@ -5,17 +5,20 @@ import { join } from "node:path";
 export const ogSize = { width: 1200, height: 630 };
 export const ogContentType = "image/png";
 
-/** Archivo (SIL Open Font License) bundled in /assets/fonts for on-brand OG images. */
-async function loadFont(weight: 500 | 800) {
-  return readFile(join(process.cwd(), "assets/fonts", `Archivo-${weight}.ttf`));
+const root = process.cwd();
+
+/** Geist (SIL Open Font License) bundled in /assets/fonts so OG images need no network. */
+function loadFont(weight: 500 | 700) {
+  return readFile(join(root, "assets/fonts", `Geist-${weight}.ttf`));
+}
+
+async function loadLogo() {
+  const png = await readFile(join(root, "public/brand/logo-light.png"));
+  return `data:image/png;base64,${png.toString("base64")}`;
 }
 
 export async function renderOg({ kicker, title }: { kicker: string; title: string }) {
-  const [bold, medium] = await Promise.all([loadFont(800), loadFont(500)]);
-  const fonts = [
-    { name: "Archivo", data: bold, weight: 800 as const, style: "normal" as const },
-    { name: "Archivo", data: medium, weight: 500 as const, style: "normal" as const },
-  ];
+  const [bold, medium, logo] = await Promise.all([loadFont(700), loadFont(500), loadLogo()]);
 
   return new ImageResponse(
     (
@@ -24,45 +27,32 @@ export async function renderOg({ kicker, title }: { kicker: string; title: strin
           width: "100%",
           height: "100%",
           display: "flex",
-          flexDirection: "column",
-          justifyContent: "space-between",
-          padding: "64px 72px",
-          background: "#0b0f14",
-          color: "#f4f1ea",
-          fontFamily: "Archivo",
-          backgroundImage:
-            "linear-gradient(to right, rgba(244,241,234,0.06) 1px, transparent 1px), linear-gradient(to bottom, rgba(244,241,234,0.06) 1px, transparent 1px)",
-          backgroundSize: "96px 96px",
+          padding: "72px",
+          background: "linear-gradient(135deg, #0a3e23 0%, #0f1f17 100%)",
+          color: "#f5f3ee",
+          fontFamily: "Geist",
         }}
       >
-        <div style={{ display: "flex", alignItems: "center", gap: 18 }}>
-          <svg width="56" height="56" viewBox="0 0 32 32">
-            <circle cx="16" cy="16" r="15" fill="none" stroke="rgba(244,241,234,0.3)" strokeWidth="1.2" />
-            <path d="M16 2.5 21 16H11Z" fill="#e5482b" />
-            <path d="M11 16h10l-5 13.5Z" fill="#f4f1ea" />
-          </svg>
-          <div style={{ display: "flex", flexDirection: "column" }}>
-            <div style={{ fontSize: 30, fontWeight: 800, letterSpacing: 3 }}>GETNORTH</div>
-            <div style={{ fontSize: 15, fontWeight: 500, letterSpacing: 4, color: "#a3abb8" }}>
-              MEDIA &amp; AI SOLUTIONS
-            </div>
-          </div>
-        </div>
-
-        <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
-          <div style={{ display: "flex", alignItems: "center", gap: 14, fontSize: 22, fontWeight: 500, letterSpacing: 4, color: "#ff6a4d" }}>
-            <div style={{ width: 12, height: 12, background: "#e5482b", transform: "rotate(45deg)" }} />
+        <div style={{ display: "flex", flexDirection: "column", justifyContent: "space-between", flex: 1 }}>
+          <div style={{ display: "flex", alignItems: "center", gap: 16, fontSize: 22, fontWeight: 500, letterSpacing: 5, color: "#9fd0aa" }}>
+            <div style={{ width: 36, height: 2, background: "#9fd0aa" }} />
             {kicker.toUpperCase()}
           </div>
-          <div style={{ fontSize: 76, fontWeight: 800, lineHeight: 1.02, letterSpacing: -2, maxWidth: 1000 }}>{title}</div>
+          <div style={{ fontSize: 72, fontWeight: 700, lineHeight: 1.04, letterSpacing: -2.5, maxWidth: 720 }}>{title}</div>
+          <div style={{ fontSize: 22, fontWeight: 500, color: "#a9b8ae" }}>Bengaluru, India · getnorthmedia.com</div>
         </div>
-
-        <div style={{ display: "flex", justifyContent: "space-between", fontSize: 22, fontWeight: 500, color: "#a3abb8" }}>
-          <div>Media. Marketing. Technology. AI.</div>
-          <div>Bengaluru, India · getnorthmedia.com</div>
+        <div style={{ display: "flex", alignItems: "center", justifyContent: "center", width: 300 }}>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src={logo} width={280} height={149} alt="" />
         </div>
       </div>
     ),
-    { ...ogSize, fonts },
+    {
+      ...ogSize,
+      fonts: [
+        { name: "Geist", data: bold, weight: 700, style: "normal" },
+        { name: "Geist", data: medium, weight: 500, style: "normal" },
+      ],
+    },
   );
 }
