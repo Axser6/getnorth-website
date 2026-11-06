@@ -7,7 +7,7 @@ import { site, whatsappHref, defaultWhatsAppMessage } from "@/lib/site";
 import { Compass } from "@/components/compass";
 import { ButtonLink, Container, Eyebrow, SectionHeading, TextLink } from "@/components/ui";
 import { CtaBand } from "@/components/sections";
-import { DivisionCarousel } from "@/components/division-carousel";
+import { ScrollCardCarousel } from "@/components/scroll-card-carousel";
 import { BentoGrid, type BentoItem } from "@/components/ui21/bento-grid";
 import { WordRotate } from "@/components/ui21/word-rotate";
 import { ArrowUpRight, Check, GlyphAI, GlyphMarketing, MapPin, WhatsApp, divisionGlyph } from "@/components/icons";
@@ -257,24 +257,23 @@ export default function HomePage() {
         </Container>
       </section>
 
-      {/* ---------------- Divisions ---------------- */}
-      <section className="pb-24 sm:pb-32" aria-labelledby="divisions-title">
-        <Container>
-          <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end">
-            <div data-reveal>
-              <Eyebrow>Core divisions</Eyebrow>
-              <h2 id="divisions-title" className="font-heading mt-5 max-w-2xl text-[clamp(1.9rem,4.2vw,3.25rem)] leading-[1.04] font-bold">
+      {/* ---------------- Divisions (scroll-driven carousel) ---------------- */}
+      <ScrollCardCarousel
+        divisions={divisions}
+        heading={
+          <div className="flex flex-col justify-between gap-4 md:flex-row md:items-end">
+            <div>
+              <Eyebrow className="[@media(max-height:700px)]:hidden">Core divisions</Eyebrow>
+              <h2 id="divisions-title" className="font-heading mt-4 max-w-2xl text-[clamp(1.75rem,4.2vw,3.25rem)] leading-[1.04] font-bold sm:mt-5 [@media(max-height:700px)]:mt-0 [@media(max-height:700px)]:text-[clamp(1.5rem,3.4vw,2.5rem)]">
                 Everything you need to grow, <span className="text-signal">in one place.</span>
               </h2>
             </div>
-            <TextLink href="/services">View all services</TextLink>
+            <span className="hidden md:block">
+              <TextLink href="/services">View all services</TextLink>
+            </span>
           </div>
-
-          <div className="mt-14">
-            <DivisionCarousel divisions={divisions} />
-          </div>
-        </Container>
-      </section>
+        }
+      />
 
       {/* ---------------- Industries ---------------- */}
       <section className="overflow-hidden border-y border-ink/10 bg-paper-2 py-24 sm:py-32" aria-labelledby="industries-title">
