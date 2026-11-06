@@ -2,9 +2,10 @@ import type { Metadata } from "next";
 import { workItems } from "@/data/work";
 import { pageMetadata } from "@/lib/seo";
 import { Container, PlaceholderBadge, SectionHeading } from "@/components/ui";
-import { CtaBand, PageHero } from "@/components/sections";
+import { CtaBand } from "@/components/sections";
 import { WorkGrid } from "./work-grid";
-import PerspectiveTunnelHero, { type TunnelImage } from "@/components/ui/perspective-tunnel-hero";
+import { WorkTunnel } from "@/components/work-tunnel";
+import type { TunnelImage } from "@/components/ui/perspective-tunnel-hero";
 
 /** Minimum number of real project photos before the tunnel switches to them. */
 const MIN_PROJECT_PHOTOS = 5;
@@ -12,8 +13,9 @@ const MIN_PROJECT_PHOTOS = 5;
 const unsplash = (id: string) => `https://images.unsplash.com/${id}?auto=format&fit=crop&w=800&q=80`;
 
 /**
- * Illustrative stock imagery (Unsplash), labelled with service names — NOT client work.
- * Shown only until enough real project photos exist in src/data/work.ts.
+ * Illustrative stock imagery (Unsplash, free licence), labelled with service names — NOT client
+ * work. Shown only until enough real project photos exist in src/data/work.ts.
+ * Any photo that fails to load is hidden automatically.
  */
 const ILLUSTRATIVE: TunnelImage[] = [
   { src: unsplash("photo-1497366216548-37526070297c"), title: "Brand identity" },
@@ -25,6 +27,13 @@ const ILLUSTRATIVE: TunnelImage[] = [
   { src: unsplash("photo-1557804506-669a67965ba0"), title: "Campaign planning" },
   { src: unsplash("photo-1519389950473-47ba0277781c"), title: "WhatsApp automation" },
   { src: unsplash("photo-1550751827-4bd374c3f58b"), title: "Business dashboards" },
+  { src: unsplash("photo-1556761175-5973dc0f32e7"), title: "Strategy workshops" },
+  { src: unsplash("photo-1542744173-8e7e53415bb0"), title: "Pitch & presentation" },
+  { src: unsplash("photo-1551288049-bebda4e38f71"), title: "Analytics" },
+  { src: unsplash("photo-1611162617213-7d7a39e9b1d7"), title: "Social media" },
+  { src: unsplash("photo-1561070791-2526d30994b5"), title: "Graphic design" },
+  { src: unsplash("photo-1488590528505-98d2b5aba04b"), title: "Custom platforms" },
+  { src: unsplash("photo-1531403009284-440f080d1e12"), title: "Creative campaigns" },
 ];
 
 export const metadata: Metadata = pageMetadata({
@@ -50,50 +59,39 @@ export default function WorkPage() {
 
   return (
     <>
-      <PageHero
-        eyebrow="Our work"
-        title={
-          <>
-            Work that points <span className="text-signal">somewhere.</span>
-          </>
-        }
-        intro="A portfolio of brand, marketing, AI and web projects. Case studies are being prepared and will be published here as they are approved by our clients."
-      />
-
-      {/* Scroll-linked 3D showcase: follows normal page scrolling, never captures it. */}
-      <PerspectiveTunnelHero
-        trigger="scroll"
-        headingLevel="h2"
+      <WorkTunnel
         images={useProjectPhotos ? projectPhotos : ILLUSTRATIVE}
-        eyebrow="What we build"
-        title={
+        note={useProjectPhotos ? undefined : "Illustrative imagery · client project photos coming soon"}
+        outroTitle={
           <>
-            Media. Marketing.
-            <br />
-            Technology. AI.
+            Four disciplines. <span className="text-signal-bright">One team.</span>
           </>
         }
-        description="Four disciplines, one team. Keep scrolling to fly through what we build."
-        prompt="Keep scrolling"
-        titleClassName="text-[clamp(2.3rem,7vw,5.25rem)]"
-        note={useProjectPhotos ? undefined : "Illustrative imagery · client project photos coming soon"}
+        outroBody="Media, marketing, technology and AI — planned together and delivered in-house in Bengaluru."
       />
 
-      {!hasRealWork && (
+      <section id="projects" aria-labelledby="projects-title" className="scroll-mt-20 pb-20 sm:pb-28">
+        {!hasRealWork && (
         <div className="border-b border-ink/10 bg-paper-2">
           <Container className="flex flex-col gap-3 py-5 sm:flex-row sm:items-center">
             <PlaceholderBadge>Portfolio in preparation</PlaceholderBadge>
             <p className="text-sm text-stone">
-              The cards below are sample placeholders that show how case studies will be presented. They do not
-              represent real clients or completed projects.
+              The cards below are sample placeholders, shown with illustrative stock photos, to preview how case
+              studies will be presented. They do not represent real clients or completed projects.
             </p>
           </Container>
         </div>
-      )}
+        )}
 
-      <section className="py-20 sm:py-28">
-        <Container>
-          <WorkGrid items={workItems} />
+        <Container className="pt-14 sm:pt-20">
+          <SectionHeading
+            eyebrow="Projects"
+            title={<span id="projects-title">Projects by discipline.</span>}
+            intro="Filter by discipline. Each project opens to show its challenge, approach, deliverables and outcome."
+          />
+          <div className="mt-10">
+            <WorkGrid items={workItems} />
+          </div>
         </Container>
       </section>
 

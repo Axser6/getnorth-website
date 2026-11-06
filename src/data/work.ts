@@ -21,6 +21,7 @@ export type WorkItem = {
   /**
    * Optional cover image. Put the file in /public/images/work/ and write its path
    * starting with "/images/…", e.g. "/images/work/acme-website.jpg".
+   * (Placeholder items use illustrative Unsplash photos — replace them with real project images.)
    * Recommended: 1600×1200 px (4:3), JPG or WebP, under 500 KB.
    */
   image?: string;
@@ -40,6 +41,8 @@ export const workItems: WorkItem[] = [
     approach: "To be added: research, concept routes and the final identity system.",
     deliverables: ["Logo suite", "Brand guidelines", "Launch creatives"],
     outcome: "To be added once results are confirmed and approved by the client.",
+    image: "https://images.unsplash.com/photo-1561070791-2526d30994b5?auto=format&fit=crop&w=1200&q=80",
+    imageAlt: "Designer sketching brand concepts (illustrative stock photo)",
   },
   {
     id: "sample-performance-campaign",
@@ -52,6 +55,8 @@ export const workItems: WorkItem[] = [
     approach: "To be added: channel strategy, targeting and creative testing.",
     deliverables: ["Campaign structure", "Landing page", "Conversion tracking"],
     outcome: "To be added once results are confirmed and approved by the client.",
+    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1200&q=80",
+    imageAlt: "Marketing analytics on a laptop (illustrative stock photo)",
   },
   {
     id: "sample-whatsapp-automation",
@@ -64,6 +69,8 @@ export const workItems: WorkItem[] = [
     approach: "To be added: automation design, integrations and team handover.",
     deliverables: ["WhatsApp flows", "CRM integration", "Lead routing"],
     outcome: "To be added once results are confirmed and approved by the client.",
+    image: "https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?auto=format&fit=crop&w=1200&q=80",
+    imageAlt: "Smartphone with messaging and social apps (illustrative stock photo)",
   },
   {
     id: "sample-corporate-website",
@@ -76,6 +83,8 @@ export const workItems: WorkItem[] = [
     approach: "To be added: structure, design system and technical build.",
     deliverables: ["UX & visual design", "Responsive build", "SEO foundations"],
     outcome: "To be added once results are confirmed and approved by the client.",
+    image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1200&q=80",
+    imageAlt: "Website code on a laptop screen (illustrative stock photo)",
   },
   {
     id: "sample-video-content",
@@ -88,6 +97,8 @@ export const workItems: WorkItem[] = [
     approach: "To be added: scripting, production and editing approach.",
     deliverables: ["Brand film", "Reels series", "Cut-downs for ads"],
     outcome: "To be added once results are confirmed and approved by the client.",
+    image: "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&w=1200&q=80",
+    imageAlt: "Team reviewing a presentation (illustrative stock photo)",
   },
   {
     id: "sample-ai-chatbot",
@@ -100,5 +111,7 @@ export const workItems: WorkItem[] = [
     approach: "To be added: knowledge design, integrations and safeguards.",
     deliverables: ["AI chatbot", "Knowledge base", "Hand-off to team"],
     outcome: "To be added once results are confirmed and approved by the client.",
+    image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=1200&q=80",
+    imageAlt: "Abstract artificial intelligence visual (illustrative stock photo)",
   },
 ];

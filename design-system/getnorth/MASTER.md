@@ -134,6 +134,7 @@ Minimum rendered text size: **12px**. Base body: **16px**. Fonts load with `disp
 | Compass | `src/components/compass.tsx` | Hero illustration |
 | EnquiryForm | `src/app/contact/enquiry-form.tsx` | Client + server validation |
 
+| WorkTunnel | `src/components/work-tunnel.tsx` | Our Work opening: full-screen 3D photo tunnel, pinned while scrolling (scroll never captured), pre-populated first/last frames, title + outro on a layer above the cards, "Skip to projects" escape route + progress bar, reduced-motion still frame. Failed photos hide their card |
 | PerspectiveTunnelHero | `src/components/ui/perspective-tunnel-hero.tsx` | From 21st.dev; framer-motion 3D tunnel. Wheel/touch/keys drive it only while it is ≥85% visible and has travel left, then release to page scroll. Restyled to brand tokens. On **Our Work** it runs with `trigger="scroll"` (follows page scroll, captures nothing) and switches from labelled illustrative stock to real project photos once ≥5 exist. Preview: `/preview/perspective-tunnel` |
 
 Third-party components live in `src/components/ui/` (shadcn convention, see `components.json`) with their source and licence noted at the top of each file.
@@ -145,3 +146,9 @@ Third-party components live in `src/components/ui/` (shadcn convention, see `com
 - Never fabricate clients, testimonials, statistics, awards or results.
 - Portfolio items stay marked "Sample placeholder" until real, approved case studies exist.
 - Photography: none yet. When supplied, use WebP/AVIF via `next/image`, with declared dimensions and `loading="lazy"` below the fold.
+
+---
+
+## Page override — Our Work
+
+Pattern: **Portfolio Grid** (ui-ux-pro-max) — immersive tunnel hero → "Projects by discipline" masonry grid (photo-led, filter by discipline) → case-study structure → CTA. Header uses its light style over the dark hero. Stock photos are labelled "Illustrative" and the tunnel switches to real project photos automatically once ≥5 exist.

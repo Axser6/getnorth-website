@@ -9,7 +9,7 @@ import { Logo } from "./logo";
 import { buttonClass } from "./ui";
 import { ArrowRight, Close, Menu, Phone, WhatsApp } from "./icons";
 
-const DARK_HERO_ROUTES = ["/ai-solutions"];
+const DARK_HERO_ROUTES = ["/ai-solutions", "/work"];
 
 export function SiteHeader() {
   const pathname = usePathname();
