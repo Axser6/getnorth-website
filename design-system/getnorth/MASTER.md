@@ -15,7 +15,7 @@ Tokens are implemented in `src/app/globals.css` (`@theme`). Use the token, never
 | **Style** | Minimalism & Swiss Style + Accessible & Ethical, with Bento Grid showcases and micro-interactions |
 | **Skill output** | Pattern *Trust & Authority + Conversion*, style *Accessible & Ethical*, typography *Plus Jakarta Sans*. Full output: `skill-recommendation.md` |
 | **Primary CTA** | "Get a quote" (header, hero, mobile action bar); "Request a quote" in CTA bands |
-| **Landing pattern** | Feature-Rich Showcase + Trust: Hero (value prop) → Overview → Division cards → Industries → Why us → Process → **What we measure (ROI)** → Bento features → **Case studies** → CTA |
+| **Home page** | Kept deliberately short — one idea per block: Hero (headline, rotating line, one sentence, 2 CTAs, compass, credentials) → Services carousel → Why GetNorth (3 points) → How we work (4 steps) → Industries (link chips) → CTA. Detail lives on inner pages; don't repeat the services list on the home page. |
 | **Skill must-haves (B2B Service / Marketing Agency)** | Case studies (honest placeholders until approved) · ROI messaging (metrics we report, never invented results) · visible credentials |
 | **Personality** | Calm, credible, direct. Natural forest green; generous space; no hype |
 | **Brand line** | Media. Marketing. Technology. AI. |
