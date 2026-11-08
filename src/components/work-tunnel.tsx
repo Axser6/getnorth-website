@@ -275,14 +275,13 @@ export function WorkTunnel({
           </motion.p>
         )}
         <div className="absolute inset-x-4 bottom-[calc(5.75rem+env(safe-area-inset-bottom))] z-40 flex items-center gap-4 sm:inset-x-8 md:bottom-8">
-          {/* Skip link on the left: the bottom-right corner belongs to the floating WhatsApp button */}
           <a
             href={skipHref}
             className="inline-flex min-h-11 shrink-0 items-center gap-2 rounded-full border border-paper/25 bg-ink/60 px-4 text-sm font-semibold text-paper backdrop-blur-sm transition-colors duration-(--duration-fast) hover:border-paper hover:bg-paper hover:text-ink"
           >
             Skip to projects <ArrowRight size={16} className="rotate-90" />
           </a>
-          <div aria-hidden="true" className="h-[3px] flex-1 overflow-hidden rounded-full bg-paper/15 md:mr-60">
+          <div aria-hidden="true" className="h-[3px] flex-1 overflow-hidden rounded-full bg-paper/15">
             <motion.div style={{ scaleX: bar }} className="h-full origin-left rounded-full bg-signal-bright" />
           </div>
         </div>

@@ -4,7 +4,7 @@ import { site } from "@/lib/site";
 import { organizationJsonLd } from "@/lib/seo";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
-import { MobileActionBar, WhatsAppFloat } from "@/components/sections";
+import { MobileActionBar } from "@/components/sections";
 import { RevealObserver } from "@/components/reveal-observer";
 import { RouteFocus } from "@/components/route-focus";
 import "./globals.css";
@@ -86,7 +86,6 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           {children}
         </main>
         <SiteFooter />
-        <WhatsAppFloat />
         <MobileActionBar />
         <RevealObserver />
         <RouteFocus />

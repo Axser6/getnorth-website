@@ -72,7 +72,7 @@ Minimum rendered text size: **12px**. Base body: **16px**. Fonts load with `disp
 - **Radius:** `--radius-chip` (pill), `--radius-control` 12px, `--radius-card` 20px, `--radius-panel` 28px.
 - **Elevation:** `--shadow-card` (resting), `--shadow-card-hover` (hover lift). Shadows are soft and green-tinted.
 
-- **Z-index scale:** content `0` · sticky sub-nav `30` · floating actions / mobile action bar `40` · header & mobile menu `50` · skip link `60`.
+- **Z-index scale:** content `0` · sticky sub-nav `30` · mobile action bar `40` · header & mobile menu `50` · skip link `60`.
 
 ---
 
@@ -127,7 +127,7 @@ Minimum rendered text size: **12px**. Base body: **16px**. Fonts load with `disp
 | Eyebrow, SectionHeading, TextLink, PlaceholderBadge | `src/components/ui/index.tsx` | |
 | Logo, LogoMark, LogoStacked | `src/components/logo.tsx` | Official logo assets only (`src/assets/brand`) |
 | SiteHeader / mobile menu | `src/components/site-header.tsx` | Light variant over dark heroes |
-| PageHero, CtaBand, WhatsAppFloat, MobileActionBar | `src/components/sections.tsx` | |
+| PageHero, CtaBand, MobileActionBar | `src/components/sections.tsx` | |
 | LoopCardCarousel | `src/components/loop-card-carousel.tsx` | Endless ring carousel: swipe/drag, prev/next, indicators, ←/→, auto-advance with pause. Never captures page scroll |
 | **BentoGrid** | `src/components/ui/bento-grid.tsx` | From 21st.dev — Kokonut UI (MIT), adapted to tokens and a11y |
 | **WordRotate** | `src/components/ui/word-rotate.tsx` | From 21st.dev — Magic UI (MIT), CSS motion, pause control |

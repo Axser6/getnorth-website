@@ -80,24 +80,6 @@ export function CtaBand({
   );
 }
 
-/** Floating WhatsApp shortcut (tablet/desktop; phones use MobileActionBar). */
-export function WhatsAppFloat() {
-  return (
-    <a
-      href={whatsappHref(defaultWhatsAppMessage)}
-      target="_blank"
-      rel="noopener noreferrer"
-      aria-label="Chat with GetNorth on WhatsApp"
-      className="group fixed right-6 bottom-6 z-40 hidden h-14 items-center gap-2 rounded-full bg-ink pr-5 pl-4 md:inline-flex text-paper shadow-[0_10px_30px_-10px_rgb(11_15_20/0.6)] transition-transform duration-300 hover:-translate-y-0.5 sm:right-6 sm:bottom-6"
-    >
-      <span className="relative inline-flex h-8 w-8 items-center justify-center rounded-full bg-whatsapp text-white">
-        <WhatsApp size={18} />
-      </span>
-      <span className="text-sm font-semibold">Chat on WhatsApp</span>
-    </a>
-  );
-}
-
 /**
  * Thumb-zone action bar for phones: the three ways to reach GetNorth,
  * always one tap away. Respects the iOS home-indicator safe area.
