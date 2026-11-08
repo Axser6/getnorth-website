@@ -22,6 +22,14 @@ const geistMono = Geist_Mono({
   display: "swap",
 });
 
+const RELOAD_TO_TOP = `(function(){try{
+var n=performance.getEntriesByType("navigation")[0];
+if(!n||n.type!=="reload"||location.hash)return;
+history.scrollRestoration="manual";
+window.scrollTo(0,0);
+addEventListener("load",function(){window.scrollTo(0,0);setTimeout(function(){history.scrollRestoration="auto";},0);});
+}catch(e){}})();`;
+
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
@@ -71,10 +79,19 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en-IN" className={`${jakarta.variable} ${geistMono.variable} antialiased`}>
+    // data-scroll-behavior="smooth": Next.js 16 no longer disables our CSS smooth scrolling during
+    // page changes by itself — this attribute makes every new page start instantly at the top.
+    <html
+      lang="en-IN"
+      data-scroll-behavior="smooth"
+      className={`${jakarta.variable} ${geistMono.variable} antialiased`}
+    >
       <head>
         {/* Enables scroll-reveal styles only when JavaScript is running. */}
         <script dangerouslySetInnerHTML={{ __html: "document.documentElement.classList.add('js')" }} />
+        {/* On a page refresh, start at the top instead of the browser's remembered position.
+            Links to a #section and the Back button keep their normal behaviour. */}
+        <script dangerouslySetInnerHTML={{ __html: RELOAD_TO_TOP }} />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd()) }}
